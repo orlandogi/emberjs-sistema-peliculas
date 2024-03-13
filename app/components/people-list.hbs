@@ -1,0 +1,21 @@
+<table class="my-table">
+  <thead>
+    <tr>
+      <th>Nombre de Usuario</th>
+      <th>Contraseña</th>
+      <th>Tipo de Usuario</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each @users as |user|}}
+      <tr>
+        <td>{{user.strNombreUsuario}}</td>
+        <td>{{user.strContraseña}}</td>
+        <td>{{user.TipoUsuario}}</td>
+        <td>{{user.Estado}}</td>
+      </tr>
+    {{/each}}
+    {{log @users}}
+  </tbody>
+</table>
