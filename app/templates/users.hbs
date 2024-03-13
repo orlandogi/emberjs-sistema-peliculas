@@ -5,5 +5,13 @@
     <div class="filter-name">
      <Input @type="text" />
     </div>
+    <Crear::Crear 
+@button = 'usuario'
+@title = 'del Usuario'
+@user = {{true}}
+@state1 = 'Activo'
+@state2 = 'Inactivo'
+@send = 'Crear'
+/>
     <PeopleList @users={{@model}}/>
 </div>

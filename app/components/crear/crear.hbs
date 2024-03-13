@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar
+<button type="button" class="btn btn-primary mb-3 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar
     {{@button}}</button>
 
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -13,21 +13,19 @@
                 <form>
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
-                        <div class="pe-5">
-                            <input type="text" class="form-control" id="recipient-name">
-
+                        <div class="pe-5"><input type="text" class="form-control" id="recipient-name" value={{this.strNombreUsuario}} />
                         </div>
                     </div>
                     {{#if @user}}
                     <label for="inputPassword5" class="form-label">Password</label>
                     <input type="password" id="inputPassword5" class="form-control"
-                        aria-describedby="passwordHelpBlock">
+                        aria-describedby="passwordHelpBlock" value={{this.strContraseña}}>
                     <div id="passwordHelpBlock" class="form-text mb-3">
                         Your password must be 8-20 characters long</div>
                     <div class="wrappeer todos mt-2">
                         <label for="formFile" class="form-label">Tipo de usuario: </label>
-                        <input class="todos" type="radio" name="select2" id="option-3" checked>
-                        <input class="todos" type="radio" name="select2" id="option-4">
+                        <input class="todos" type="radio" name="select2" id="option-3" checked value="1">
+                        <input class="todos" type="radio" name="select2" id="option-4" value="2">
                         <label for="option-3" class="optionn option-3 todos">
                             <div class="dott todos"></div>
                             <span class="spann todos">Normal</span>
@@ -104,8 +102,8 @@
 
                     <div class="wrappeer todos mb-3 mt-2">
                         <label for="formFile" class="form-label">Estado: </label>
-                        <input class="todos" type="radio" name="select" id="option-1" checked>
-                        <input class="todos" type="radio" name="select" id="option-2">
+                        <input class="todos" type="radio" name="select" id="option-1" checked value="1">
+                        <input class="todos" type="radio" name="select" id="option-2" value="2">
                         <label for="option-1" class="optionn option-1 todos">
                             <div class="dott todos"></div>
                             <span class="spann todos">{{@state1}}</span>
@@ -118,7 +116,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-success">{{@send}}</button>
+                        <button type="submit" class="btn btn-success" {{on "click" this.insertUser}}>{{@send}}</button>
                     </div>
                 </form>
             </div>
