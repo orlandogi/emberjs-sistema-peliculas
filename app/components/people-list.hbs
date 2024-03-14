@@ -16,7 +16,7 @@
         <td>{{user.strContraseña}}</td>
         <td>{{user.TipoUsuario}}</td>
         <td>{{user.Estado}}</td>
-        <td><button class="button-delete" type="button"  {{on "click" this.eliminarUsuario user.id}}>Eliminar</button></td>
+        <td><button class="button-delete" type="button" id="eliminar" onclick="deleteUser('{{user.id}}');">Eliminar</button></td>
         <td><button class="button-update" type="button" >Editar</button></td>
       </tr>
     {{/each}}

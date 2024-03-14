@@ -514,9 +514,20 @@ p {
 }
 
 .button-update {
-  background-color: #FFC700;
+  background-color: #ffc700;
   color: white;
   border: none;
   border-radius: 5px;
   font-weight: bold;
+}
+
+.filter-users {
+  display: flex;
+  justify-content: space-around;
+}
+
+.filter-state,
+.filter-type,
+.filter-name {
+  margin-bottom: 40px; 
 }
