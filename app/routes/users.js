@@ -20,6 +20,8 @@ export default class UsersRoute extends Route {
       }
       console.log(error.config);
       return [];
+
+      
     }
   }
 

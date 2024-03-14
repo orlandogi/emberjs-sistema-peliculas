@@ -572,10 +572,9 @@ input[type="number"] {
   height: 40px;
   width: 400px;
   align-items: center;
-  justify-content: space-evenly;
   border-radius: 5px;
-  padding: 20px 15px;
-  box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+  padding: 20px 0px;
+
 }
 .wrappeer .optionn{
   background: #fff;
@@ -591,6 +590,14 @@ input[type="number"] {
   border: 2px solid lightgrey;
   transition: all 0.3s ease;
 }
+.wrappeer .option-4{
+  width: 145px !important;
+
+}
+.wrappeer .option-2{
+  width: 110px !important;
+
+}
 .wrappeer .optionn .dott{
   height: 15px;
   width: 15px;
@@ -601,20 +608,21 @@ input[type="number"] {
 .wrappeer .optionn .dott::before{
   position: absolute;
   content: "";
-  top: 4px;
-  left: 4px;
-  width: 12px;
-  height: 12px;
-  background: #0069d9;
+  top: 0px;
+  left: 0px;
+  width: 15px;
+  height: 15px;
+  background: #ffffff;
   border-radius: 50%;
   opacity: 0;
   transform: scale(1.5);
   transition: all 0.3s ease;
 }
+
 input[type="radio"]{
   display: none;
 }
-#option-1:checked:checked ~ .option-1,
+
 #option-2:checked:checked ~ .option-2,
 #option-3:checked:checked ~ .option-3,
 #option-4:checked:checked ~ .option-4,
@@ -623,6 +631,28 @@ input[type="radio"]{
   border-color: #0069d9;
   background: #0069d9;
 }
+
+#option-1:checked:checked ~ .option-1{
+  border-color: #00d80e;
+  background: #00d80e;
+}
+
+#option-2:checked:checked ~ .option-2{
+  border-color: #d82b00;
+  background: #d82b00;
+}
+
+#option-3:checked:checked ~ .option-3{
+  border-color: #0069d9;
+  background: #0069d9;
+}
+
+#option-4:checked:checked ~ .option-4{
+  border-color: #f6ba07;
+  background: #f6ba07;
+}
+
+
 #option-1:checked:checked ~ .option-1 .dott,
 #option-2:checked:checked ~ .option-2 .dott,
 #option-3:checked:checked ~ .option-3 .dott,
