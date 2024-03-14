@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import axios from 'axios';
 
-export default class UsersRoute extends Route {
+export default class IndexRoute extends Route {
   async model() {
     try {
       const response = await axios.get('http://localhost:3000/api/usuarios');

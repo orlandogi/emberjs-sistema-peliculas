@@ -29,6 +29,9 @@ button {
 body {
   background: #f3f3f3;
 }
+.tamaño {
+  resize: none;
+}
 
 a {
   color: #016aba;
@@ -470,6 +473,223 @@ p {
   margin: -1px;
   padding: 0;
   border: 0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.custom-file-button {
+  input[type="file"] {
+    margin-left: -2px !important;
+
+    &::-webkit-file-upload-button {
+      display: none;
+    }
+    &::file-selector-button {
+      display: none;
+    }
+  }
+
+  &:hover {
+    label {
+      background-color: #dde0e3;
+      cursor: pointer;
+    }
+  }
+}
+
+#file-input, #foto {
+  display: none;
+}
+
+
+.formulario-div{
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.formulario-img{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 6px solid #AAA;
+}
+
+.formulario-div:first-child{
+  align-items: center;
+}
+
+.formulario-div:first-child input{
+  display: none;
+}
+  
+.formulario-div:first-child label{
+  background: #1F5F74;
+  color: white;
+  padding: 6px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.etiqueta-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.etiqueta {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.etiqueta-close {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap');
+.todos{
+ 
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+.wrappeer{
+  display: inline-flex;
+  background: #fff;
+  height: 40px;
+  width: 400px;
+  align-items: center;
+  border-radius: 5px;
+  padding: 20px 0px;
+
+}
+.wrappeer .optionn{
+  background: #fff;
+  height: 30px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+.wrappeer .option-4{
+  width: 145px !important;
+
+}
+.wrappeer .option-2{
+  width: 110px !important;
+
+}
+.wrappeer .optionn .dott{
+  height: 15px;
+  width: 15px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+}
+.wrappeer .optionn .dott::before{
+  position: absolute;
+  content: "";
+  top: 0px;
+  left: 0px;
+  width: 15px;
+  height: 15px;
+  background: #ffffff;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+
+input[type="radio"]{
+  display: none;
+}
+
+#option-2:checked:checked ~ .option-2,
+#option-3:checked:checked ~ .option-3,
+#option-4:checked:checked ~ .option-4,
+#option-5:checked:checked ~ .option-5,
+#option-6:checked:checked ~ .option-6{
+  border-color: #0069d9;
+  background: #0069d9;
+}
+
+#option-1:checked:checked ~ .option-1{
+  border-color: #00d80e;
+  background: #00d80e;
+}
+
+#option-2:checked:checked ~ .option-2{
+  border-color: #d82b00;
+  background: #d82b00;
+}
+
+#option-3:checked:checked ~ .option-3{
+  border-color: #0069d9;
+  background: #0069d9;
+}
+
+#option-4:checked:checked ~ .option-4{
+  border-color: #f6ba07;
+  background: #f6ba07;
+}
+
+
+#option-1:checked:checked ~ .option-1 .dott,
+#option-2:checked:checked ~ .option-2 .dott,
+#option-3:checked:checked ~ .option-3 .dott,
+#option-4:checked:checked ~ .option-4 .dott,
+#option-5:checked:checked ~ .option-5 .dott,
+#option-6:checked:checked ~ .option-6 .dott{
+  background: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dott::before,
+#option-2:checked:checked ~ .option-2 .dott::before,
+#option-3:checked:checked ~ .option-3 .dott::before,
+#option-4:checked:checked ~ .option-4 .dott::before,
+#option-5:checked:checked ~ .option-5 .dott::before,
+#option-6:checked:checked ~ .option-6 .dott::before{
+  opacity: 1;
+  transform: scale(1);
+}
+.wrappeer .optionn .spann{
+  font-size: 14px;
+  color: #808080;
+}
+#option-1:checked:checked ~ .option-1 .spann,
+#option-2:checked:checked ~ .option-2 .spann,
+#option-3:checked:checked ~ .option-3 .spann,
+#option-4:checked:checked ~ .option-4 .spann,
+#option-5:checked:checked ~ .option-5 .spann,
+#option-6:checked:checked ~ .option-6 .spann{
+  color: #fff;
+}
+
+.btn-primary{
+  background-color: #63B8E8 !important ;
+}
+
+.btn-primary:hover{
+
+  background-color: #56A9EA !important;
 }
 
 /* Estilos para la tabla */

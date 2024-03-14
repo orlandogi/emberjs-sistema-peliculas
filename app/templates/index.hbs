@@ -23,5 +23,14 @@
      <Input @value={{this.query}} @input={{this.filterByName}} placeholder="Buscar usuario" />
     </div>
 </div>
-    <PeopleList @users={{@model}} />
+  <Crear::Crear 
+@button = 'usuario'
+@title = 'del Usuario'
+@user = {{true}}
+@state1 = 'Activo'
+@state2 = 'Inactivo'
+@send = 'Crear'
+/>
+    <PeopleList @index={{@model}}/>
+
 </div>
