@@ -745,9 +745,3 @@ input[type="radio"]{
   display: flex;
   justify-content: space-around;
 }
-
-.filter-state,
-.filter-type,
-.filter-name {
-  margin-bottom: 40px; 
-}

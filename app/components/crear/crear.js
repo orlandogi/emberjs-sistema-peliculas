@@ -5,7 +5,17 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 export default class CrearCrearComponent extends Component {
 
-  
+  async insertar(){
+await(
+    Swal.fire("Saved!", "", "success"),
+     axios.post('http://localhost:3000/api/usuario', {
+    strNombreUsuario: document.getElementById('recipient-name').value,
+    strContraseña: document.getElementById('inputPassword5').value,
+    idTipoUsuario: parseInt(document.querySelector('input[name="select2"]:checked').value),
+    idTipoEstado: parseInt(document.querySelector('input[name="select"]:checked').value),
+  }))
+
+  }
 
   @action
   async insertUser() {
@@ -18,21 +28,8 @@ export default class CrearCrearComponent extends Component {
         if((validUsername.test(username))){
         if((validPassword.test(password))){
 
-            await axios.post('http://localhost:3000/api/usuario', {
-            strNombreUsuario: document.getElementById('recipient-name').value,
-            strContraseña: document.getElementById('inputPassword5').value,
-            idTipoUsuario: parseInt(document.querySelector('input[name="select2"]:checked').value),
-            idTipoEstado: parseInt(document.querySelector('input[name="select"]:checked').value),
-
+         this.insertar();
             
-          });
-
-          await Swal.fire({
-            icon: "success",
-            title: "Terminado!",
-            text: "Se registro correctamente"
-          });
-          
         }else{
           await Swal.fire({
             icon: "error",

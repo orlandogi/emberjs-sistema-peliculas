@@ -1,11 +1,10 @@
-<div>
     <div class="titulo">
         <h1>Usuarios</h1>
     </div>
-<div class="filter-users">
+<div class="filter-users mt-3">
     <div class="filter-state">
         <label for="filter">Filtrar por estado:</label>
-        <select id="filter" {{on "change" this.filterUsers}}>
+        <select id="filter" >
             <option value="todos">Todos</option>
             <option value="activo">Activo</option>
             <option value="inactivo">Inactivo</option>
@@ -13,14 +12,14 @@
     </div>
     <div class="filter-type">
         <label for="filter">Filtrar por tipo:</label>
-        <select id="filter" {{on "change" this.filterUsers}}>
+        <select id="filter" >
             <option value="todos">Todos</option>
             <option value="administrador">Administrador</option>
             <option value="normal">Normal</option>
         </select>
     </div>
     <div class="filter-name">
-     <Input @value={{this.query}} @input={{this.filterByName}} placeholder="Buscar usuario" />
+     <Input  placeholder="Buscar usuario" />
     </div>
 </div>
   <Crear::Crear 
@@ -31,6 +30,4 @@
 @state2 = 'Inactivo'
 @send = 'Crear'
 />
-    <PeopleList @index={{@model}}/>
-
-</div>
+    <PeopleList @users={{@model}}/>
