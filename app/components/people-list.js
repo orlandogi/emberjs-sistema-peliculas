@@ -6,7 +6,7 @@ export default class PeopleListComponent extends Component {
   async deleteUser(user) {
     try {
       await (
-        axios.delete(`http://localhost:3000/api/usuario/${user}`),
+        axios.delete(`https://backend-express-production-be7d.up.railway.app/api/usuario/${user}`),
         Swal.fire("Eliminado!", "", "success")
      )
      location.reload();

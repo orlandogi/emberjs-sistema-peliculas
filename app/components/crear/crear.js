@@ -8,7 +8,7 @@ export default class CrearCrearComponent extends Component {
   async insertar(){
 await(
     Swal.fire("Saved!", "", "success"),
-     axios.post('http://localhost:3000/api/usuario', {
+     axios.post('https://backend-express-production-be7d.up.railway.app/api/usuario', {
     strNombreUsuario: document.getElementById('recipient-name').value,
     strContraseña: document.getElementById('inputPassword5').value,
     idTipoUsuario: parseInt(document.querySelector('input[name="select2"]:checked').value),
