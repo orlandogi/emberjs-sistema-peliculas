@@ -12,7 +12,7 @@ export default class PeopleListComponent extends Component {
 
   @action async deleteUser(user) {
     try {
-      await (axios.delete(`http://localhost:3000/api/usuario/${user}`)
+      await (axios.delete(`https://backend-express-production-be7d.up.railway.app/api/usuario/${user}`)
       .then((response) =>{
         const {data} = response;
         if(data.message === 'Se elimino correctamente'){
@@ -59,7 +59,7 @@ export default class PeopleListComponent extends Component {
 
   async UpdateList2() {
     try {
-      const response = await axios.get('http://localhost:3000/api/usuarios');
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
       const { data } = response;
       this.usuarios = data;
     } catch (error) {
