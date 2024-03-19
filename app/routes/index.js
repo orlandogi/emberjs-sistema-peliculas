@@ -4,7 +4,7 @@ import axios from 'axios';
 export default class IndexRoute extends Route {
   async model() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
+      const response = await axios.get('http://localhost:3000/api/usuarios');
       return response.data;
     } catch (error) {
       if (error.response) {

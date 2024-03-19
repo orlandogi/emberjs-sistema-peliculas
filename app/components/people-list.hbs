@@ -9,17 +9,40 @@
       <th></th>
     </tr>
   </thead>
+
   <tbody>
-    {{#each @users as |user|}}
+
+{{! app/templates/components/people-list.hbs }}
+{{#if this.dataStore.insertedSuccessfully}}
+      {{#each @users2 as |user|}}
       <tr>
         <td>{{user.strNombreUsuario}}</td>
         <td>{{user.strContraseña}}</td>
         <td>{{user.TipoUsuario}}</td>
         <td>{{user.Estado}}</td>
-        <td><button class="button-delete" type="button" id="eliminar" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
+        <td><button class="button-delete" type="button" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
         <td><button class="button-update" type="button" >Editar</button></td>
       </tr>
     {{/each}}
-    {{log @users}}
+{{else}}
+      {{#each this.usuarios as |user|}}
+      <tr>
+        <td>{{user.strNombreUsuario}}</td>
+        <td>{{user.strContraseña}}</td>
+        <td>{{user.TipoUsuario}}</td>
+        <td>{{user.Estado}}</td>
+        <td><button class="button-delete" type="button" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
+        <td><button class="button-update" type="button" >Editar</button></td>
+      </tr>
+    {{/each}}
+{{/if}}
+
+   
+
+
+    
   </tbody>
+  
+
+  
 </table>

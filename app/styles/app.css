@@ -504,35 +504,35 @@ input[type="number"] {
   }
 }
 
-#file-input, #foto {
+#file-input,
+#foto {
   display: none;
 }
 
-
-.formulario-div{
+.formulario-div {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
-.formulario-img{
+.formulario-img {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 6px solid #AAA;
+  border: 6px solid #aaa;
 }
 
-.formulario-div:first-child{
+.formulario-div:first-child {
   align-items: center;
 }
 
-.formulario-div:first-child input{
+.formulario-div:first-child input {
   display: none;
 }
-  
-.formulario-div:first-child label{
-  background: #1F5F74;
+
+.formulario-div:first-child label {
+  background: #1f5f74;
   color: white;
   padding: 6px 20px;
   cursor: pointer;
@@ -559,14 +559,13 @@ input[type="number"] {
   cursor: pointer;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap');
-.todos{
- 
+@import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
+.todos {
   box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
-.wrappeer{
+.wrappeer {
   display: inline-flex;
   background: #fff;
   height: 40px;
@@ -574,9 +573,8 @@ input[type="number"] {
   align-items: center;
   border-radius: 5px;
   padding: 20px 0px;
-
 }
-.wrappeer .optionn{
+.wrappeer .optionn {
   background: #fff;
   height: 30px;
   width: 100px;
@@ -590,22 +588,20 @@ input[type="number"] {
   border: 2px solid lightgrey;
   transition: all 0.3s ease;
 }
-.wrappeer .option-4{
+.wrappeer .option-4 {
   width: 145px !important;
-
 }
-.wrappeer .option-2{
+.wrappeer .option-2 {
   width: 110px !important;
-
 }
-.wrappeer .optionn .dott{
+.wrappeer .optionn .dott {
   height: 15px;
   width: 15px;
   background: #d9d9d9;
   border-radius: 50%;
   position: relative;
 }
-.wrappeer .optionn .dott::before{
+.wrappeer .optionn .dott::before {
   position: absolute;
   content: "";
   top: 0px;
@@ -619,7 +615,7 @@ input[type="number"] {
   transition: all 0.3s ease;
 }
 
-input[type="radio"]{
+input[type="radio"] {
   display: none;
 }
 
@@ -627,38 +623,37 @@ input[type="radio"]{
 #option-3:checked:checked ~ .option-3,
 #option-4:checked:checked ~ .option-4,
 #option-5:checked:checked ~ .option-5,
-#option-6:checked:checked ~ .option-6{
+#option-6:checked:checked ~ .option-6 {
   border-color: #0069d9;
   background: #0069d9;
 }
 
-#option-1:checked:checked ~ .option-1{
+#option-1:checked:checked ~ .option-1 {
   border-color: #00d80e;
   background: #00d80e;
 }
 
-#option-2:checked:checked ~ .option-2{
+#option-2:checked:checked ~ .option-2 {
   border-color: #d82b00;
   background: #d82b00;
 }
 
-#option-3:checked:checked ~ .option-3{
+#option-3:checked:checked ~ .option-3 {
   border-color: #0069d9;
   background: #0069d9;
 }
 
-#option-4:checked:checked ~ .option-4{
+#option-4:checked:checked ~ .option-4 {
   border-color: #f6ba07;
   background: #f6ba07;
 }
-
 
 #option-1:checked:checked ~ .option-1 .dott,
 #option-2:checked:checked ~ .option-2 .dott,
 #option-3:checked:checked ~ .option-3 .dott,
 #option-4:checked:checked ~ .option-4 .dott,
 #option-5:checked:checked ~ .option-5 .dott,
-#option-6:checked:checked ~ .option-6 .dott{
+#option-6:checked:checked ~ .option-6 .dott {
   background: #fff;
 }
 #option-1:checked:checked ~ .option-1 .dott::before,
@@ -666,11 +661,11 @@ input[type="radio"]{
 #option-3:checked:checked ~ .option-3 .dott::before,
 #option-4:checked:checked ~ .option-4 .dott::before,
 #option-5:checked:checked ~ .option-5 .dott::before,
-#option-6:checked:checked ~ .option-6 .dott::before{
+#option-6:checked:checked ~ .option-6 .dott::before {
   opacity: 1;
   transform: scale(1);
 }
-.wrappeer .optionn .spann{
+.wrappeer .optionn .spann {
   font-size: 14px;
   color: #808080;
 }
@@ -679,17 +674,16 @@ input[type="radio"]{
 #option-3:checked:checked ~ .option-3 .spann,
 #option-4:checked:checked ~ .option-4 .spann,
 #option-5:checked:checked ~ .option-5 .spann,
-#option-6:checked:checked ~ .option-6 .spann{
+#option-6:checked:checked ~ .option-6 .spann {
   color: #fff;
 }
 
-.btn-primary{
-  background-color: #63B8E8 !important ;
+.btn-primary {
+  background-color: #63b8e8 !important ;
 }
 
-.btn-primary:hover{
-
-  background-color: #56A9EA !important;
+.btn-primary:hover {
+  background-color: #56a9ea !important;
 }
 
 /* Estilos para la tabla */
@@ -744,4 +738,51 @@ input[type="radio"]{
 .filter-users {
   display: flex;
   justify-content: space-around;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  margin-right: 7px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  margin-right: 7px;
+  content: "✖";
+}
+
+.includ::before {
+  position: relative;
+  margin-right: 7px;
+  content: "◼️";
+}
+
+#number,
+#letter,
+#length,
+#capital,
+#length2,
+#letter2,
+#capital2 {
+  margin-bottom: 0;
+}
+#must,
+#must2 {
+  margin-bottom: 5px;
+}
+
+.poAbajo {
+  position: relative;
+  top: 2.5px;
 }

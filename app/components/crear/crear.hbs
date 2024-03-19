@@ -1,4 +1,4 @@
-<button type="button"  class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal" {{on "click" this.validarBoton}}>Agregar
+<button type="button"  class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal" >Agregar
     {{@button}}</button>
 
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -7,30 +7,33 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Datos {{@title}}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="cerrar2" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="was-validated">
+                <form id="miFormulario">
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
                         <div class="pe-5"><input type="text" aria-describedby="usernameBlock" class="form-control" id="recipient-name" value={{this.strNombreUsuario}}  placeholder="Digite el nombre del usuario" />
                         </div>
                          <div id="usernameBlock" class="form-text mb-3">
-                        Solo se admiten numeros y letras <br>
-                        Debe tener al menos 6 caracteres</div>
-                        
+         <p id="must2" >El nombre debe cumplir lo siguiente:</p>
+        <p id="letter2" class="includ" >Solo se admiten <b>números</b> y <b>letras</b></p>
+        <p id="length2" class="includ" >Minimo <b>6 </b>caracteres, maximo <b>20</b></p>
+        <p id="capital2" class="includ">Para unir palabras utilize <b>( _ )</b></p>
+      </div>
                     </div>
 
                     {{#if @user}}
                     <label for="inputPassword5" class="form-label">Password</label>
-                    <div class="pe-5"><input type="password" id="inputPassword5" class="form-control"
-                        aria-describedby="passwordHelpBlock" value={{this.strContraseña}}  placeholder="Digite la contraseña"></div>
-                    <div id="passwordHelpBlock" class="form-text mb-3">
-                        Tu contraseña debe tener 8-20 caracteres <br>
-                        Al menos una letra minuscula (a - z) <br>
-                        Al menos un valor numério (0 - 9) <br>
-                        Al menos un símbolo especial (!@#$%^*=+-_)
-                        </div>
+                    <div class="pe-5"><input type="password" id="inputPassword5" class="form-control" 
+                        aria-describedby="passwordHelpBlock" value={{this.strContraseña}}  placeholder="Digite la contraseña" ></div>
+                        <div id="passwordHelpBlock" class="form-text mb-3">
+         <p id="must">La contraseña debe contener lo siguiente:</p>
+        <p id="letter" class="invalid">Una letra <b>minuscula </b> y <b>mayuscula</b></p>
+        <p id="number" class="invalid">Un <b>numero</b></p>
+        <p id="length" class="invalid">Minimo <b>8 </b>caracteres, maximo <b>16</b></p>
+        <p id="capital" class="invalid">Un caracter especial <b>( !@#$%*=+-_ )</b></p>
+      </div>
                     <div class="wrappeer todos ">
                         <label for="formFile" class="form-label">Tipo de usuario: </label>
                         <input class="todos" type="radio" name="select2" id="option-3" checked value="1">
@@ -46,7 +49,7 @@
 
                     </div>
                     <div class="form-text mb-3" id="descripci">
-<b>*Tiene acceso limitado al sistema*</b>                    
+<b>🔒Tiene acceso limitado al sistema🔒</b>                    
 </div>
                     {{else}}
                     <div class="mb-3">
@@ -114,7 +117,7 @@
                     {{/if}}
 
                     <div class="wrappeer todos mb-3">
-                        <label for="formFile" class="form-label">Estado: </label>
+                        <label for="formFile" class="form-label poAbajo">Estado: </label>
                         <input class="todos" type="radio" name="select" id="option-1" checked value="1">
                         <input class="todos" type="radio" name="select" id="option-2" value="2">
                         <label for="option-1" class="optionn option-1 todos">
@@ -128,8 +131,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-success" {{on "click" this.insertUser}}>{{@send}}</button>
+                        <button id="cerrar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="enviar" type="submit" class="btn btn-success" {{on "click" this.insertUser}} disabled>{{@send}}</button>
                     </div>
                 </form>
             </div>
@@ -138,47 +141,180 @@
     </div>
 </div>
 
+  <PeopleList @users2={{this.usuarios}} />
 
 <script>
 
-const axios = require('axios');
+var myInput = document.getElementById("inputPassword5");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+var myInput2 = document.getElementById('recipient-name');
+var buttonSend = document.getElementById('enviar');
+var buttonClose = document.getElementById('cerrar');
+var buttonClose2 = document.getElementById('cerrar2');
+var val1 = false, val2 = false, val3 = false, val4 = false, val5 = false;
 
-async function obtenerDescripcion() {
-  try {
-    const respuesta = await fetch('http://localhost:3000/api/tipoUsuario');
-    const datos = await respuesta.json();
-    return datos;
-  } catch (error) {
+myInput2.onkeypress = function(e) {
+    var chr = String.fromCharCode(e.which);
+    if ("1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_".indexOf(chr) < 0)
+        return false;
+};
+myInput.onkeypress = function(e){
+var chr = String.fromCharCode(e.which);
+    if ("1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@".indexOf(chr) < 0)
+        return false;
+};
+
+myInput.addEventListener('keydown', function(event) {
+
+    if (myInput.value.length >= 16) {
+
+    if (event.key === 'Backspace') {
+      return; 
+    } else {
+      event.preventDefault(); // Prevenir la escritura de más caracteres
+    }
+  }
+});
+
+myInput2.addEventListener('keydown', function(event){
+    if(myInput2.value.length >=20){
+    
+    if(event.key === 'Backspace'){
+    return;
+    }else{
+    event.preventDefault();
+    }
+    }
+})
+
+function validarBoton(){
+   if(val1 && val2 && val3 && val4 && val5){
+    buttonSend.disabled = false;
+    }else{
+    buttonSend.disabled = true;
+    }
+}
+
+myInput2.onkeyup = function(){
+    if(myInput2.value.length >=6 && myInput2.value.length <=20){
+    val5 = true;
+    validarBoton();
+    }else{
+    val5 = false;
+    validarBoton();}
+}
+
+myInput.onkeyup = function() {
+  var lowerCaseLetters = /[a-z]/g;
+  var upperCaseLetters = /[A-Z]/g;
+  if((myInput.value.match(lowerCaseLetters)) && (myInput.value.match(upperCaseLetters))) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+    val1 = true;
+    validarBoton();
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+    val1 = false;
+    validarBoton();
+  }
+  
+
+  
+  var upperCaseLetters = /[!@#$%*_=+-]/g;
+  var noCaracter = /[<>&:^()'"\s]/g;
+  if((myInput.value.match(upperCaseLetters)) && !(myInput.value.match(noCaracter))) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+    val4 = true;
+    validarBoton();
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+    val4 = false;
+    validarBoton();
+  }
+
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+    val2 = true;
+    validarBoton();
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+    val2 = false;
+    validarBoton();
+  }
+  
+  if(myInput.value.length >= 8 && myInput.value.length <= 16) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+    val3 = true;
+    validarBoton();
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+    val3 = false;
+    validarBoton();
   }
 }
-const respuesta = obtenerDescripcion();
+
 
 const normalRadio = document.getElementById("option-3");
 const administradorRadio = document.getElementById("option-4");
+const estadoUser = document.getElementById("option-1");
 
 
 function verificarOpcionInicial() {
     if (normalRadio.checked) {
-       document.getElementById("descripci").innerHTML='<b>*Tiene acceso limitado al sistema*</b>';    
-    } 
+       document.getElementById("descripci").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';    
+    }else{
+       document.getElementById("descripci").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
+    }
 }
 
 window.addEventListener("load", verificarOpcionInicial);
 
  normalRadio.addEventListener("change", function() {
     if (normalRadio.checked) {
-       document.getElementById("descripci").innerHTML='<b>*Tiene acceso limitado al sistema*</b>';
-
-    
+       document.getElementById("descripci").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';
+    }else{
+           document.getElementById("descripci").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
     }
 });
 
 administradorRadio.addEventListener("change", function() {
     if (administradorRadio.checked) {
-        
-       document.getElementById("descripci").innerHTML='<b>*Tiene control total del sistema*</b>';
-    }
+       document.getElementById("descripci").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
+    }else{
+           document.getElementById("descripci").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';
+}
 });
+
+  document.getElementById('miFormulario').addEventListener('submit', function(event) {
+        event.preventDefault();
+        buttonClose.click();
+        myInput.value = '';
+        myInput2.value = '';
+        normalRadio.checked = true;
+        estadoUser.checked = true;
+
+    });
+
+function handleClick() {
+ myInput.value = '';
+        myInput2.value = '';
+        normalRadio.checked = true;
+        estadoUser.checked = true;
+}
+
+buttonClose.addEventListener('click', handleClick);
+buttonClose2.addEventListener('click', handleClick);
 
     const defaultFile = 'https://static-00.iconduck.com/assets.00/user-icon-1024x1024-dtzturco.png';
     const file = document.getElementById('foto');
