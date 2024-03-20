@@ -591,6 +591,9 @@ input[type="number"] {
 .wrappeer .option-4 {
   width: 145px !important;
 }
+.wrappeer .option-6 {
+  width: 145px !important;
+}
 .wrappeer .option-2 {
   width: 110px !important;
 }
@@ -623,7 +626,9 @@ input[type="radio"] {
 #option-3:checked:checked ~ .option-3,
 #option-4:checked:checked ~ .option-4,
 #option-5:checked:checked ~ .option-5,
-#option-6:checked:checked ~ .option-6 {
+#option-6:checked:checked ~ .option-6,
+#option-7:checked:checked ~ .option-7,
+#option-8:checked:checked ~ .option-8 {
   border-color: #0069d9;
   background: #0069d9;
 }
@@ -638,6 +643,16 @@ input[type="radio"] {
   background: #d82b00;
 }
 
+#option-7:checked:checked ~ .option-7 {
+  border-color: #00d80e;
+  background: #00d80e;
+}
+
+#option-8:checked:checked ~ .option-8 {
+  border-color: #d82b00;
+  background: #d82b00;
+}
+
 #option-3:checked:checked ~ .option-3 {
   border-color: #0069d9;
   background: #0069d9;
@@ -648,12 +663,24 @@ input[type="radio"] {
   background: #f6ba07;
 }
 
+#option-5:checked:checked ~ .option-5 {
+  border-color: #0069d9;
+  background: #0069d9;
+}
+
+#option-6:checked:checked ~ .option-6 {
+  border-color: #f6ba07;
+  background: #f6ba07;
+}
+
+
 #option-1:checked:checked ~ .option-1 .dott,
 #option-2:checked:checked ~ .option-2 .dott,
 #option-3:checked:checked ~ .option-3 .dott,
 #option-4:checked:checked ~ .option-4 .dott,
 #option-5:checked:checked ~ .option-5 .dott,
-#option-6:checked:checked ~ .option-6 .dott {
+#option-7:checked:checked ~ .option-7 .dott,
+#option-8:checked:checked ~ .option-8 .dott {
   background: #fff;
 }
 #option-1:checked:checked ~ .option-1 .dott::before,
@@ -661,7 +688,9 @@ input[type="radio"] {
 #option-3:checked:checked ~ .option-3 .dott::before,
 #option-4:checked:checked ~ .option-4 .dott::before,
 #option-5:checked:checked ~ .option-5 .dott::before,
-#option-6:checked:checked ~ .option-6 .dott::before {
+#option-6:checked:checked ~ .option-6 .dott::before,
+#option-7:checked:checked ~ .option-7 .dott::before,
+#option-8:checked:checked ~ .option-8 .dott::before {
   opacity: 1;
   transform: scale(1);
 }
@@ -674,7 +703,9 @@ input[type="radio"] {
 #option-3:checked:checked ~ .option-3 .spann,
 #option-4:checked:checked ~ .option-4 .spann,
 #option-5:checked:checked ~ .option-5 .spann,
-#option-6:checked:checked ~ .option-6 .spann {
+#option-6:checked:checked ~ .option-6 .spann,
+#option-7:checked:checked ~ .option-7 .spann,
+#option-8:checked:checked ~ .option-8 .spann {
   color: #fff;
 }
 
@@ -774,15 +805,28 @@ input[type="radio"] {
 #capital,
 #length2,
 #letter2,
-#capital2 {
+#capital2,
+#length3,
+#letter3,
+#capital3,
+#number4,
+#letter4,
+#length4,
+#capital4 {
   margin-bottom: 0;
 }
 #must,
-#must2 {
+#must2,
+#must3,
+#must4 {
   margin-bottom: 5px;
 }
 
 .poAbajo {
   position: relative;
   top: 2.5px;
+}
+
+#ocultar{
+  display: none;
 }

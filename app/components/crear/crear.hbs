@@ -25,7 +25,7 @@
 
                     {{#if @user}}
                     <label for="inputPassword5" class="form-label">Password</label>
-                    <div class="pe-5"><input type="password" id="inputPassword5" class="form-control" 
+                    <div class="pe-5"><input type="text" id="inputPassword5" class="form-control" 
                         aria-describedby="passwordHelpBlock" value={{this.strContraseña}}  placeholder="Digite la contraseña" ></div>
                         <div id="passwordHelpBlock" class="form-text mb-3">
          <p id="must">La contraseña debe contener lo siguiente:</p>
@@ -303,6 +303,21 @@ administradorRadio.addEventListener("change", function() {
         myInput2.value = '';
         normalRadio.checked = true;
         estadoUser.checked = true;
+        letter.classList.remove("valid");
+        letter.classList.add("invalid");
+         capital.classList.remove("valid");
+        capital.classList.add("invalid");
+         number.classList.remove("valid");
+        number.classList.add("invalid");
+         length.classList.remove("valid");
+        length.classList.add("invalid");
+           val5 = false;
+           val1 = false;
+           val2 = false;
+           val3 = false;
+           val4 = false;
+        buttonSend.disabled = true;
+
 
     });
 
@@ -311,6 +326,20 @@ function handleClick() {
         myInput2.value = '';
         normalRadio.checked = true;
         estadoUser.checked = true;
+        letter.classList.remove("valid");
+        letter.classList.add("invalid");
+         capital.classList.remove("valid");
+        capital.classList.add("invalid");
+         number.classList.remove("valid");
+        number.classList.add("invalid");
+         length.classList.remove("valid");
+        length.classList.add("invalid");
+           val5 = false;
+           val1 = false;
+           val2 = false;
+           val3 = false;
+           val4 = false;        
+           buttonSend.disabled = true;
 }
 
 buttonClose.addEventListener('click', handleClick);

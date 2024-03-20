@@ -1,10 +1,91 @@
+<button type="button"  class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="ocultar">Agregar Usuario</button>
+
+<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog p-4 m-0 m-auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel2">Datos del Usuario</h1>
+                <button id="cerrar3" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> 
+            <div class="modal-body">
+                <form id="miFormulario2">
+                    <div class="mb-3">
+                        <label for="recipient-name2" class="col-form-label">Nombre:</label>
+                        <div class="pe-5"><input type="text" aria-describedby="usernameBlock2" class="form-control" id="recipient-name2"  placeholder="Digite el nombre del usuario" />
+                        </div>
+                         <div id="usernameBlock2" class="form-text mb-3">
+         <p id="must3" >El nombre debe cumplir lo siguiente:</p>
+        <p id="letter3" class="includ" >Solo se admiten <b>números</b> y <b>letras</b></p>
+        <p id="length3" class="includ" >Minimo <b>6 </b>caracteres, maximo <b>20</b></p>
+        <p id="capital3" class="includ">Para unir palabras utilize <b>( _ )</b></p>
+      </div>
+                    </div>
+
+                    <label for="inputPassword52" class="form-label">Password</label>
+                    <div class="pe-5"><input type="text" id="inputPassword52" class="form-control" 
+                        aria-describedby="passwordHelpBlock2"  placeholder="Digite la contraseña" ></div>
+                        <div id="passwordHelpBlock2" class="form-text mb-3">
+         <p id="must4">La contraseña debe contener lo siguiente:</p>
+        <p id="letter4" class="invalid">Una letra <b>minuscula </b> y <b>mayuscula</b></p>
+        <p id="number4" class="invalid">Un <b>numero</b></p>
+        <p id="length4" class="invalid">Minimo <b>8 </b>caracteres, maximo <b>16</b></p>
+        <p id="capital4" class="invalid">Un caracter especial <b>( !@#$%*=+-_ )</b></p>
+      </div>
+                    <div class="wrappeer todos ">
+                        <label for="formFile" class="form-label">Tipo de usuario: </label>
+                        <input class="todos" type="radio" name="select3" id="option-5" checked value="1">
+                        <input class="todos" type="radio" name="select3" id="option-6" value="2">
+                        <label for="option-5" class="optionn option-5 todos">
+                            <div class="dott todos"></div>
+                            <span class="spann todos">Normal</span>
+                        </label>
+                        <label for="option-6" class="optionn option-6 todos">
+                            <div class="dott todos"></div>
+                            <span class="spann todos">Administrador</span>
+                        </label>
+
+                    </div>
+                    <div class="form-text mb-3" id="descripci2">
+<b>🔒Tiene acceso limitado al sistema🔒</b>                    
+</div>
+                   
+                    <div class="wrappeer todos mb-3">
+                        <label for="formFile" class="form-label poAbajo">Estado: </label>
+                        <input class="todos" type="radio" name="select4" id="option-7" checked value="1">
+                        <input class="todos" type="radio" name="select4" id="option-8" value="2">
+                        <label for="option-7" class="optionn option-7 todos">
+                            <div class="dott todos"></div>
+                            <span class="spann todos">Activo</span>
+                        </label>
+                        <label for="option-8" class="optionn option-8 todos">
+                            <div class="dott todos"></div>
+                            <span class="spann todos">Inactivo</span>
+                        </label>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="cerrarmd" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="enviar2" type="submit" class="btn btn-success" {{on "click" this.actualizarDatos}} disabled>Actualizar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <table class="my-table">
   <thead>
     <tr>
-      <th>Nombre de Usuario</th>
-      <th>Contraseña</th>
-      <th>Tipo de Usuario</th>
-      <th>Estado</th>
+      <th style="text-align: center;">Nombre de Usuario</th>
+      <th style="text-align: center;">Contraseña</th>
+      <th style="text-align: center;">Tipo de Usuario</th>
+      <th style="text-align: center;">Estado</th>
       <th></th>
       <th></th>
     </tr>
@@ -21,7 +102,7 @@
         <td>{{user.TipoUsuario}}</td>
         <td>{{user.Estado}}</td>
         <td><button class="button-delete" type="button" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
-        <td><button class="button-update" type="button" >Editar</button></td>
+        <td><button class="button-update" type="button" {{on "click" (fn this.editarDatos user.id )}} >Editar</button></td>
       </tr>
     {{/each}}
 {{else}}
@@ -32,17 +113,215 @@
         <td>{{user.TipoUsuario}}</td>
         <td>{{user.Estado}}</td>
         <td><button class="button-delete" type="button" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
-        <td><button class="button-update" type="button" >Editar</button></td>
+        <td><button class="button-update" type="button" {{on "click" (fn this.editarDatos user.id )}}>Editar</button></td>
       </tr>
     {{/each}}
 {{/if}}
+  </tbody>
+</table>
+
+
+<script>
+
+var myInput3 = document.getElementById("inputPassword52");
+var letter22 = document.getElementById("letter4");
+var capital22 = document.getElementById("capital4");
+var number22 = document.getElementById("number4");
+var length22 = document.getElementById("length4");
+var myInput4 = document.getElementById('recipient-name2');
+var buttonSend2 = document.getElementById('enviar2');
+var buttonClose3 = document.getElementById('cerrarmd');
+var buttonClose4 = document.getElementById('cerrar3');
+var val11 = false, val22 = false, val33 = false, val44 = false, val55 = false;
+
+myInput4.onkeypress = function(e) {
+    var chr = String.fromCharCode(e.which);
+    if ("1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_".indexOf(chr) < 0)
+        return false;
+};
+myInput3.onkeypress = function(e){
+var chr = String.fromCharCode(e.which);
+    if ("1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@".indexOf(chr) < 0)
+        return false;
+};
+
+myInput3.addEventListener('keydown', function(event) {
+
+    if (myInput3.value.length >= 16) {
+
+    if (event.key === 'Backspace') {
+      return; 
+    } else {
+      event.preventDefault(); // Prevenir la escritura de más caracteres
+    }
+  }
+});
+
+myInput4.addEventListener('keydown', function(event){
+    if(myInput4.value.length >=20){
+    
+    if(event.key === 'Backspace'){
+    return;
+    }else{
+    event.preventDefault();
+    }
+    }
+})
+
+function validarBoton2(){
+   if(val11 && val22 && val33 && val44 && val55){
+    buttonSend2.disabled = false;
+    }else{
+    buttonSend2.disabled = true;
+    }
+}
+
+myInput4.onkeyup = function(){
+    if(myInput4.value.length >=6 && myInput4.value.length <=20){
+    val55 = true;
+    validarBoton2();
+    }else{
+    val55 = false;
+    validarBoton2();}
+}
+
+myInput3.onkeyup = function() {
+  var lowerCaseLetters = /[a-z]/g;
+  var upperCaseLetters = /[A-Z]/g;
+  if((myInput3.value.match(lowerCaseLetters)) && (myInput3.value.match(upperCaseLetters))) {  
+    letter22.classList.remove("invalid");
+    letter22.classList.add("valid");
+    val11 = true;
+    validarBoton2();
+  } else {
+    letter22.classList.remove("valid");
+    letter22.classList.add("invalid");
+    val11 = false;
+    validarBoton2();
+  }
+  
+
+  
+  var upperCaseLetters = /[!@#$%*_=+-]/g;
+  var noCaracter = /[<>&:^()'"\s]/g;
+  if((myInput3.value.match(upperCaseLetters)) && !(myInput3.value.match(noCaracter))) {  
+    capital22.classList.remove("invalid");
+    capital22.classList.add("valid");
+    val44 = true;
+    validarBoton2();
+  } else {
+    capital22.classList.remove("valid");
+    capital22.classList.add("invalid");
+    val44 = false;
+    validarBoton2();
+  }
+
+  var numbers = /[0-9]/g;
+  if(myInput3.value.match(numbers)) {  
+    number22.classList.remove("invalid");
+    number22.classList.add("valid");
+    val22 = true;
+    validarBoton2();
+  } else {
+    number22.classList.remove("valid");
+    number22.classList.add("invalid");
+    val22 = false;
+    validarBoton2();
+  }
+  
+  if(myInput3.value.length >= 8 && myInput3.value.length <= 16) {
+    length22.classList.remove("invalid");
+    length22.classList.add("valid");
+    val33 = true;
+    validarBoton2();
+  } else {
+    length22.classList.remove("valid");
+    length22.classList.add("invalid");
+    val33 = false;
+    validarBoton2();
+  }
+}
+
+
+const normalRadio2 = document.getElementById("option-5");
+const administradorRadio2 = document.getElementById("option-6");
+const estadoUser2 = document.getElementById("option-7");
+
+
+function verificarOpcionInicial2() {
+    if (normalRadio2.checked) {
+       document.getElementById("descripci2").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';    
+    }else{
+       document.getElementById("descripci2").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
+    }
+}
+
+window.addEventListener("load", verificarOpcionInicial2);
+
+ normalRadio2.addEventListener("change", function() {
+    if (normalRadio2.checked) {
+       document.getElementById("descripci2").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';
+    }else{
+           document.getElementById("descripci2").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
+    }
+});
+
+administradorRadio2.addEventListener("change", function() {
+    if (administradorRadio2.checked) {
+       document.getElementById("descripci2").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
+    }else{
+           document.getElementById("descripci2").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';
+}
+});
+
+  document.getElementById('miFormulario2').addEventListener('submit', function(event) {
+        event.preventDefault();
+        buttonClose3.click();
+        myInput3.value = '';
+        myInput4.value = '';
+        normalRadio2.checked = true;
+        estadoUser2.checked = true;
+        letter22.classList.remove("invalid");
+        letter22.classList.add("valid");
+        capital22.classList.remove("invalid");
+        capital22.classList.add("valid");
+        number22.classList.remove("invalid");
+        number22.classList.add("valid");
+        length22.classList.remove("invalid");
+        length22.classList.add("valid");
+           val55 = true;
+           val11 = true;
+           val22 = true;
+           val33 = true;
+           val44 = true;
+           buttonSend2.disabled = false;
+
+    });
+
+function handleClick2() {
+ myInput3.value = '';
+        myInput4.value = '';
+        normalRadio2.checked = true;
+        estadoUser2.checked = true;
+           letter22.classList.remove("invalid");
+        letter22.classList.add("valid");
+        capital22.classList.remove("invalid");
+        capital22.classList.add("valid");
+        number22.classList.remove("invalid");
+        number22.classList.add("valid");
+        length22.classList.remove("invalid");
+        length22.classList.add("valid");
+           val55 = true;
+           val11 = true;
+           val22 = true;
+           val33 = true;
+           val44 = true;
+                      buttonSend2.disabled = false;
+
+}
+
+buttonClose3.addEventListener('click', handleClick2);
+buttonClose4.addEventListener('click', handleClick2);
 
    
-
-
-    
-  </tbody>
-  
-
-  
-</table>
+</script>

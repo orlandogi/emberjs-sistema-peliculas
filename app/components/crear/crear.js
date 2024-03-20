@@ -11,7 +11,7 @@ export default class CrearCrearComponent extends Component {
   @action async insertar() {
     try {
       await axios
-        .post('https://backend-express-production-be7d.up.railway.app/api/usuario', {
+        .post('http://localhost:3000/api/usuario', {
           strNombreUsuario: document.getElementById('recipient-name').value,
           strContraseña: document.getElementById('inputPassword5').value,
           idTipoUsuario: parseInt(
@@ -78,7 +78,7 @@ export default class CrearCrearComponent extends Component {
 
   async UpdateList() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
+      const response = await axios.get('http://localhost:3000/api/usuarios');
       const { data } = response;
       this.usuarios = data;
     } catch (error) {
