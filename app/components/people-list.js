@@ -8,7 +8,6 @@ import { inject as service } from '@ember/service';
 
 export default class PeopleListComponent extends Component {
   @service dataStore;
-  @tracked usuarios;
   @tracked usuId;
 
   @action async deleteUser(user) {
@@ -44,7 +43,6 @@ export default class PeopleListComponent extends Component {
           });
         }
       }))
-      this.dataStore.setInsertedSuccessfully(false);
       await this.UpdateList2();
     } catch (error) {
       await Swal.fire({
@@ -164,7 +162,6 @@ export default class PeopleListComponent extends Component {
 console.log(error)
 }) )
   if(validar){
-    this.dataStore.setInsertedSuccessfully(false);
    await this.UpdateList2();
    Swal.fire({
      position: 'center',
@@ -180,7 +177,7 @@ console.log(error)
     try {
       const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
       const { data } = response;
-      this.usuarios = data;
+      this.dataStore.setActualizarDatos(data);
     } catch (error) {
       if (error.response) {
         console.log(error.response.status);

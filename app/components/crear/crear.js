@@ -60,9 +60,8 @@ export default class CrearCrearComponent extends Component {
             });
           }
         });
-
       await this.UpdateList();
-      this.dataStore.setInsertedSuccessfully(true);
+
     } catch (error) {
       Swal.fire({
         position: 'center',
@@ -74,13 +73,11 @@ export default class CrearCrearComponent extends Component {
     }
   }
 
-  @tracked usuarios = this.UpdateList();
-
   async UpdateList() {
     try {
       const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
       const { data } = response;
-      this.usuarios = data;
+      this.dataStore.setActualizarDatos(data);
     } catch (error) {
       if (error.response) {
         console.log(error.response.status);
