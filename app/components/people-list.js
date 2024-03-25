@@ -94,7 +94,7 @@ export default class PeopleListComponent extends Component {
   
   }
   @action async actualizarDatos(){
-
+    const validar = true;
     const username = document.getElementById('recipient-name2').value;
     const validUsername = /^[0-9A-Za-z_]{6,20}$/;
     const password = document.getElementById('inputPassword52').value;
@@ -103,8 +103,6 @@ export default class PeopleListComponent extends Component {
       if (validPassword.test(password)) {
         if(username.length >= 6 && username.length <=20){
           if(password.length >= 8 && password.length <= 16){
-
-            const validar = true;
             let tipoUser;
             let tipoEstado;
             if(document.getElementById('opNormal2').selected){
