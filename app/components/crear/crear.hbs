@@ -13,44 +13,28 @@
                 <form id="miFormulario">
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
-                        <div class="pe-5"><input type="text" aria-describedby="usernameBlock" class="form-control" id="recipient-name" value={{this.strNombreUsuario}}  placeholder="Digite el nombre del usuario" />
+                        <div class="pe-5"><input type="text" aria-describedby="usernameBlock" class="form-control" id="recipient-name" placeholder="Digite el nombre del usuario" />
                         </div>
                          <div id="usernameBlock" class="form-text mb-3">
-         <p id="must2" >El nombre debe cumplir lo siguiente:</p>
-        <p id="letter2" class="includ" >Solo se admiten <b>números</b> y <b>letras</b></p>
-        <p id="length2" class="includ" >Minimo <b>6 </b>caracteres, maximo <b>20</b></p>
-        <p id="capital2" class="includ">Para unir palabras utilize <b>( _ )</b></p>
+         <p><b>Nota:</b> Para unir palabras utilize <b>( _ )</b></p>
       </div>
                     </div>
 
                     {{#if @user}}
                     <label for="inputPassword5" class="form-label">Password</label>
-                    <div class="pe-5"><input type="text" id="inputPassword5" class="form-control" 
-                        aria-describedby="passwordHelpBlock" value={{this.strContraseña}}  placeholder="Digite la contraseña" ></div>
-                        <div id="passwordHelpBlock" class="form-text mb-3">
-         <p id="must">La contraseña debe contener lo siguiente:</p>
-        <p id="letter" class="invalid">Una letra <b>minuscula </b> y <b>mayuscula</b></p>
-        <p id="number" class="invalid">Un <b>numero</b></p>
-        <p id="length" class="invalid">Minimo <b>8 </b>caracteres, maximo <b>16</b></p>
-        <p id="capital" class="invalid">Un caracter especial <b>( !@#$%*=+-_ )</b></p>
-      </div>
-                    <div class="wrappeer todos ">
+                    <div class="pe-5"><input type="password" id="inputPassword5" class="form-control mb-3" 
+                       placeholder="Digite la contraseña" ></div>
+                     
+                    <div class="mb-3 d-grid" >
                         <label for="formFile" class="form-label">Tipo de usuario: </label>
-                        <input class="todos" type="radio" name="select2" id="option-3" checked value="1">
-                        <input class="todos" type="radio" name="select2" id="option-4" value="2">
-                        <label for="option-3" class="optionn option-3 todos">
-                            <div class="dott todos"></div>
-                            <span class="spann todos">Normal</span>
-                        </label>
-                        <label for="option-4" class="optionn option-4 todos">
-                            <div class="dott todos"></div>
-                            <span class="spann todos">Administrador</span>
-                        </label>
+
+                    <select>
+                        <option id="opNormal"  value="1" selected>Normal</option>
+                        <option id="opAdmin"  value="2">Administrador</option>
+                    </select>
 
                     </div>
-                    <div class="form-text mb-3" id="descripci">
-<b>🔒Tiene acceso limitado al sistema🔒</b>                    
-</div>
+                
                     {{else}}
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Sinopsis</label>
@@ -116,23 +100,19 @@
 
                     {{/if}}
 
-                    <div class="wrappeer todos mb-3">
-                        <label for="formFile" class="form-label poAbajo">Estado: </label>
-                        <input class="todos" type="radio" name="select" id="option-1" checked value="1">
-                        <input class="todos" type="radio" name="select" id="option-2" value="2">
-                        <label for="option-1" class="optionn option-1 todos">
-                            <div class="dott todos"></div>
-                            <span class="spann todos">{{@state1}}</span>
-                        </label>
-                        <label for="option-2" class="optionn option-2 todos">
-                            <div class="dott todos"></div>
-                            <span class="spann todos">{{@state2}}</span>
-                        </label>
+                    <div class="mb-3 d-grid">
+                        <label class="form-label">Estado: </label>
+
+                <select >
+                    <option id="opActivo"  value="1" selected>Activo</option>
+                    <option id="opInactivo" value="2">Inactivo</option>
+                </select>
+
                     </div>
 
-                    <div class="modal-footer">
+                    <div class="modal-footer ">
                         <button id="cerrar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="enviar" type="submit" class="btn btn-success" {{on "click" this.insertUser}} disabled>{{@send}}</button>
+                        <button id="enviar" type="submit" class="btn btn-success " {{on "click" this.insertUser}}>{{@send}}</button>
                     </div>
                 </form>
             </div>
@@ -146,15 +126,13 @@
 <script>
 
 var myInput = document.getElementById("inputPassword5");
-var letter = document.getElementById("letter");
-var capital = document.getElementById("capital");
-var number = document.getElementById("number");
-var length = document.getElementById("length");
 var myInput2 = document.getElementById('recipient-name');
-var buttonSend = document.getElementById('enviar');
+var optNormal = document.getElementById('opNormal');
+var optAdmin = document.getElementById('opAdmin');
+var optActivo = document.getElementById('opActivo');
+var optInactivo = document.getElementById('opInactivo');
 var buttonClose = document.getElementById('cerrar');
 var buttonClose2 = document.getElementById('cerrar2');
-var val1 = false, val2 = false, val3 = false, val4 = false, val5 = false;
 
 myInput2.onkeypress = function(e) {
     var chr = String.fromCharCode(e.which);
@@ -174,7 +152,7 @@ myInput.addEventListener('keydown', function(event) {
     if (event.key === 'Backspace') {
       return; 
     } else {
-      event.preventDefault(); // Prevenir la escritura de más caracteres
+      event.preventDefault(); 
     }
   }
 });
@@ -190,160 +168,25 @@ myInput2.addEventListener('keydown', function(event){
     }
 })
 
-function validarBoton(){
-   if(val1 && val2 && val3 && val4 && val5){
-    buttonSend.disabled = false;
-    }else{
-    buttonSend.disabled = true;
-    }
-}
-
-myInput2.onkeyup = function(){
-    if(myInput2.value.length >=6 && myInput2.value.length <=20){
-    val5 = true;
-    validarBoton();
-    }else{
-    val5 = false;
-    validarBoton();}
-}
-
-myInput.onkeyup = function() {
-  var lowerCaseLetters = /[a-z]/g;
-  var upperCaseLetters = /[A-Z]/g;
-  if((myInput.value.match(lowerCaseLetters)) && (myInput.value.match(upperCaseLetters))) {  
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
-    val1 = true;
-    validarBoton();
-  } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-    val1 = false;
-    validarBoton();
-  }
-  
-
-  
-  var upperCaseLetters = /[!@#$%*_=+-]/g;
-  var noCaracter = /[<>&:^()'"\s]/g;
-  if((myInput.value.match(upperCaseLetters)) && !(myInput.value.match(noCaracter))) {  
-    capital.classList.remove("invalid");
-    capital.classList.add("valid");
-    val4 = true;
-    validarBoton();
-  } else {
-    capital.classList.remove("valid");
-    capital.classList.add("invalid");
-    val4 = false;
-    validarBoton();
-  }
-
-  var numbers = /[0-9]/g;
-  if(myInput.value.match(numbers)) {  
-    number.classList.remove("invalid");
-    number.classList.add("valid");
-    val2 = true;
-    validarBoton();
-  } else {
-    number.classList.remove("valid");
-    number.classList.add("invalid");
-    val2 = false;
-    validarBoton();
-  }
-  
-  if(myInput.value.length >= 8 && myInput.value.length <= 16) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-    val3 = true;
-    validarBoton();
-  } else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
-    val3 = false;
-    validarBoton();
-  }
-}
-
-
-const normalRadio = document.getElementById("option-3");
-const administradorRadio = document.getElementById("option-4");
-const estadoUser = document.getElementById("option-1");
-
-
-function verificarOpcionInicial() {
-    if (normalRadio.checked) {
-       document.getElementById("descripci").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';    
-    }else{
-       document.getElementById("descripci").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
-    }
-}
-
-window.addEventListener("load", verificarOpcionInicial);
-
- normalRadio.addEventListener("change", function() {
-    if (normalRadio.checked) {
-       document.getElementById("descripci").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';
-    }else{
-           document.getElementById("descripci").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
-    }
-});
-
-administradorRadio.addEventListener("change", function() {
-    if (administradorRadio.checked) {
-       document.getElementById("descripci").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
-    }else{
-           document.getElementById("descripci").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';
-}
-});
-
   document.getElementById('miFormulario').addEventListener('submit', function(event) {
         event.preventDefault();
-        buttonClose.click();
-        myInput.value = '';
-        myInput2.value = '';
-        normalRadio.checked = true;
-        estadoUser.checked = true;
-        letter.classList.remove("valid");
-        letter.classList.add("invalid");
-         capital.classList.remove("valid");
-        capital.classList.add("invalid");
-         number.classList.remove("valid");
-        number.classList.add("invalid");
-         length.classList.remove("valid");
-        length.classList.add("invalid");
-           val5 = false;
-           val1 = false;
-           val2 = false;
-           val3 = false;
-           val4 = false;
-        buttonSend.disabled = true;
-
-
     });
 
 function handleClick() {
- myInput.value = '';
+        myInput.value = '';
         myInput2.value = '';
-        normalRadio.checked = true;
-        estadoUser.checked = true;
-        letter.classList.remove("valid");
-        letter.classList.add("invalid");
-         capital.classList.remove("valid");
-        capital.classList.add("invalid");
-         number.classList.remove("valid");
-        number.classList.add("invalid");
-         length.classList.remove("valid");
-        length.classList.add("invalid");
-           val5 = false;
-           val1 = false;
-           val2 = false;
-           val3 = false;
-           val4 = false;        
-           buttonSend.disabled = true;
+             optNormal.removeAttribute("selected");
+        optAdmin.removeAttribute("selected");
+        optActivo.removeAttribute("selected");
+        optInactivo.removeAttribute("selected");
+     optNormal.setAttribute("selected", "selected");
+        optActivo.setAttribute("selected", "selected");
+   
 }
 
 buttonClose.addEventListener('click', handleClick);
 buttonClose2.addEventListener('click', handleClick);
+
 
     const defaultFile = 'https://static-00.iconduck.com/assets.00/user-icon-1024x1024-dtzturco.png';
     const file = document.getElementById('foto');

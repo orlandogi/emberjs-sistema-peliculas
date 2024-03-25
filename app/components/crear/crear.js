@@ -10,16 +10,24 @@ export default class CrearCrearComponent extends Component {
   
   @action async insertar() {
     try {
+      let tipoUser;
+      let tipoEstado;
+      if(document.getElementById('opNormal').selected){
+        tipoUser = 1;
+      }else{
+        tipoUser = 2;
+      }
+      if(document.getElementById('opActivo').selected){
+        tipoEstado = 1;
+      }else{
+        tipoEstado = 2;
+      }
       await axios
         .post('https://backend-express-production-be7d.up.railway.app/api/usuario', {
           strNombreUsuario: document.getElementById('recipient-name').value,
           strContraseña: document.getElementById('inputPassword5').value,
-          idTipoUsuario: parseInt(
-            document.querySelector('input[name="select2"]:checked').value,
-          ),
-          idTipoEstado: parseInt(
-            document.querySelector('input[name="select"]:checked').value,
-          ),
+          idTipoUsuario: tipoUser,
+          idTipoEstado: tipoEstado,
         })
         .then((response) => {
           const { data } = response;
@@ -32,6 +40,15 @@ export default class CrearCrearComponent extends Component {
               timer: 1500,
             });
           } else {
+            document.getElementById('cerrar').click();
+            document.getElementById("inputPassword5").value = '';
+            document.getElementById('recipient-name').value = '';
+            document.getElementById('opNormal').removeAttribute("selected");
+            document.getElementById('opAdmin').removeAttribute("selected");
+            document.getElementById('opActivo').removeAttribute("selected");
+            document.getElementById('opInactivo').removeAttribute("selected");
+            document.getElementById('opNormal').setAttribute("selected", "selected");
+            document.getElementById('opActivo').setAttribute("selected", "selected");
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -100,12 +117,33 @@ export default class CrearCrearComponent extends Component {
       const validPassword = /^(?!.*[<>&:^()'"\s])[a-zA-Z0-9!@#$%*_=+-]{8,16}$/;
       if (validUsername.test(username)) {
         if (validPassword.test(password)) {
-          this.insertar();
+          if(username.length >= 6 && username.length <=20){
+            if(password.length >= 8 && password.length <= 16){
+              this.insertar();
+            }else{
+              await Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'La contraseña debe ser mayor a 8 caracteres',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          }else{
+            await Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'El nombre debe ser mayor a 6 caracteres',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+
         } else {
           await Swal.fire({
             position: 'center',
             icon: 'error',
-            title: 'La contraseña no cumple con los parametros',
+            title: 'La contraseña debe ser mayor a 8 caracteres',
             showConfirmButton: false,
             timer: 1500,
           });
@@ -114,7 +152,7 @@ export default class CrearCrearComponent extends Component {
         await Swal.fire({
           position: 'center',
           icon: 'error',
-          title: 'El nombre no cumple con los parametros',
+          title: 'El nombre debe ser mayor a 6 caracteres',
           showConfirmButton: false,
           timer: 1500,
         });

@@ -62,115 +62,162 @@ export default class PeopleListComponent extends Component {
       var modalEditar = document.getElementById('ocultar');
       var mNombre = document.getElementById('recipient-name2');
       var mContraseña = document.getElementById('inputPassword52');
-      var mUsuarioNormal = document.getElementById('option-5');
-      var mUsuarioAdmin = document.getElementById('option-6');
-      var mUsuarioActivo = document.getElementById('option-7');
-      var mUsuarioInactivo = document.getElementById('option-8');
+      var mUsuarioNormal = document.getElementById('opNormal2');
+      var mUsuarioAdmin = document.getElementById('opAdmin2');
+      var mUsuarioActivo = document.getElementById('opActivo2');
+      var mUsuarioInactivo = document.getElementById('opInactivo2');
 
       const response = await axios.get(`https://backend-express-production-be7d.up.railway.app/api/usuario/${userId}`);
       const { data } = response;
       mNombre.value = data.strNombreUsuario;
       mContraseña.value = data.strContraseña;
       if(data.idTipoUsuario === 1){
-        mUsuarioNormal.checked = true;
-        document.getElementById("descripci2").innerHTML='<b>🔒 Tiene acceso limitado al sistema 🔒</b>';
+        mUsuarioNormal.setAttribute("selected", "selected");
       }else{
-        mUsuarioAdmin.checked = true;
-         document.getElementById("descripci2").innerHTML='<b>🌟 Tiene control total del sistema 🌟</b>';
+        mUsuarioAdmin.setAttribute("selected", "selected");
       }
-      if(data.idTipoEstado=== 1){
-        mUsuarioActivo.checked = true;
+      if(data.idTipoEstado === 1){
+        mUsuarioActivo.setAttribute("selected", "selected");
       }else{
-        mUsuarioInactivo.checked = true;
+        mUsuarioInactivo.setAttribute("selected", "selected");
       }
-      letter22.classList.remove("invalid");
-      letter22.classList.add("valid");
-      capital22.classList.remove("invalid");
-      capital22.classList.add("valid");
-      number22.classList.remove("invalid");
-      number22.classList.add("valid");
-      length22.classList.remove("invalid");
-      length22.classList.add("valid");
-      val55 = true;
-      val11 = true;
-      val22 = true;
-      val33 = true;
-      val44 = true;
-      buttonSend2.disabled = false;
       modalEditar.click();
     } catch (error) {
-      
+      await Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'ERROR',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   
   }
   @action async actualizarDatos(){
-    const validar = true;
-    await (axios.put(`https://backend-express-production-be7d.up.railway.app/api/usuario/${this.usuId}`, {
-          strNombreUsuario: document.getElementById('recipient-name2').value,
-          strContraseña: document.getElementById('inputPassword52').value,
-          idTipoUsuario: parseInt(
-            document.querySelector('input[name="select3"]:checked').value,
-          ),
-          idTipoEstado: parseInt(
-            document.querySelector('input[name="select4"]:checked').value,
-          ),
-})
-.then(function (response) {
-  const {data} = response;
-  if(data.message === 'El nombre de usuario o la contraseña ya están registrados'){
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'El nombre o la contraseña estan registrados',
-      showConfirmButton: false,
-      timer: 2000,
-    });  
-    validar = false;
-  }
-  if(response.status === 404){
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'Usuario no encontrado',
-      showConfirmButton: false,
-      timer: 2000,
-    });  
-   validar = false;
-  }
-  if(response.status === 408 || response.status === 504  || response.status === 'ERROR'){
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'Problemas de conexión',
-      showConfirmButton: false,
-      timer: 2000,
-    }); 
-    validar = false;
-  }
 
+    const username = document.getElementById('recipient-name2').value;
+    const validUsername = /^[0-9A-Za-z_]{6,20}$/;
+    const password = document.getElementById('inputPassword52').value;
+    const validPassword = /^(?!.*[<>&:^()'"\s])[a-zA-Z0-9!@#$%*_=+-]{8,16}$/;
+    if (validUsername.test(username)) {
+      if (validPassword.test(password)) {
+        if(username.length >= 6 && username.length <=20){
+          if(password.length >= 8 && password.length <= 16){
 
-})
-.catch(function (error) {
-  Swal.fire({
-    position: 'center',
-    icon: 'error',
-    title: 'El nombre o la contraseña estan registrados',
-    showConfirmButton: false,
-    timer: 2000,
-  })
-  validar = false;
-console.log(error)
-}) )
-  if(validar){
-   await this.UpdateList2();
-   Swal.fire({
-     position: 'center',
-     icon: 'success',
-     title: 'Datos actualizados',
-     showConfirmButton: false,
-     timer: 900,
-   });  
-  }
+            const validar = true;
+            let tipoUser;
+            let tipoEstado;
+            if(document.getElementById('opNormal2').selected){
+              tipoUser = 1;
+            }else{
+              tipoUser = 2;
+            }
+            if(document.getElementById('opActivo2').selected){
+              tipoEstado = 1;
+            }else{
+              tipoEstado = 2;
+            }
+            await (axios.put(`https://backend-express-production-be7d.up.railway.app/api/usuario/${this.usuId}`, {
+                  strNombreUsuario: document.getElementById('recipient-name2').value,
+                  strContraseña: document.getElementById('inputPassword52').value,
+                  idTipoUsuario: tipoUser,
+                  idTipoEstado: tipoEstado,
+        })
+        .then(function (response) {
+          const {data} = response;
+          if(data.message === 'El nombre de usuario o la contraseña ya están registrados'){
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'El nombre o la contraseña estan registrados',
+              showConfirmButton: false,
+              timer: 2000,
+            });  
+            validar = false;
+          }
+          if(response.status === 404){
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Usuario no encontrado',
+              showConfirmButton: false,
+              timer: 2000,
+            });  
+           validar = false;
+          }
+          if(response.status === 408 || response.status === 504  || response.status === 'ERROR'){
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Problemas de conexión',
+              showConfirmButton: false,
+              timer: 2000,
+            }); 
+            validar = false;
+          }
+        
+        
+        })
+        .catch(function (error) {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'El nombre o la contraseña estan registrados',
+            showConfirmButton: false,
+            timer: 2000,
+          })
+          validar = false;
+        console.log(error)
+        }) )
+          if(validar){
+           await this.UpdateList2();
+           document.getElementById('cerrar3').click();
+           Swal.fire({
+             position: 'center',
+             icon: 'success',
+             title: 'Datos actualizados',
+             showConfirmButton: false,
+             timer: 900,
+           });  
+          }
+        }else{
+            await Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'La contraseña debe ser mayor a 8 caracteres',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        }else{
+          await Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'El nombre debe ser mayor a 6 caracteres',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+
+      } else {
+        await Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'La contraseña debe ser mayor a 8 caracteres',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } else {
+      await Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'El nombre debe ser mayor a 6 caracteres',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+
   }
 
   async UpdateList2() {
