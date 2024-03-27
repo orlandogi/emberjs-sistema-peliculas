@@ -509,29 +509,29 @@ input[type="number"] {
   display: none;
 }
 
-.formulario-div {
+.formulario-div-img {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
-.formulario-img {
+.formulario-imagen {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   border: 6px solid #aaa;
 }
 
-.formulario-div:first-child {
+.formulario-img-centrar {
   align-items: center;
 }
 
-.formulario-div:first-child input {
+.formulario-img-quitarbtn {
   display: none;
 }
 
-.formulario-div:first-child label {
+.boton-foto-label {
   background: #1f5f74;
   color: white;
   padding: 6px 20px;
@@ -672,3 +672,4 @@ select option:checked {
 .redondo{
   border-radius: 50% !important;
 }
+

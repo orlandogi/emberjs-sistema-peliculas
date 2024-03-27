@@ -11,19 +11,32 @@
             </div>
             <div class="modal-body">
                 <form id="miFormulario">
+                    {{#if @user}}
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
-                        <div class="pe-5"><input type="text" aria-describedby="usernameBlock" class="form-control" id="recipient-name" placeholder="Digite el nombre del usuario" />
-                        </div>
+<div class="pe-5">
+    <input type="text" aria-describedby="usernameBlock" class="form-control" id="recipient-name" placeholder="Digite el nombre del usuario" {{on "keydown" this.handleInput}} {{on "keypress" this.handleInput}} />
+
+</div>
                          <div id="usernameBlock" class="form-text mb-3">
          <p><b>Nota:</b> Para unir palabras utilize <b>( _ )</b></p>
       </div>
                     </div>
+                    {{else}}
+                     <div class="mb-3">
+                        <label for="recipient-movie" class="col-form-label">Nombre:</label>
+                        <div class="pe-5"><input type="text" class="form-control" id="recipient-movie" placeholder="Digite el nombre del usuario" />
+                        </div>
+                      
+                    </div>
+                    {{/if}}
 
                     {{#if @user}}
-                    <label for="inputPassword5" class="form-label">Password</label>
-                    <div class="pe-5"><input type="password" id="inputPassword5" class="form-control mb-3" 
-                       placeholder="Digite la contraseña" ></div>
+                   
+<label for="inputPassword5" class="form-label">Password</label>
+<div class="pe-5">
+<input type="password" id="inputPassword5" class="form-control mb-3" placeholder="Digite la contraseña" {{on "keydown" this.handleInput}} {{on "keypress" this.handleInput}} />
+    </div>
                      
                     <div class="mb-3 d-grid" >
                         <label for="formFile" class="form-label">Tipo de usuario: </label>
@@ -62,26 +75,20 @@
                             <label for="number2" class="col-form-label">Precio:</label>
                         </div>
                         <div class="col-auto d-flex">
-                            <span class="input-group-text">$</span>
                             <input id="number2" type="number" class="form-control" aria-describedby="precio" />
-                            <span class="input-group-text">$</span>
+                            <span class="input-group-text">MX</span>
 
-                        </div>
-                        <div class="col-auto">
-                            <span id="precio" class="form-text">
-                                MX
-                            </span>
                         </div>
                     </div>
 
-                    <div class="formulario-div mb-3">
-                        <label for="formFile" class="form-label">Imagen</label>
-                        <img class="formulario-img"
-                            src="https://static-00.iconduck.com/assets.00/user-icon-1024x1024-dtzturco.png" alt="avatar"
-                            id="img" />
-                        <input type="file" name="foto" id="foto" accept="image/*" />
-                        <label for="foto">Cambiar foto</label>
-                    </div>
+                 <div class="formulario-div-img formulario-img-centrar mb-3">
+    <label  >Imagen</label>
+    <img class="formulario-imagen"
+        src="https://static-00.iconduck.com/assets.00/user-icon-1024x1024-dtzturco.png" alt="avatar"
+        id="cont-imagen" />
+<input type="file" name="foto" id="foto-input" accept="image/*" class="formulario-img-quitarbtn" {{on "change" this.changeImage}} />
+    <label class="boton-foto-label" for="foto-input">Cambiar foto</label>
+</div>
 
                     <div class="btn-group dropup mb-3">
                         <label for="formFile" class="form-label">Generos: </label>
@@ -104,8 +111,8 @@
                         <label class="form-label">Estado: </label>
 
                 <select >
-                    <option id="opActivo"  value="1" selected>Activo</option>
-                    <option id="opInactivo" value="2">Inactivo</option>
+                    <option id="opActivo"  value="1" selected>{{@state1}}</option>
+                    <option id="opInactivo" value="2">{{@state2}}</option>
                 </select>
 
                     </div>
@@ -134,40 +141,6 @@ var optInactivo = document.getElementById('opInactivo');
 var buttonClose = document.getElementById('cerrar');
 var buttonClose2 = document.getElementById('cerrar2');
 
-myInput2.onkeypress = function(e) {
-    var chr = String.fromCharCode(e.which);
-    if ("1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_".indexOf(chr) < 0)
-        return false;
-};
-myInput.onkeypress = function(e){
-var chr = String.fromCharCode(e.which);
-    if ("1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@".indexOf(chr) < 0)
-        return false;
-};
-
-myInput.addEventListener('keydown', function(event) {
-
-    if (myInput.value.length >= 16) {
-
-    if (event.key === 'Backspace') {
-      return; 
-    } else {
-      event.preventDefault(); 
-    }
-  }
-});
-
-myInput2.addEventListener('keydown', function(event){
-    if(myInput2.value.length >=20){
-    
-    if(event.key === 'Backspace'){
-    return;
-    }else{
-    event.preventDefault();
-    }
-    }
-})
-
   document.getElementById('miFormulario').addEventListener('submit', function(event) {
         event.preventDefault();
     });
@@ -188,20 +161,6 @@ buttonClose.addEventListener('click', handleClick);
 buttonClose2.addEventListener('click', handleClick);
 
 
-    const defaultFile = 'https://static-00.iconduck.com/assets.00/user-icon-1024x1024-dtzturco.png';
-    const file = document.getElementById('foto');
-    const img = document.getElementById('img');
-    file.addEventListener('change', e => {
-        if (e.target.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                img.src = e.target.result;
-            }
-            reader.readAsDataURL(e.target.files[0])
-        } else {
-            img.src = defaultFile;
-        }
-    });
 
 
     function selectOption(option) {

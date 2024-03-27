@@ -1,3 +1,29 @@
+
+<div class="filter-users" style="margin-bottom: 14px;">
+   <div class="filter-state" style="">
+  <label for="filter">Filtrar por estado:</label>
+  <select id="filter" onchange={{action "filterByState"}}>
+    <option value="todos">Todos</option>
+    <option value="activo">Activo</option>
+    <option value="inactivo">Inactivo</option>
+  </select>
+</div>
+  <div class="filter-type">
+  <label for="filter-type">Filtrar por tipo:</label>
+  <select id="filter-type" onchange={{action "filterByType"}}>
+    <option value="todos">Todos</option>
+    <option value="Administrador">Administrador</option>
+    <option value="Normal">Normal</option>
+  </select>
+</div>
+   <div class="filter-name" style="display: grid;">
+    <label >Filtrar por nombre:</label>
+  <input type="text" placeholder="Buscar usuario" {{on "input" this.filterByName}}>
+</div>
+
+</div>
+
+
 <button type="button"  class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="ocultar">Agregar Usuario</button>
 
 <div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -54,6 +80,8 @@
     </div>
 </div>
 
+
+
 <table class="my-table">
   <thead>
     <tr>
@@ -67,8 +95,7 @@
   </thead>
 
   <tbody>
-
-   {{#each @users2 as |user|}}
+    {{#each this.paginatedUsers as |user|}}
       <tr>
         <td>{{user.strNombreUsuario}}</td>
         <td>{{user.strContraseña}}</td>
@@ -78,9 +105,13 @@
         <td><button class="button-update" type="button" {{on "click" (fn this.editarDatos user.id )}} >Editar</button></td>
       </tr>
     {{/each}}
-
   </tbody>
 </table>
+<div class="pagination justify-content-center mt-3">
+  <button class="btn btn-outline-primary me-2" {{action "previousPage"}}>Anterior</button>
+  Página {{this.currentPage}} de {{this.totalPages}}
+  <button class="btn btn-outline-primary ms-2" {{action "nextPage"}}>Siguiente</button>
+</div>
 
 
 <script>

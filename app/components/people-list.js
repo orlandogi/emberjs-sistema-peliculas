@@ -5,10 +5,78 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-
 export default class PeopleListComponent extends Component {
   @service dataStore;
   @tracked usuId;
+  @tracked currentPage = 1;
+  itemsPerPage = 5;
+  @tracked filterState = 'todos'; // Estado inicial del filtro
+  @tracked filterType = 'todos'; // Estado inicial del filtro por tipo
+  @tracked filterName = ''; // Agregar esta línea para el filtro por nombre
+
+
+  
+  get totalPages() {
+    const totalUsers = this.filteredUsers.length;
+    return Math.ceil(totalUsers / this.itemsPerPage);
+  }
+
+  get filteredUsers() {
+    const data = this.dataStore.getActualizarDatos();
+    if (!data) return [];
+    let filteredData = data;
+    if (this.filterState !== 'todos') {
+      filteredData = filteredData.filter(user => user.Estado.toLowerCase() === this.filterState);
+    }
+    if (this.filterType !== 'todos') {
+      filteredData = filteredData.filter(user => user.TipoUsuario === this.filterType);
+    }
+    if (this.filterName.trim() !== '') { // Filtrar por nombre si se ha ingresado algún texto
+      filteredData = filteredData.filter(user =>
+        user.strNombreUsuario.toLowerCase().includes(this.filterName.toLowerCase())
+      );
+    }
+    return filteredData;
+  }
+
+ get paginatedUsers() {
+    if (!this.filteredUsers || this.currentPage < 1 || this.currentPage > this.totalPages) return [];
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.filteredUsers.length);
+    return this.filteredUsers.slice(startIndex, endIndex);
+  }
+  @action async filterByState(event) {
+    this.filterState = event.target.value;
+    this.currentPage = 1;
+  }
+
+  @action async filterByType(event) {
+    this.filterType = event.target.value;
+    this.currentPage = 1;
+  }
+
+  @action async filterByName(event) {
+    this.filterName = event.target.value;
+    this.currentPage = 1;
+  }
+
+  @action async nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      await this.loadData();
+    }
+  }
+
+  @action async previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      await this.loadData();
+    }
+  }
+
+  async loadData() {
+    await this.dataStore.updateList223(); // Asegurarse de que los datos estén actualizados
+  }
 
   @action async deleteUser(user) {
     try {

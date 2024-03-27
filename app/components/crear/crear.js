@@ -161,4 +161,70 @@ export default class CrearCrearComponent extends Component {
       console.error(error);
     }
   }
+
+  @action
+  changeImage(event) {
+    const defaultFile = 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/blue-colourful-paint-splash-background-design-template-42e74804ae515723c85e890962f48211_screen.jpg?ts=1633599269';
+    const img = document.getElementById('cont-imagen');
+
+    event.target.removeEventListener('change', this.changeImage);
+
+    if (event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        img.src = e.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      img.src = defaultFile;
+    }
+  }
+
+  @action
+  handleInput(event) {
+    const myInput = document.getElementById("inputPassword5");
+    const myInput2 = document.getElementById('recipient-name');
+
+    const chr = String.fromCharCode(event.which);
+    const validCharacters = "1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_";
+    const validCharactersPassword = "1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@";
+
+    if (event.target === myInput) {
+      if(myInput.value.length <=16){
+        if(event.key === 'Backspace'){
+          return;
+        }
+      }
+      if (myInput.value.length >= 16 ) {
+        if(event.key === 'Backspace'){
+          return;
+        }else{
+          event.preventDefault();
+        }
+      } else if (!event.ctrlKey && validCharactersPassword.indexOf(chr) < 0) {
+        event.preventDefault();
+      }
+    }
+
+    if (event.target === myInput2) {
+      if(myInput2.value.length <=20){
+        if(event.key === 'Backspace'){
+          return;
+        }
+      }
+      if (myInput2.value.length >= 20 ) {
+        if(event.key === 'Backspace'){
+          return;
+        }else{
+        event.preventDefault();
+        }
+      } else if (!event.ctrlKey && validCharacters.indexOf(chr) < 0) {
+        event.preventDefault();
+      }
+    }
+  
+  
+  }
+  
+  
 }
