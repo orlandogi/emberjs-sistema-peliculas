@@ -1,4 +1,4 @@
 [[redirects]]
-from "/movies"
-to "/movies.hbs"
+from "/*"
+to "/index.hbs"
 status = 200
