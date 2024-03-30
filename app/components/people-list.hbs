@@ -1,0 +1,180 @@
+
+<div class="filter-users" style="margin-bottom: 14px;">
+   <div class="filter-state" style="">
+  <label for="filter">Filtrar por estado:</label>
+  <select id="filter" onchange={{action "filterByState"}}>
+    <option value="todos">Todos</option>
+    <option value="activo">Activo</option>
+    <option value="inactivo">Inactivo</option>
+  </select>
+</div>
+  <div class="filter-type">
+  <label for="filter-type">Filtrar por tipo:</label>
+  <select id="filter-type" onchange={{action "filterByType"}}>
+    <option value="todos">Todos</option>
+    <option value="Administrador">Administrador</option>
+    <option value="Normal">Normal</option>
+  </select>
+</div>
+   <div class="filter-name" style="display: grid;">
+    <label >Filtrar por nombre:</label>
+  <input type="text" placeholder="Buscar usuario" {{on "input" this.filterByName}}>
+</div>
+
+</div>
+
+
+<button type="button"  class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="ocultar">Agregar Usuario</button>
+
+<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog p-4 m-0 m-auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel2">Datos del Usuario</h1>
+                <button id="cerrar3" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> 
+            <div class="modal-body">
+                <form id="miFormulario2">
+                    <div class="mb-3">
+                        <label for="recipient-name2" class="col-form-label">Nombre:</label>
+                        <div class="pe-5"><input type="text" aria-describedby="usernameBlock2" class="form-control" id="recipient-name2"  placeholder="Digite el nombre del usuario" />
+                        </div>
+                         <div id="usernameBlock2" class="form-text mb-3">
+         <p><b>Nota:</b> Para unir palabras utilize <b>( _ )</b></p>
+      </div>
+                    </div>
+
+                    <label for="inputPassword52" class="form-label">Password</label>
+                    <div class="pe-5"><input type="password" id="inputPassword52" class="form-control mb-3" 
+                          placeholder="Digite la contraseña" ></div>
+                  
+                    <div class="mb-3 d-grid">
+                        <label for="formFile" class="form-label">Tipo de usuario: </label>
+                      
+                    <select>
+                        <option id="opNormal2"  value="1" selected>Normal</option>
+                        <option id="opAdmin2"  value="2">Administrador</option>
+                    </select>
+
+                    </div>
+
+                       <div class="mb-3 d-grid">
+                        <label class="form-label">Estado: </label>
+
+                <select >
+                    <option id="opActivo2"  value="1" selected>Activo</option>
+                    <option id="opInactivo2" value="2">Inactivo</option>
+                </select>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="cerrarmd" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="enviar2" type="submit" class="btn btn-success" {{on "click" this.actualizarDatos}} >Actualizar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<table class="my-table">
+  <thead>
+    <tr>
+      <th class="text-center">Nombre de Usuario</th>
+      <th class="text-center">Contraseña</th>
+      <th class="text-center">Tipo de Usuario</th>
+      <th class="text-center">Estado</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each this.paginatedUsers as |user|}}
+      <tr>
+        <td>{{user.strNombreUsuario}}</td>
+        <td>{{user.strContraseña}}</td>
+        <td>{{user.TipoUsuario}}</td>
+        <td>{{user.Estado}}</td>
+        <td><button class="button-delete" type="button" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
+        <td><button class="button-update" type="button" {{on "click" (fn this.editarDatos user.id )}} >Editar</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<div class="pagination justify-content-center mt-3">
+  <button class="btn btn-outline-primary me-2" type="button" {{action "previousPage"}}>Anterior</button>
+  Página {{this.currentPage}} de {{this.totalPages}}
+  <button class="btn btn-outline-primary ms-2" type="button" {{action "nextPage"}}>Siguiente</button>
+</div>
+
+
+<script>
+
+var myInput3 = document.getElementById("inputPassword52");
+var myInput4 = document.getElementById('recipient-name2');
+var optNormal2 = document.getElementById('opNormal2');
+var optAdmin2 = document.getElementById('opAdmin2');
+var optActivo2 = document.getElementById('opActivo2');
+var optInactivo2 = document.getElementById('opInactivo2');
+var buttonClose3 = document.getElementById('cerrarmd');
+var buttonClose4 = document.getElementById('cerrar3');
+
+myInput4.onkeypress = function(e) {
+    var chr = String.fromCharCode(e.which);
+    if ("1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_".indexOf(chr) < 0)
+        return false;
+};
+myInput3.onkeypress = function(e){
+var chr = String.fromCharCode(e.which);
+    if ("1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@".indexOf(chr) < 0)
+        return false;
+};
+
+myInput3.addEventListener('keydown', function(event) {
+
+    if (myInput3.value.length >= 16) {
+
+    if (event.key === 'Backspace') {
+      return; 
+    } else {
+      event.preventDefault(); // Prevenir la escritura de más caracteres
+    }
+  }
+});
+
+myInput4.addEventListener('keydown', function(event){
+    if(myInput4.value.length >=20){
+    
+    if(event.key === 'Backspace'){
+    return;
+    }else{
+    event.preventDefault();
+    }
+    }
+});
+
+  document.getElementById('miFormulario2').addEventListener('submit', function(event) {
+        event.preventDefault();
+    });
+
+function handleClick2() {
+        myInput4.value = '';
+        myInput3.value = '';
+        optNormal2.removeAttribute("selected");
+        optAdmin2.removeAttribute("selected");
+        optActivo2.removeAttribute("selected");
+        optInactivo2.removeAttribute("selected");
+        optNormal2.setAttribute("selected", "selected");
+        optActivo2.setAttribute("selected", "selected");
+}
+
+buttonClose3.addEventListener('click', handleClick2);
+buttonClose4.addEventListener('click', handleClick2);
+   
+</script>
