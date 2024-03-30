@@ -1,0 +1,4 @@
+[[redirects]]
+from "/movies"
+to "/movies.hbs"
+status = 200
