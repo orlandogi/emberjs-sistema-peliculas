@@ -8,6 +8,11 @@ import { inject as service } from '@ember/service';
 export default class CrearCrearComponent extends Component {
   @service dataStore;
 
+  @action
+  preventDefaultSubmission(event) {
+    event.preventDefault();
+  }
+
   @action async insertar() {
     try {
       let tipoUser;
@@ -166,8 +171,7 @@ export default class CrearCrearComponent extends Component {
 
   @action
   changeImage(event) {
-    const defaultFile =
-      'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/blue-colourful-paint-splash-background-design-template-42e74804ae515723c85e890962f48211_screen.jpg?ts=1633599269';
+    const defaultFile = '../images/pelicula-icon.jpg';
     const img = document.getElementById('cont-imagen');
 
     event.target.removeEventListener('change', this.changeImage);
@@ -187,45 +191,74 @@ export default class CrearCrearComponent extends Component {
   handleInput(event) {
     const myInput = document.getElementById('inputPassword5');
     const myInput2 = document.getElementById('recipient-name');
-
+  
     const chr = String.fromCharCode(event.which);
     const validCharacters =
       '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_';
     const validCharactersPassword =
       '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@';
-
+  
     if (event.target === myInput) {
-      if (myInput.value.length <= 16) {
-        if (event.key === 'Backspace') {
-          return;
-        }
+      if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+        return;
       }
-      if (myInput.value.length >= 16) {
-        if (event.key === 'Backspace') {
-          return;
-        } else {
-          event.preventDefault();
-        }
-      } else if (!event.ctrlKey && validCharactersPassword.indexOf(chr) < 0) {
+  
+      if (myInput.value.length >= 16 && !event.ctrlKey) {
+        event.preventDefault();
+      } else if (validCharactersPassword.indexOf(chr) < 0 && !event.ctrlKey) {
         event.preventDefault();
       }
     }
-
+  
     if (event.target === myInput2) {
-      if (myInput2.value.length <= 20) {
-        if (event.key === 'Backspace') {
-          return;
-        }
+      if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+        return;
       }
-      if (myInput2.value.length >= 20) {
-        if (event.key === 'Backspace') {
-          return;
-        } else {
-          event.preventDefault();
-        }
-      } else if (!event.ctrlKey && validCharacters.indexOf(chr) < 0) {
+  
+      if (myInput2.value.length >= 20 && !event.ctrlKey) {
+        event.preventDefault();
+      } else if (validCharacters.indexOf(chr) < 0 && !event.ctrlKey) {
         event.preventDefault();
       }
     }
   }
+  
+
+  @action 
+  removeData(){
+    document.getElementById("inputPassword5").value = '';
+    document.getElementById('recipient-name').value = '';
+    document.getElementById('opNormal').removeAttribute("selected");
+    document.getElementById('opAdmin').removeAttribute("selected");
+    document.getElementById('opActivo').removeAttribute("selected");
+    document.getElementById('opInactivo').removeAttribute("selected");
+    document.getElementById('opNormal').setAttribute("selected", "selected");
+    document.getElementById('opActivo').setAttribute("selected", "selected");
+
+  }
+
+  @action
+  selectOption(option) {
+    const tagContainer = document.getElementById('tagContainer');
+
+    // Crear una nueva etiqueta
+    const tag = document.createElement('div');
+    tag.classList.add('etiqueta');
+    tag.textContent = option;
+
+    // Crear el botón de cierre
+    const closeButton = document.createElement('span');
+    closeButton.classList.add('etiqueta-close');
+    closeButton.textContent = 'x';
+    closeButton.addEventListener('click', function () {
+        tag.remove();
+    });
+
+    // Adjuntar el botón de cierre a la etiqueta
+    tag.appendChild(closeButton);
+
+    // Agregar la etiqueta al contenedor
+    tagContainer.appendChild(tag);
+  }
+
 }

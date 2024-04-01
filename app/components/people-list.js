@@ -14,6 +14,11 @@ export default class PeopleListComponent extends Component {
   @tracked filterType = 'todos'; // Estado inicial del filtro por tipo
   @tracked filterName = ''; // Agregar esta línea para el filtro por nombre
 
+  @action
+  preventDefaultSubmission2(event) {
+    event.preventDefault();
+  }
+
   get totalPages() {
     const totalUsers = this.filteredUsers.length;
     return Math.ceil(totalUsers / this.itemsPerPage);
@@ -176,6 +181,7 @@ export default class PeopleListComponent extends Component {
       });
     }
   }
+  
   @action async actualizarDatos() {
     const validar = true;
     const username = document.getElementById('recipient-name2').value;
@@ -322,5 +328,51 @@ export default class PeopleListComponent extends Component {
       console.log(error.config);
       return [];
     }
+  }
+
+  @action
+  handleInput2(event) {
+    const myInput = document.getElementById('inputPassword52');
+    const myInput2 = document.getElementById('recipient-name2');
+  
+    const chr = String.fromCharCode(event.which);
+    const validCharacters =
+      '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_';
+    const validCharactersPassword =
+      '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@';
+  
+    if (event.target === myInput) {
+      if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+        return;
+      }
+  
+      if (myInput.value.length >= 16 && !event.ctrlKey) {
+        event.preventDefault();
+      } else if (validCharactersPassword.indexOf(chr) < 0 && !event.ctrlKey) {
+        event.preventDefault();
+      }
+    }
+  
+    if (event.target === myInput2) {
+      if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+        return;
+      }
+  
+      if (myInput2.value.length >= 20 && !event.ctrlKey) {
+        event.preventDefault();
+      } else if (validCharacters.indexOf(chr) < 0 && !event.ctrlKey) {
+        event.preventDefault();
+      }
+    }
+  }
+
+  @action 
+  removeData2(){
+    document.getElementById("inputPassword52").value = '';
+    document.getElementById('recipient-name2').value = '';
+    document.getElementById('opNormal2').removeAttribute("selected");
+    document.getElementById('opAdmin2').removeAttribute("selected");
+    document.getElementById('opActivo2').removeAttribute("selected");
+    document.getElementById('opInactivo2').removeAttribute("selected");
   }
 }

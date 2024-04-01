@@ -456,7 +456,6 @@ p {
 }
 
 .tomster {
-  background: url("../assets/images/teaching-tomster.png");
   background-size: contain;
   background-repeat: no-repeat;
   height: 200px;
@@ -509,7 +508,7 @@ input[type="number"] {
 }
 
 #file-input,
-#foto {
+#foto-input{
   display: none;
 }
 
