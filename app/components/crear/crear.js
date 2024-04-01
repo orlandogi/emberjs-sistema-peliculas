@@ -173,19 +173,22 @@ export default class CrearCrearComponent extends Component {
   changeImage(event) {
     const defaultFile = '../images/pelicula-icon.jpg';
     const img = document.getElementById('cont-imagen');
-
-    event.target.removeEventListener('change', this.changeImage);
-
-    if (event.target.files[0]) {
+  
+    if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = function (e) {
         img.src = e.target.result;
       };
       reader.readAsDataURL(event.target.files[0]);
     } else {
-      img.src = defaultFile;
+      Swal.fire({
+        position: "top-center",
+        title: "No seleccionaste una imagen nueva",
+        showConfirmButton: true,
+      });
     }
   }
+  
 
   @action
   handleInput(event) {
