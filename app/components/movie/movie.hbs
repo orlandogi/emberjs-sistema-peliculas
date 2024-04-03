@@ -1,4 +1,5 @@
-<button type="button"  class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal3" >Agregar película</button>
+<button type="button" class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal3">Agregar
+    película</button>
 
 <div class="modal fade" id="exampleModal3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel3" aria-hidden="true">
@@ -6,37 +7,46 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel3">Datos de la Película</h1>
-                <button id="cerrarMovie1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" {{on "click" this.removeDataMovie}}></button>
+                <button id="cerrarMovie1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    {{on "click" this.removeDataMovie}}></button>
             </div>
             <div class="modal-body">
                 <form {{on "submit" this.preventDefaultSubmissionMovie}}>
-                    
+
                     <div class="row">
 
- <div class="col-md-6 ">
+                        <div class="col-md-6 ">
 
-<div class="mb-3">
-                        <label for="recipient-movie" style="margin-top: -100px;" class="col-form-label">Nombre:</label>
-                        <div class="">
-                            <input type="text" class="form-control" id="recipient-movie" placeholder="Digite el nombre de la película" {{on "keydown" this.handleInputMovie}} {{on "keypress" this.handleInputMovie}} />
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <label for="synopsisMovie" class="form-label">Sinopsis:</label>
-                        <textarea class="form-control tamaño" id="synopsisMovie" rows="3" {{on "keydown" this.handleInputMovie}} {{on "keypress" this.handleInputMovie}} placeholder="Digite la sinopsis de la película"></textarea>
-                    </div>
-                    <div class="align-items-center mb-3 d-flex">
-                        <div class="col-auto me-3">
-                            <label for="numberDuration" class="col-form-label">Duración:</label>
-                        </div>
-                        <div class="col-auto d-flex">
-                            <input id="numberDuration" type="number" class="form-control me-2" aria-describedby="duracion" {{on "keydown" this.handleInputMovie}} {{on "keypress" this.handleInputMovie}} placeholder="000" style="width: 100px;"/>
-                            <span id="duracion" class="form-text" style="padding-top: 7px;">
-                                Minutos
-                            </span>
-                        </div>
-                    </div>
-                    <!--
+                            <div class="mb-3">
+                                <label for="recipient-movie" style="margin-top: -100px;"
+                                    class="col-form-label">Nombre:</label>
+                                <div class="">
+                                    <input type="text" class="form-control" id="recipient-movie"
+                                        placeholder="Digite el nombre de la película" {{on "keydown"
+                                        this.handleInputMovie}} {{on "keypress" this.handleInputMovie}} />
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="synopsisMovie" class="form-label">Sinopsis:</label>
+                                <textarea class="form-control tamaño" id="synopsisMovie" rows="3" {{on "keydown"
+                                    this.handleInputMovie}} {{on "keypress" this.handleInputMovie}}
+                                    placeholder="Digite la sinopsis de la película"></textarea>
+                            </div>
+                            <div class="align-items-center mb-3 d-flex">
+                                <div class="col-auto me-3">
+                                    <label for="numberDuration" class="col-form-label">Duración:</label>
+                                </div>
+                                <div class="col-auto d-flex">
+                                    <input id="numberDuration" type="number" class="form-control me-2"
+                                        aria-describedby="duracion" {{on "keydown" this.handleInputMovie}}
+                                        {{on "keypress" this.handleInputMovie}} placeholder="000"
+                                        style="width: 100px;" />
+                                    <span id="duracion" class="form-text" style="padding-top: 7px;">
+                                        Minutos
+                                    </span>
+                                </div>
+                            </div>
+                            <!--
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-auto">
                             <label for="numberPrice" class="col-form-label">Precio:</label>
@@ -48,61 +58,65 @@
                     </div>
                     -->
 
-                    <div class="btn-group dropup mb-2">
-                        <label for="formFile" class="form-label me-3">Generos: </label>
-                        <button type="button" class="btn btn-secondary dropdown-toggle generos-style" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Selecciona una opción
-                        </button>
-                        <ul class="dropdown-menu">
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Acción')}}>Acción</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Aventura')}}>Aventura</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Comedia')}}>Comedia</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Drama')}}>Drama</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Fantasía')}}>Fantasía</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Misterio')}}>Misterio</a></li>                           
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Romance')}}>Romance</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Terror')}}>Terror</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Ciencia ficción')}}>Ciencia ficción</a></li>
-                        </ul>
+                            <div class="btn-group dropup mb-2">
+                                <label for="formFile" class="form-label me-3">Generos: </label>
+                                <button type="button" class="btn btn-secondary dropdown-toggle generos-style"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Selecciona una opción
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Acción'
+                                            )}}>Acción</a></li>
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Aventura'
+                                            )}}>Aventura</a></li>
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Comedia'
+                                            )}}>Comedia</a></li>
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Drama'
+                                            )}}>Drama</a></li>
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Fantasía'
+                                            )}}>Fantasía</a></li>
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Misterio'
+                                            )}}>Misterio</a></li>
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Romance'
+                                            )}}>Romance</a></li>
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Terror'
+                                            )}}>Terror</a></li>
+                                    <li><a class="dropdown-item" href="#" {{on "click" (fn
+                                            this.selectOption 'Ciencia ficción' )}}>Ciencia ficción</a></li>
+                                </ul>
+                            </div>
+                            <div class="etiqueta-container mb-3" id="tagContainer"></div>
+
+                            <div class="mb-3 d-grid">
+                                <label class="form-label">Estado: </label>
+
+                                <select>
+                                    <option id="opDisponible" value="1" selected>Disponible</option>
+                                    <option id="opRetirada" value="2">Retirada</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="formulario-div-img formulario-img-centrar ">
+                                <label class="form-label mb-0">Imagen:</label>
+                                <img class="formulario-imagen" src="../images/pelicula-icon.jpg" alt="avatar"
+                                    id="cont-imagen" />
+                                <input type="file" id="foto-input" accept="image/*" class="formulario-img-quitarbtn"
+                                    {{on "change" this.changeImage}} />
+                                <label class="boton-foto-label" for="foto-input">Cambiar foto</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="etiqueta-container mb-3" id="tagContainer"></div>
-
-                    <div class="mb-3 d-grid">
-                        <label class="form-label">Estado: </label>
-
-                <select >
-                    <option id="opDisponible"  value="1" selected>Disponible</option>
-                    <option id="opRetirada" value="2">Retirada</option>
-                </select>
-
-                    </div>
-
-          </div>
-
-          <div class="col-md-6">
-
- <div class="formulario-div-img formulario-img-centrar ">
-    <label class="form-label mb-0">Imagen:</label>
-    <img class="formulario-imagen"
-        src="../images/pelicula-icon.jpg" alt="avatar"
-        id="cont-imagen" />
-<input type="file" id="foto-input" accept="image/*" class="formulario-img-quitarbtn" {{on "change" this.changeImage}} />
-    <label class="boton-foto-label" for="foto-input">Cambiar foto</label>
-</div>
-
-                    
-
-          </div>
-                    </div>
-                    
-                     
-
-                
 
                     <div class="modal-footer ">
-                        <button id="cerrarMovie2" type="button" class="btn btn-secondary" data-bs-dismiss="modal" {{on "click" this.removeDataMovie}}>Cerrar</button>
-                        <button id="enviarMovie" type="submit" class="btn btn-success " {{on "click" this.insertarMovie}}>Agregar</button>
+                        <button id="cerrarMovie2" type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            {{on "click" this.removeDataMovie}}>Cerrar</button>
+                        <button id="enviarMovie" type="submit" class="btn btn-success " {{on "click"
+                            this.insertarMovie}}>Agregar</button>
                     </div>
                 </form>
             </div>
@@ -111,3 +125,4 @@
     </div>
 </div>
 
+<MovieGrid @users3={{this.dataStore.actualizarDatosMovies}} />

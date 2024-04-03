@@ -1,19 +1,19 @@
 
 <div class="filter-users" style="margin-bottom: 14px;">
-   <div class="filter-state" style="">
-  <label for="filter">Filtrar por estado:</label>
-  <select id="filter" onchange={{action "filterByState"}}>
-    <option value="todos">Todos</option>
-    <option value="activo">Activo</option>
-    <option value="inactivo">Inactivo</option>
-  </select>
-</div>
   <div class="filter-type">
   <label for="filter-type">Filtrar por tipo:</label>
   <select id="filter-type" onchange={{action "filterByType"}}>
     <option value="todos">Todos</option>
     <option value="Administrador">Administrador</option>
     <option value="Normal">Normal</option>
+  </select>
+</div>
+ <div class="filter-state" style="">
+  <label for="filter">Filtrar por estado:</label>
+  <select id="filter" onchange={{action "filterByState"}}>
+    <option value="todos">Todos</option>
+    <option value="activo">Activo</option>
+    <option value="inactivo">Inactivo</option>
   </select>
 </div>
    <div class="filter-name" style="display: grid;">

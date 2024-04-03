@@ -81,16 +81,17 @@ export default class MovieMovieComponent extends Component {
   
   @action 
   removeDataMovie(){
-    /*
-    document.getElementById("inputPassword5").value = '';
-    document.getElementById('recipient-name').value = '';
-    document.getElementById('opNormal').removeAttribute("selected");
-    document.getElementById('opAdmin').removeAttribute("selected");
-    document.getElementById('opActivo').removeAttribute("selected");
-    document.getElementById('opInactivo').removeAttribute("selected");
-    document.getElementById('opNormal').setAttribute("selected", "selected");
-    document.getElementById('opActivo').setAttribute("selected", "selected");
-*/
+    document.getElementById('recipient-movie').value = '';
+    document.getElementById('synopsisMovie').value = '';;
+   document.getElementById('numberDuration').value = null;
+   const etiquetas = document.querySelectorAll('.etiqueta');
+   etiquetas.forEach(etiqueta => {
+     etiqueta.remove();
+   });
+   document.getElementById('opDisponible').selected = false;
+   document.getElementById('opRetirada').selected = false;
+   document.getElementById('opDisponible').selected = true;
+document.getElementById('cont-imagen').src='../images/pelicula-icon.jpg';
   }
 
   @action
@@ -177,6 +178,24 @@ selectOption(option) {
       // Agregar la etiqueta al contenedor
       tagContainer.appendChild(tag);
     }
+  }
+}
+
+async UpdateListAllMovies() {
+  try {
+    const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculas');
+    const { data } = response;
+    this.dataStore.setActualizarDatosMovies(data);
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.status);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+    return [];
   }
 }
 
@@ -278,7 +297,7 @@ async insertMovie(event) {
         'Content-Type': 'multipart/form-data'
       }
     });
-
+    await this.UpdateListAllMovies();
   document.getElementById('recipient-movie').value = '';
     document.getElementById('synopsisMovie').value = '';;
    document.getElementById('numberDuration').value = null;
@@ -299,6 +318,16 @@ document.getElementById('cerrarMovie2').click();
       timer: 1500
     });  
   } catch (error) {
+    if (error.message === 'Network Error') {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas de conexión',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }else{
+
     console.error(error);
     Swal.fire({
       position: 'center',
@@ -307,6 +336,7 @@ document.getElementById('cerrarMovie2').click();
       showConfirmButton: false,
       timer: 1500
     });    // Manejar errores
+  }
   }
 }
 

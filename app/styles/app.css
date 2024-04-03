@@ -644,7 +644,7 @@ input[type="number"] {
   justify-content: space-around;
 }
 
-#ocultar {
+#ocultar, #ocultarEdit {
   display: none;
 }
 
