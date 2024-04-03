@@ -183,7 +183,7 @@ selectOption(option) {
 
 async UpdateListAllMovies() {
   try {
-    const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculas');
+    const response = await axios.get('http://localhost:3000/api/peliculas');
     const { data } = response;
     this.dataStore.setActualizarDatosMovies(data);
   } catch (error) {
@@ -292,7 +292,7 @@ async insertMovie(event) {
     }
 
     // Realizar la solicitud POST al backend
-    const response = await axios.post('https://backend-express-production-be7d.up.railway.app/api/pelicula', formData, {
+    const response = await axios.post('http://localhost:3000/api/pelicula', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
