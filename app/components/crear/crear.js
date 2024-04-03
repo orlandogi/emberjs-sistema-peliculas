@@ -28,7 +28,7 @@ export default class CrearCrearComponent extends Component {
         tipoEstado = 2;
       }
       await axios
-        .post('http://localhost:3000/api/usuario', {
+        .post('https://backend-express-production-be7d.up.railway.app/api/usuario', {
           strNombreUsuario: document.getElementById('recipient-name').value,
           strContraseña: document.getElementById('inputPassword5').value,
           idTipoUsuario: tipoUser,
@@ -100,7 +100,7 @@ export default class CrearCrearComponent extends Component {
 
   async UpdateList() {
     try {
-      const response = await axios.get('http://localhost:3000/api/usuarios');
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
       const { data } = response;
       this.dataStore.setActualizarDatos(data);
     } catch (error) {
@@ -169,29 +169,7 @@ export default class CrearCrearComponent extends Component {
     }
   }
 
-  @action
-  changeImage(event) {
-    const defaultFile = '../images/pelicula-icon.jpg';
-    const img = document.getElementById('cont-imagen');
-  
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    } else {
-      Swal.fire({
-        position: "top-center",
-        title: "No seleccionaste una imagen nueva",
-        showConfirmButton: true,
-      });
-    }
-  }
-  
-
-  @action
-  handleInput(event) {
+  @action handleInput(event) {
     const myInput = document.getElementById('inputPassword5');
     const myInput2 = document.getElementById('recipient-name');
   
@@ -224,6 +202,7 @@ export default class CrearCrearComponent extends Component {
         event.preventDefault();
       }
     }
+
   }
   
 
@@ -238,30 +217,4 @@ export default class CrearCrearComponent extends Component {
     document.getElementById('opNormal').setAttribute("selected", "selected");
     document.getElementById('opActivo').setAttribute("selected", "selected");
 
-  }
-
-  @action
-  selectOption(option) {
-    const tagContainer = document.getElementById('tagContainer');
-
-    // Crear una nueva etiqueta
-    const tag = document.createElement('div');
-    tag.classList.add('etiqueta');
-    tag.textContent = option;
-
-    // Crear el botón de cierre
-    const closeButton = document.createElement('span');
-    closeButton.classList.add('etiqueta-close');
-    closeButton.textContent = 'x';
-    closeButton.addEventListener('click', function () {
-        tag.remove();
-    });
-
-    // Adjuntar el botón de cierre a la etiqueta
-    tag.appendChild(closeButton);
-
-    // Agregar la etiqueta al contenedor
-    tagContainer.appendChild(tag);
-  }
-
-}
+  } }

@@ -99,7 +99,7 @@ export default class PeopleListComponent extends Component {
   @action async deleteUser(user) {
     try {
       await axios
-        .delete(`http://localhost:3000/api/usuario/${user}`)
+        .delete(`https://backend-express-production-be7d.up.railway.app/api/usuario/${user}`)
         .then((response) => {
           const { data } = response;
           if (data.message === 'Se elimino correctamente') {
@@ -155,7 +155,7 @@ export default class PeopleListComponent extends Component {
       var mUsuarioInactivo = document.getElementById('opInactivo2');
 
       const response = await axios.get(
-        `http://localhost:3000/api/usuario/${userId}`,
+        `https://backend-express-production-be7d.up.railway.app/api/usuario/${userId}`,
       );
       const { data } = response;
       mNombre.value = data.strNombreUsuario;
@@ -205,7 +205,7 @@ export default class PeopleListComponent extends Component {
               tipoEstado = 2;
             }
             await axios
-              .put(`http://localhost:3000/api/usuario/${this.usuId}`, {
+              .put(`https://backend-express-production-be7d.up.railway.app/api/usuario/${this.usuId}`, {
                 strNombreUsuario:
                   document.getElementById('recipient-name2').value,
                 strContraseña: document.getElementById('inputPassword52').value,
@@ -314,7 +314,7 @@ export default class PeopleListComponent extends Component {
 
   async UpdateList2() {
     try {
-      const response = await axios.get('http://localhost:3000/api/usuarios');
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
       const { data } = response;
       this.dataStore.setActualizarDatos(data);
     } catch (error) {

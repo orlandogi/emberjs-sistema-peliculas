@@ -520,14 +520,11 @@ input[type="number"] {
 }
 
 .formulario-imagen {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 6px solid #aaa;
-}
-
-.formulario-img-centrar {
-  align-items: center;
+  width: 270px;
+  height: 350px;
+  border-radius: 5%;
+  margin: 0 auto;
+  margin-bottom: 2px;
 }
 
 .formulario-img-quitarbtn {
@@ -540,6 +537,9 @@ input[type="number"] {
   padding: 6px 20px;
   cursor: pointer;
   border-radius: 3px;
+  width: 150px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .etiqueta-container {
@@ -549,17 +549,30 @@ input[type="number"] {
 }
 
 .etiqueta {
-  background-color: #007bff;
-  color: white;
-  padding: 5px 10px;
+  background-color: #F6F146;
+  color: black;
+  padding: 0px 0px 0px 5px;
   border-radius: 5px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 28px;
 }
 
 .etiqueta-close {
   margin-left: 5px;
   cursor: pointer;
+  border: 1.5px inset black;
+  padding: 0px 8px;
+  background-color: tomato;
+  border-radius: 5px;
+  position: relative;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center !important;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
@@ -669,4 +682,9 @@ select option:checked {
 
 .redondo {
   border-radius: 50% !important;
+}
+
+.generos-style{
+  border-radius:30px !important;
+    padding: 0 10px !important;
 }

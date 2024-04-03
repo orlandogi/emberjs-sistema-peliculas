@@ -1,17 +1,15 @@
-<button type="button"  class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal" >Agregar
-    {{@button}}</button>
+<button type="button"  class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal" >Agregar usuario</button>
 
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog p-4 m-0 m-auto">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Datos {{@title}}</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Datos del Usuario</h1>
                 <button id="cerrar2" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" {{on "click" this.removeData}}></button>
             </div>
             <div class="modal-body">
                 <form {{on "submit" this.preventDefaultSubmission}}>
-                    {{#if @user}}
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
 <div class="pe-5">
@@ -21,18 +19,8 @@
          <p><b>Nota:</b> Para unir palabras utilize <b>( _ )</b></p>
       </div>
                     </div>
-                    {{else}}
-                     <div class="mb-3">
-                        <label for="recipient-movie" class="col-form-label">Nombre:</label>
-                        <div class="pe-5">
-                            <input type="text" class="form-control" id="recipient-movie" placeholder="Digite el nombre de la película" />
-                        </div>
-                    </div>
-                    {{/if}}
-
-                    {{#if @user}}
                    
-<label for="inputPassword5" class="form-label">Password</label>
+<label for="inputPassword5" class="form-label">Contraseña</label>
 <div class="pe-5">
 <input type="password" id="inputPassword5" class="form-control mb-3" placeholder="Digite la contraseña" {{on "keydown" this.handleInput}} {{on "keypress" this.handleInput}} />
     </div>
@@ -47,72 +35,20 @@
 
                     </div>
                 
-                    {{else}}
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Sinopsis</label>
-                        <textarea class="form-control tamaño" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                    </div>
-                    <div class="row g-3 align-items-center mb-3">
-                        <div class="col-auto">
-                            <label for="numberDuration" class="col-form-label">Duracion</label>
-                        </div>
-                        <div class="col-auto">
-                            <input id="numberDuration" type="number" class="form-control" aria-describedby="duracion" />
-                        </div>
-                        <div class="col-auto">
-                            <span id="duracion" class="form-text">
-                                Minutos
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row g-3 align-items-center mb-3">
-                        <div class="col-auto">
-                            <label for="numberPrice" class="col-form-label">Precio:</label>
-                        </div>
-                        <div class="col-auto d-flex">
-                            <input id="numberPrice" type="number" class="form-control" />
-                            <span class="input-group-text">MX</span>
-                        </div>
-                    </div>
-
-                 <div class="formulario-div-img formulario-img-centrar mb-3">
-    <label>Imagen</label>
-    <img class="formulario-imagen"
-        src="../images/pelicula-icon.jpg" alt="avatar"
-        id="cont-imagen" />
-<input type="file" id="foto-input" accept="image/*" class="formulario-img-quitarbtn" {{on "change" this.changeImage}} />
-    <label class="boton-foto-label" for="foto-input">Cambiar foto</label>
-</div>
-
-                    <div class="btn-group dropup mb-3">
-                        <label for="formFile" class="form-label">Generos: </label>
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Selecciona una opción
-                        </button>
-                        <ul class="dropdown-menu">
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Manzana')}}>Manzana</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Banana')}}>Banana</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Naranja')}}>Naranja</a></li>
-                           <li><a class="dropdown-item" href="#" {{on "click" (fn this.selectOption 'Uva')}}>Uva</a></li>
-                        </ul>
-                    </div>
-                    <div class="etiqueta-container" id="tagContainer"></div>
-                    {{/if}}
-
+                   
                     <div class="mb-3 d-grid">
                         <label class="form-label">Estado: </label>
 
                 <select >
-                    <option id="opActivo"  value="1" selected>{{@state1}}</option>
-                    <option id="opInactivo" value="2">{{@state2}}</option>
+                    <option id="opActivo"  value="1" selected>Activo</option>
+                    <option id="opInactivo" value="2">Inactivo</option>
                 </select>
 
                     </div>
 
                     <div class="modal-footer ">
                         <button id="cerrar" type="button" class="btn btn-secondary" data-bs-dismiss="modal" {{on "click" this.removeData}}>Cerrar</button>
-                        <button id="enviar" type="submit" class="btn btn-success " {{on "click" this.insertUser}}>{{@send}}</button>
+                        <button id="enviar" type="submit" class="btn btn-success " {{on "click" this.insertUser}}>Crear</button>
                     </div>
                 </form>
             </div>
