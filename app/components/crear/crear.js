@@ -30,7 +30,7 @@ export default class CrearCrearComponent extends Component {
       await(document.getElementById('enviar').disabled = true,document.getElementById('cerrar').disabled = true, 
       document.getElementById('cerrar2').disabled = true,
        axios
-        .post('http://localhost:3000/api/usuario', {
+        .post('https://backend-express-production-be7d.up.railway.app/api/usuario', {
           strNombreUsuario: document.getElementById('recipient-name').value,
           strContraseña: document.getElementById('inputPassword5').value,
           idTipoUsuario: tipoUser,
@@ -114,7 +114,7 @@ export default class CrearCrearComponent extends Component {
 
   async UpdateList() {
     try {
-      const response = await axios.get('http://localhost:3000/api/usuarios');
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
       const { data } = response;
       this.dataStore.setActualizarDatos(data);
     } catch (error) {

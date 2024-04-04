@@ -92,7 +92,7 @@ export default class MovieGridComponent extends Component {
 
     try {
       await axios
-        .delete(`http://localhost:3000/api/pelicula/${movie}`)
+        .delete(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${movie}`)
         .then((response) => {
           const { data } = response;
           if (data.message === 'Película eliminada correctamente') {
@@ -281,7 +281,8 @@ async updateMovie() {
 
                             // Realizar la solicitud POST al backend
                             const response = await (document.getElementById('enviarMovie2').disabled = true, document.getElementById('cerrarMovieG').disabled = true,
-                            document.getElementById('cerrarGMovie').disabled = true, axios.put(`http://localhost:3000/api/pelicula/${this.usuId2}`, formData, {
+                            document.getElementById('cerrarGMovie').disabled = true, 
+                            axios.put(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${this.usuId2}`, formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }
@@ -374,7 +375,7 @@ async updateMovie() {
 
   async UpdateListMovies() {
     try {
-      const response = await axios.get('http://localhost:3000/api/peliculas');
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculas');
       const { data } = response;
       this.dataStore.setActualizarDatosMovies(data);
     } catch (error) {

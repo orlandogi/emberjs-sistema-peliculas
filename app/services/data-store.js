@@ -23,7 +23,7 @@ export default class DataStoreService extends Service {
 
   async updateList223() {
     try {
-      const response = await axios.get('http://localhost:3000/api/usuarios');
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
       const { data } = response;
       this.actualizarDatos = data;
     } catch (error) {
@@ -40,7 +40,7 @@ export default class DataStoreService extends Service {
 
   async updateListMovie() {
     try {
-      const response = await axios.get('http://localhost:3000/api/peliculas');
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculas');
       const { data } = response;
       this.actualizarDatosMovies = data;
     } catch (error) {
