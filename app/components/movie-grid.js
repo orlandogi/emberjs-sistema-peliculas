@@ -95,11 +95,9 @@ export default class MovieGridComponent extends Component {
       document.getElementById('movieEdit').disabled = true,
        axios
         .delete(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${movie}`))
-        .then((response) => {
+          await this.UpdateListMovies();
           document.getElementById('movieDelete').disabled = false;
           document.getElementById('movieEdit').disabled = false;
-          const { data } = response;
-          if (data.message === 'Película eliminada correctamente') {
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -107,8 +105,11 @@ export default class MovieGridComponent extends Component {
               showConfirmButton: false,
               timer: 850,
             });
-          }
-          if (response.status === 404) {
+          
+    } catch (error) {
+          document.getElementById('movieDelete').disabled = false;
+          document.getElementById('movieEdit').disabled = false;
+          if(error.response.data.status === 404){
             Swal.fire({
               position: 'center',
               icon: 'error',
@@ -117,7 +118,7 @@ export default class MovieGridComponent extends Component {
               timer: 1500,
             });
           }
-          if (response.status === 'ERROR') {
+          if (error.response.data.status === 'ERROR') {
             Swal.fire({
               position: 'center',
               icon: 'error',
@@ -126,11 +127,6 @@ export default class MovieGridComponent extends Component {
               timer: 1500,
             });
           }
-        });
-      await this.UpdateListMovies();
-    } catch (error) {
-          document.getElementById('movieDelete').disabled = false;
-          document.getElementById('movieEdit').disabled = false;
       await Swal.fire({
         position: 'center',
         icon: 'error',
@@ -293,10 +289,10 @@ async updateMovie() {
                                     'Content-Type': 'multipart/form-data'
                                 }
                             }));
+                            await this.UpdateListMovies();
                             document.getElementById('enviarMovie2').disabled = false;
                             document.getElementById('cerrarMovieG').disabled = false;
                             document.getElementById('cerrarGMovie').disabled = false;
-                            await this.UpdateListMovies();
                             Swal.fire({
                                 position: 'center',
                                 icon: 'success',

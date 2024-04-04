@@ -101,11 +101,9 @@ export default class PeopleListComponent extends Component {
       await (document.getElementById('userDelete').disabled = true, 
       document.getElementById('userEdit').disabled = true, axios
         .delete(`https://backend-express-production-be7d.up.railway.app/api/usuario/${user}`))
-        .then((response) => {
+        await this.UpdateList2();
           document.getElementById('userDelete').disabled = false;
           document.getElementById('userEdit').disabled = false;
-          const { data } = response;
-          if (data.message === 'Se elimino correctamente') {
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -113,8 +111,10 @@ export default class PeopleListComponent extends Component {
               showConfirmButton: false,
               timer: 850,
             });
-          }
-          if (response.status === 404) {
+    } catch (error) {
+          document.getElementById('userDelete').disabled = false;
+          document.getElementById('userEdit').disabled = false;
+          if (error.data.status === 404) {
             Swal.fire({
               position: 'center',
               icon: 'error',
@@ -123,7 +123,7 @@ export default class PeopleListComponent extends Component {
               timer: 1500,
             });
           }
-          if (response.status === 'ERROR') {
+          if (error.status === 'ERROR') {
             Swal.fire({
               position: 'center',
               icon: 'error',
@@ -131,13 +131,8 @@ export default class PeopleListComponent extends Component {
               showConfirmButton: false,
               timer: 1500,
             });
-          }
-        });
-      await this.UpdateList2();
-    } catch (error) {
-          document.getElementById('userDelete').disabled = false;
-          document.getElementById('userEdit').disabled = false;
-      await Swal.fire({
+          }      
+          await Swal.fire({
         position: 'center',
         icon: 'error',
         title: 'Problemas de conexión',
@@ -205,20 +200,25 @@ export default class PeopleListComponent extends Component {
             } else {
               tipoEstado = 2;
             }
-            await axios
+            await (document.getElementById('enviar2').disabled = true, 
+            document.getElementById('cerrarmd').disabled = true,
+            document.getElementById('cerrar3').disabled = true, axios
               .put(`https://backend-express-production-be7d.up.railway.app/api/usuario/${this.usuId}`, {
                 strNombreUsuario:
                   document.getElementById('recipient-name2').value,
                 strContraseña: document.getElementById('inputPassword52').value,
                 idTipoUsuario: tipoUser,
                 idTipoEstado: tipoEstado,
-              })
+              }))
               .then(function (response) {
                 const { data } = response;
                 if (
                   data.message ===
                   'El nombre de usuario o la contraseña ya están registrados'
                 ) {
+                  document.getElementById('enviar2').disabled = false; 
+            document.getElementById('cerrarmd').disabled = false;
+            document.getElementById('cerrar3').disabled = false;
                   Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -229,6 +229,9 @@ export default class PeopleListComponent extends Component {
                   validar = false;
                 }
                 if (response.status === 404) {
+                  document.getElementById('enviar2').disabled = false; 
+            document.getElementById('cerrarmd').disabled = false;
+            document.getElementById('cerrar3').disabled = false;
                   Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -243,6 +246,9 @@ export default class PeopleListComponent extends Component {
                   response.status === 504 ||
                   response.status === 'ERROR'
                 ) {
+                  document.getElementById('enviar2').disabled = false; 
+            document.getElementById('cerrarmd').disabled = false;
+            document.getElementById('cerrar3').disabled = false;
                   Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -254,6 +260,9 @@ export default class PeopleListComponent extends Component {
                 }
               })
               .catch(function (error) {
+                document.getElementById('enviar2').disabled = false; 
+                document.getElementById('cerrarmd').disabled = false;
+                document.getElementById('cerrar3').disabled = false;
                 Swal.fire({
                   position: 'center',
                   icon: 'error',
@@ -266,6 +275,9 @@ export default class PeopleListComponent extends Component {
               });
             if (validar) {
               await this.UpdateList2();
+              document.getElementById('enviar2').disabled = false; 
+            document.getElementById('cerrarmd').disabled = false;
+            document.getElementById('cerrar3').disabled = false;
               document.getElementById('cerrar3').click();
               Swal.fire({
                 position: 'center',

@@ -309,10 +309,10 @@ async insertMovie(event) {
         'Content-Type': 'multipart/form-data'
       }
     }));
+    await this.UpdateListAllMovies();
     document.getElementById('enviarMovie').disabled = false; 
     document.getElementById('cerrarMovie2').disabled = false;
     document.getElementById('cerrarMovie1').disabled = false;
-    await this.UpdateListAllMovies();
   document.getElementById('recipient-movie').value = '';
     document.getElementById('synopsisMovie').value = '';;
    document.getElementById('numberDuration').value = null;

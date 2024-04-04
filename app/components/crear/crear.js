@@ -50,6 +50,9 @@ export default class CrearCrearComponent extends Component {
               timer: 1500,
             });
           } else {
+            document.getElementById('enviar').disabled = false;
+            document.getElementById('cerrar').disabled = false;
+            document.getElementById('cerrar2').disabled = false;
             document.getElementById('cerrar').click();
             document.getElementById('inputPassword5').value = '';
             document.getElementById('recipient-name').value = '';
