@@ -95,7 +95,7 @@ export default class MovieGridComponent extends Component {
         .delete(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${movie}`)
         .then((response) => {
           const { data } = response;
-          if (data.message === 'Se elimino correctamente') {
+          if (data.message === 'Película eliminada correctamente') {
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -268,10 +268,13 @@ async updateMovie() {
                                 formData.append('generos[]', generoId);
                             });
 
+
                             // Validar si se ha seleccionado una nueva imagen
                             const fileInput = document.getElementById('foto-input2');
                             if (fileInput.files && fileInput.files[0] && this.imagenSource != valorimagen.src) {
                                 formData.append('imagen', fileInput.files[0]);
+                                formData.append('nombreArchivo', fileInput.files[0].name);
+
                             } else {
                                 formData.append('imagen', 'no');
                             }

@@ -291,6 +291,9 @@ async insertMovie(event) {
       formData.append('imagen', fileInput.files[0]);
     }
 
+    // Agregar el nombre del archivo
+    formData.append('nombreArchivo', fileInput.files[0].name);
+
     // Realizar la solicitud POST al backend
     const response = await axios.post('https://backend-express-production-be7d.up.railway.app/api/pelicula', formData, {
       headers: {
