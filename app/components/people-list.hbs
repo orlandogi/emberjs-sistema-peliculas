@@ -103,8 +103,8 @@
         <td>{{user.strContraseña}}</td>
         <td>{{user.TipoUsuario}}</td>
         <td>{{user.Estado}}</td>
-        <td><button class="button-delete" type="button" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
-        <td><button class="button-update" type="button" {{on "click" (fn this.editarDatos user )}} >Editar</button></td>
+        <td><button id="userDelete" class="button-delete" type="button" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
+        <td><button id="userEdit" class="button-update" type="button" {{on "click" (fn this.editarDatos user )}} >Editar</button></td>
       </tr>
     {{/each}}
   </tbody>

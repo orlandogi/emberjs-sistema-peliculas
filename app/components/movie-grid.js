@@ -91,9 +91,13 @@ export default class MovieGridComponent extends Component {
   @action async  deleteMovie(movie) {
 
     try {
-      await axios
-        .delete(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${movie}`)
+      await (document.getElementById('movieDelete').disabled = true, 
+      document.getElementById('movieEdit').disabled = true,
+       axios
+        .delete(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${movie}`))
         .then((response) => {
+          document.getElementById('movieDelete').disabled = false;
+          document.getElementById('movieEdit').disabled = false;
           const { data } = response;
           if (data.message === 'Película eliminada correctamente') {
             Swal.fire({
@@ -125,6 +129,8 @@ export default class MovieGridComponent extends Component {
         });
       await this.UpdateListMovies();
     } catch (error) {
+          document.getElementById('movieDelete').disabled = false;
+          document.getElementById('movieEdit').disabled = false;
       await Swal.fire({
         position: 'center',
         icon: 'error',

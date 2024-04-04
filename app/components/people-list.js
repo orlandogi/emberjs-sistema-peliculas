@@ -98,9 +98,12 @@ export default class PeopleListComponent extends Component {
 
   @action async deleteUser(user) {
     try {
-      await axios
-        .delete(`https://backend-express-production-be7d.up.railway.app/api/usuario/${user}`)
+      await (document.getElementById('userDelete').disabled = true, 
+      document.getElementById('userEdit').disabled = true, axios
+        .delete(`https://backend-express-production-be7d.up.railway.app/api/usuario/${user}`))
         .then((response) => {
+          document.getElementById('userDelete').disabled = false;
+          document.getElementById('userEdit').disabled = false;
           const { data } = response;
           if (data.message === 'Se elimino correctamente') {
             Swal.fire({
@@ -132,6 +135,8 @@ export default class PeopleListComponent extends Component {
         });
       await this.UpdateList2();
     } catch (error) {
+          document.getElementById('userDelete').disabled = false;
+          document.getElementById('userEdit').disabled = false;
       await Swal.fire({
         position: 'center',
         icon: 'error',

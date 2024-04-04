@@ -186,8 +186,8 @@
             {{/each}}
             </td>
             <td class="text-center">{{movie.strEstado}}</td>
-            <td ><button class="button-delete" type="button" {{on "click" (fn this.deleteMovie movie.id )}}>Eliminar</button></td>
-            <td><button class="button-update" type="button" {{on "click" (fn this.editarMovie movie )}}>Editar</button></td>
+            <td ><button id="movieDelete" class="button-delete" type="button" {{on "click" (fn this.deleteMovie movie.id )}}>Eliminar</button></td>
+            <td><button id="movieEdit" class="button-update" type="button" {{on "click" (fn this.editarMovie movie )}}>Editar</button></td>
         </tr>
         {{/each}}
     </tbody>
