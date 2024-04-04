@@ -27,14 +27,19 @@ export default class CrearCrearComponent extends Component {
       } else {
         tipoEstado = 2;
       }
-      await axios
-        .post('https://backend-express-production-be7d.up.railway.app/api/usuario', {
+      await(document.getElementById('enviar').disabled = true,document.getElementById('cerrar').disabled = true, 
+      document.getElementById('cerrar2').disabled = true,
+       axios
+        .post('http://localhost:3000/api/usuario', {
           strNombreUsuario: document.getElementById('recipient-name').value,
           strContraseña: document.getElementById('inputPassword5').value,
           idTipoUsuario: tipoUser,
           idTipoEstado: tipoEstado,
-        })
+        }))
         .then((response) => {
+          document.getElementById('enviar').disabled = false;
+          document.getElementById('cerrar').disabled = false;
+          document.getElementById('cerrar2').disabled = false;
           const { data } = response;
           if (data.message === 'El usuario ya está registrado') {
             Swal.fire({
@@ -68,6 +73,9 @@ export default class CrearCrearComponent extends Component {
           }
         })
         .catch((error) => {
+          document.getElementById('enviar').disabled = false;
+          document.getElementById('cerrar').disabled = false;
+          document.getElementById('cerrar2').disabled = false;
           if (error.message === 'Network Error') {
             Swal.fire({
               position: 'center',
@@ -86,8 +94,14 @@ export default class CrearCrearComponent extends Component {
             });
           }
         });
+        document.getElementById('enviar').disabled = false;
+        document.getElementById('cerrar').disabled = false;
+        document.getElementById('cerrar2').disabled = false;
       await this.UpdateList();
     } catch (error) {
+      document.getElementById('enviar').disabled = false;
+      document.getElementById('cerrar').disabled = false;
+      document.getElementById('cerrar2').disabled = false;
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -100,7 +114,7 @@ export default class CrearCrearComponent extends Component {
 
   async UpdateList() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
+      const response = await axios.get('http://localhost:3000/api/usuarios');
       const { data } = response;
       this.dataStore.setActualizarDatos(data);
     } catch (error) {

@@ -183,10 +183,17 @@ selectOption(option) {
 
 async UpdateListAllMovies() {
   try {
-    const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculas');
+    const response = await axios.get('http://localhost:3000/api/peliculas');
     const { data } = response;
     this.dataStore.setActualizarDatosMovies(data);
   } catch (error) {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Problemas de conexión al actualizar',
+      showConfirmButton: false,
+      timer: 1500,
+  });
     if (error.response) {
       console.log(error.response.status);
     } else if (error.request) {
@@ -295,11 +302,15 @@ async insertMovie(event) {
     formData.append('nombreArchivo', fileInput.files[0].name);
 
     // Realizar la solicitud POST al backend
-    const response = await axios.post('https://backend-express-production-be7d.up.railway.app/api/pelicula', formData, {
+    const response = await (document.getElementById('enviarMovie').disabled = true, document.getElementById('cerrarMovie2').disabled = true,
+    document.getElementById('cerrarMovie1').disabled = true, axios.post('http://localhost:3000/api/pelicula', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-    });
+    }));
+    document.getElementById('enviarMovie').disabled = false; 
+    document.getElementById('cerrarMovie2').disabled = false;
+    document.getElementById('cerrarMovie1').disabled = false;
     await this.UpdateListAllMovies();
   document.getElementById('recipient-movie').value = '';
     document.getElementById('synopsisMovie').value = '';;
@@ -321,6 +332,9 @@ document.getElementById('cerrarMovie2').click();
       timer: 1500
     });  
   } catch (error) {
+    document.getElementById('enviarMovie').disabled = false; 
+    document.getElementById('cerrarMovie2').disabled = false;
+    document.getElementById('cerrarMovie1').disabled = false;
     if (error.message === 'Network Error') {
       Swal.fire({
         position: 'center',

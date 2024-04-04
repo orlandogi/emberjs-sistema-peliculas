@@ -92,7 +92,7 @@ export default class MovieGridComponent extends Component {
 
     try {
       await axios
-        .delete(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${movie}`)
+        .delete(`http://localhost:3000/api/pelicula/${movie}`)
         .then((response) => {
           const { data } = response;
           if (data.message === 'Película eliminada correctamente') {
@@ -280,11 +280,16 @@ async updateMovie() {
                             }
 
                             // Realizar la solicitud POST al backend
-                            const response = await axios.put(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${this.usuId2}`, formData, {
+                            const response = await (document.getElementById('enviarMovie2').disabled = true, document.getElementById('cerrarMovieG').disabled = true,
+                            document.getElementById('cerrarGMovie').disabled = true, axios.put(`http://localhost:3000/api/pelicula/${this.usuId2}`, formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }
-                            });
+                            }));
+                            document.getElementById('enviarMovie2').disabled = false;
+                            document.getElementById('cerrarMovieG').disabled = false;
+                            document.getElementById('cerrarGMovie').disabled = false;
+                            await this.UpdateListMovies();
                             Swal.fire({
                                 position: 'center',
                                 icon: 'success',
@@ -292,10 +297,12 @@ async updateMovie() {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            await this.UpdateListMovies();
                             cerrar.click();
 
                         } catch (error) {
+                          document.getElementById('enviarMovie2').disabled = false;
+                            document.getElementById('cerrarMovieG').disabled = false;
+                            document.getElementById('cerrarGMovie').disabled = false;
                             if (error.message === 'Network Error') {
                                 Swal.fire({
                                     position: 'center',
@@ -367,10 +374,17 @@ async updateMovie() {
 
   async UpdateListMovies() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculas');
+      const response = await axios.get('http://localhost:3000/api/peliculas');
       const { data } = response;
       this.dataStore.setActualizarDatosMovies(data);
     } catch (error) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas de conexión al actualizar',
+        showConfirmButton: false,
+        timer: 1500,
+    });
       if (error.response) {
         console.log(error.response.status);
       } else if (error.request) {
