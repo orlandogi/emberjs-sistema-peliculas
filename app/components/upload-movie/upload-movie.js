@@ -1248,7 +1248,7 @@ async UpdateListAllMoviesUpload() {
   }
 }
 
-@action async publicar(){
+@action async publicarPelicula(){
     let fechaInicio = document.getElementById('fechaInicio');
     let fechaFin = document.getElementById('fechaFin');
     let priceMovie = document.getElementById('priceMovie');
@@ -1550,8 +1550,9 @@ async UpdateListAllMoviesUpload() {
 
 @action async movieDeleteUpload(id){
   try {
+    alert(id)
     await (document.getElementById('publicarMovie').disabled = true, document.querySelectorAll('btnEliminarMovieUpload').disabled = true,
-     axios.delete(`https://backend-express-production-be7d.up.railway.app/api/uploadMovie/${id}`))
+     axios.delete(`https://backend-express-production-be7d.up.railway.app/api/uploadMoviePublish/${id}`))
      await this.UpdateListAllMoviesUpload();
      document.getElementById('publicarMovie').disabled = false;
      document.querySelectorAll('btnEliminarMovieUpload').disabled = false;
