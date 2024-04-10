@@ -101,6 +101,7 @@ export default class CrearCrearComponent extends Component {
         document.getElementById('cerrar').disabled = false;
         document.getElementById('cerrar2').disabled = false;
       await this.UpdateList();
+      await this.UpdateList333();
     } catch (error) {
       document.getElementById('enviar').disabled = false;
       document.getElementById('cerrar').disabled = false;
@@ -120,6 +121,24 @@ export default class CrearCrearComponent extends Component {
       const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
       const { data } = response;
       this.dataStore.setActualizarDatos(data);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.status);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+      return [];
+    }
+  }
+
+  async UpdateList333() {
+    try {
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/peliculasDisponibles');
+      const { data } = response;
+      this.dataStore.setActualizarPeliculasSubidas(data);
     } catch (error) {
       if (error.response) {
         console.log(error.response.status);

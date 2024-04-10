@@ -88,6 +88,23 @@ export default class MovieGridComponent extends Component {
     await this.dataStore.updateListMovie(); 
   }
   
+  async UpdateListAllMoviesUpd2() {
+    try {
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculasDisponibles');
+      const { data } = response;
+      this.dataStore.setActualizarPeliculasSubidas(data) ;
+    } catch (error) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas de conexión al actualizar',
+        showConfirmButton: false,
+        timer: 1500,
+    });
+      throw new Error(`Error al actualizar los datos: ${error.message}`);
+    }
+  }
+
   @action async  deleteMovie(movie) {
 
     try {
@@ -96,6 +113,7 @@ export default class MovieGridComponent extends Component {
        axios
         .delete(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${movie}`))
           await this.UpdateListMovies();
+          await this.UpdateListAllMoviesUpd2();
           document.getElementById('movieDelete').disabled = false;
           document.getElementById('movieEdit').disabled = false;
             Swal.fire({
@@ -231,11 +249,7 @@ async editarMovie(movie) {
     }
 }
   
-  @action async actualizarDatos() {
-    
-  }
-
-  @action
+@action
 async updateMovie() {
     const cerrar = document.getElementById('cerrarMovieG');
     const movie = document.getElementById('recipient-movie2').value;
@@ -286,10 +300,11 @@ async updateMovie() {
                             document.getElementById('cerrarGMovie').disabled = true, 
                             axios.put(`https://backend-express-production-be7d.up.railway.app/api/pelicula/${this.usuId2}`, formData, {
                                 headers: {
-                                    'Content-Type': 'multipart/form-data'
-                                }
+                                   'Content-Type': 'multipart/form-data'
+                                } 
                             }));
                             await this.UpdateListMovies();
+                            await this.UpdateListAllMoviesUpd2();
                             document.getElementById('enviarMovie2').disabled = false;
                             document.getElementById('cerrarMovieG').disabled = false;
                             document.getElementById('cerrarGMovie').disabled = false;

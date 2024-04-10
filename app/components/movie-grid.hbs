@@ -78,18 +78,6 @@
                                     </span>
                                 </div>
                             </div>
-                            <!--
-                    <div class="row g-3 align-items-center mb-3">
-                        <div class="col-auto">
-                            <label for="numberPrice" class="col-form-label">Precio:</label>
-                        </div>
-                        <div class="col-auto d-flex">
-                            <input id="numberPrice" type="number" class="form-control" />
-                            <span class="input-group-text">MX</span>
-                        </div>
-                    </div>
-                    -->
-
                             <div class="btn-group dropup mb-2">
                                 <label for="formFile" class="form-label me-3">Generos: </label>
                                 <button type="button" class="btn btn-secondary dropdown-toggle generos-style"
@@ -179,7 +167,7 @@
             <td style="padding: 5px; text-align: center;"><img src="data:image/png;base64,{{movie.bloImagen}}" alt="Imagen de {{movie.strNombre}}" style="width: 100px; height: 150px; " /></td>
             <td style="width: 170px;">{{movie.strNombre}}</td>
             <td style="width: 310px; text-align: justify;">{{movie.strSinopsis}}</td>
-            <td class="text-center" style="width: 130px;">{{movie.intDuracion}}</td>
+            <td class="text-center" style="width: 130px;">{{movie.intDuracion}}<span style="font-size: 15px;"> min</span></td>
             <td class="text-center" style="width: 150px;" id="chale">
             {{#each movie.generos as |genero|}}
                 {{genero}}<br>

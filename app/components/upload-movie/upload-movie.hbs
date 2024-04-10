@@ -1,0 +1,241 @@
+<button type="button" class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+    Agregar película
+</button>
+
+<div class="modal fade" id="exampleModal3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen m-0 m-auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel3">Datos de la Película</h1>
+                <button id="cerrarUploadMovie" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-8 col-sm-4 border border-warning p-2">
+                        <h5>Películas disponibles</h5>
+                        <div class="filter-name" style="display: grid;">
+                            <input type="text" placeholder="Buscar película" {{on "input" this.filterByName3}}>
+                        </div>
+                        <table class="my-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 35%; padding: 1px !important;">Imagen</th>
+                                    <th class="text-center" style="padding: 1px !important;">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody id="registroBody">
+                                {{#each this.paginatedMovies2 as |movie|}}
+                                <tr {{on "click" (fn this.selectMovie movie)}} class="table-row">
+                                    <td style="padding: 5px; text-align: center;"><img
+                                            src="data:image/png;base64,{{movie.bloImagen}}"
+                                            alt="Imagen de {{movie.strNombre}}" style="width: 85px; height: 130px; " />
+                                    </td>
+                                    <td style="width: 170px; text-align: center;">{{movie.strNombre}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+
+                        </table>
+                        <div class="pagination justify-content-center mt-3">
+                            <button class="btn btn-outline-primary me-2 btn-grid-ante" type="button"
+                                {{action "previousPage3" }}>Anterior</button>
+                            Página {{this.currentPage3}} de {{this.totalPages3}}
+                            <button class="btn btn-outline-primary ms-2 btn-grid-ante" type="button"
+                                {{action "nextPage3" }}>Siguiente</button>
+                        </div>
+                    </div>
+
+
+                    <div class="col-4 col-sm-8 border border-warning">
+                        <h5>Datos</h5>
+                        <form id="formularioUpload" {{on "submit" this.preventDefaultSubmissionUpload}}>
+
+                            <div class="align-items-center mb-3 d-flex">
+                                <label for="fechaInicio" class="form-label me-2" style="margin-top: 3px;">Fecha de
+                                    inicio: </label>
+                                <input type="date" id="fechaInicio" name="fechaInicio" class="fecha-dropdown me-4"
+                                    style="width: 16%; padding: 0px 5px;" {{on "change" this.handleFechaInicio}}
+                                    onkeydown={{action this.handleDisableEditing}} onkeypress={{action
+                                    this.handleDisableEditing}} disabled>
+                                <label for="fechaFin" class="form-label me-2" style="margin-top: 3px;">Fecha de fin:
+                                </label>
+                                <input type="date" id="fechaFin" name="fechaFin" class="fecha-dropdown"
+                                    style="width: 16%; padding: 0px 5px;" {{on "change" this.handleFechaFin}}
+                                    disabled={{if this.fechaInicio false true}} onkeydown={{action
+                                    this.handleDisableEditing}} onkeypress={{action this.handleDisableEditing}}>
+                                    <label style="margin-left: 600px; width: 180px; position: fixed; text-align: center;" id="namePelicula" ></label>
+                            </div>
+
+                            <div class="align-items-center mb-3 d-flex">
+                                <div class="col-auto me-2">
+                                    <label for="numberDuration2" class="col-form-label">Precio:</label>
+                                </div>
+                                <div class="col-auto d-flex">
+                                    <input id="priceMovie" type="number" class="form-control me-2 text-center"
+                                        aria-describedby="duracion2" {{on "keydown" this.handleInputMovieU}}
+                                        {{on "keypress" this.handleInputMovieU}} placeholder="$ 000.00"
+                                        style="width: 100px;" disabled/>
+                                    <span id="duracion2" class="form-text" style="padding-top: 7px;">
+                                        MX
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row border border-primary mb-2">
+                                <div class="mb-3 d-grid col-sm-5 border border-primary-subtle h-100">
+                                    <label class="form-label">Elige una sala: </label>
+                                     <select id="selectHorarios1" {{on "change" this.handleSalaSelection1}} value={{this.selectedSala1}} disabled>
+                                        <option id="salaNinguna1" value="0" selected>Ninguna</option>
+                                        <option id="1_sala1" value="1">Sala 1</option>
+                                        <option id="1_sala2" value="2">Sala 2</option>
+                                        <option id="1_sala3" value="3">Sala 3</option>
+                                        <option id="1_sala4" value="4">Sala 4</option>
+                                        <option id="1_sala5" value="5">Sala 5</option>
+                                        <option id="1_sala6" value="6">Sala 6</option>
+                                        <option id="1_sala7" value="7">Sala 3D</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-7   border border-primary-subtle">
+                                    <div class="row d-flex border border-success">
+                                        <div class="col-auto me-3">
+                                            <label for="numberDuration2" class="col-form-label">Horario:</label>
+                                        </div>
+                                        <div class="col-auto d-flex pt-2">
+                                            <div class="input-container-horario">
+                                                <label id="horarios1" class="input-label-horario">00:00 ..</label>
+                                            </div>
+                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
+                                                {{on "click" this.selectTime1 }} disabled>+ Agregar</button>
+                                        </div>
+                                    </div>
+                                    <div class="row border border-success">
+                                        <div class="etiqueta-container mt-2" id="tagTime1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                              <div class="row border border-primary mb-2">
+                                <div class="mb-3 d-grid col-sm-5 border border-primary-subtle h-100">
+                                    <label class="form-label">Elige una sala: </label>
+                                     <select id="selectHorarios2" {{on "change" this.handleSalaSelection2}} value={{this.selectedSala2}} disabled>
+                                        <option id="salaNinguna2" value="0" selected>Ninguna</option>
+                                        <option id="2_sala1" value="1">Sala 1</option>
+                                        <option id="2_sala2" value="2">Sala 2</option>
+                                        <option id="2_sala3" value="3">Sala 3</option>
+                                        <option id="2_sala4" value="4">Sala 4</option>
+                                        <option id="2_sala5" value="5">Sala 5</option>
+                                        <option id="2_sala6" value="6">Sala 6</option>
+                                        <option id="2_sala7" value="7">Sala 3D</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-7   border border-primary-subtle">
+                                    <div class="row d-flex border border-success">
+                                        <div class="col-auto me-3">
+                                            <label for="numberDuration2" class="col-form-label">Horario:</label>
+                                        </div>
+                                        <div class="col-auto d-flex pt-2">
+                                            <div class="input-container-horario">
+                                                <label id="horarios2" class="input-label-horario">00:00 ..</label>
+                                            </div>
+                                            <button id="btnAgregarHorarios2" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
+                                                {{on "click" this.selectTime2 }} disabled>+ Agregar</button>
+                                        </div>
+                                    </div>
+                                    <div class="row border border-success">
+                                        <div class="etiqueta-container mt-2" id="tagTime2"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                              <div class="row border border-primary mb-2">
+                                <div class="mb-3 d-grid col-sm-5 border border-primary-subtle h-100">
+                                    <label class="form-label">Elige una sala: </label>
+                                     <select id="selectHorarios3" {{on "change" this.handleSalaSelection3}} value={{this.selectedSala3}} disabled>
+                                        <option id="salaNinguna3" value="0" selected>Ninguna</option>
+                                        <option id="3_sala1" value="1">Sala 1</option>
+                                        <option id="3_sala2" value="2">Sala 2</option>
+                                        <option id="3_sala3" value="3">Sala 3</option>
+                                        <option id="3_sala4" value="4">Sala 4</option>
+                                        <option id="3_sala5" value="5">Sala 5</option>
+                                        <option id="3_sala6" value="6">Sala 6</option>
+                                        <option id="3_sala7" value="7">Sala 3D</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-7   border border-primary-subtle">
+                                    <div class="row d-flex border border-success">
+                                        <div class="col-auto me-3">
+                                            <label for="numberDuration2" class="col-form-label">Horario:</label>
+                                        </div>
+                                        <div class="col-auto d-flex pt-2">
+                                            <div class="input-container-horario">
+                                                <label id="horarios3" class="input-label-horario">00:00 ..</label>
+                                            </div>
+                                            <button id="btnAgregarHorarios3" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
+                                                {{on "click" this.selectTime3 }} disabled>+ Agregar</button>
+                                        </div>
+                                    </div>
+                                    <div class="row border border-success">
+                                        <div class="etiqueta-container mt-2" id="tagTime3"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                          
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button id="cerrarUpload" type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Cerrar</button>
+                <button id="publicarMovie" type="submit" class="btn btn-success" {{on "click" this.publicar}}>Publicar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <table class="my-table">
+    <thead>
+        <tr>
+        <th class="text-center" style="width: 180px;">Imagen</th>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Duración</th>
+        <th class="text-center">Fecha inicio</th>
+        <th class="text-center">Fecha fin</th>
+        <th class="text-center" style="width: 280px !important;">Horarios</th>
+        <th class="text-center" style="width: 120px;"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each this.paginatedMovies5 as |movie|}}
+        <tr>
+            <td style="padding: 5px; text-align: center;"><img src="data:image/png;base64,{{movie.bloImagen}}" alt="Imagen de {{movie.strNombre}}" style="width: 170px; height: 220px; " /></td>
+            <td style="width: 170px; text-align: center;">{{movie.strNombre}}</td>
+            <td style="width: 130px; text-align: justify; text-align: center;">{{movie.intDuracion}} <span style="font-size: 15px;"> min</span></td>
+            <td class="text-center" style="width: 130px; text-align: center;">{{movie.fechaInicio}}</td>
+            <td class="text-center" style="width: 130px; text-align: center;">{{movie.fechaFin}}</td>
+            <td  style="display:flex; gap:10px; flex-wrap: wrap; padding: 0px 15px;padding-top:15px " >
+           {{#each movie.horarios as |horario index|}}
+    <button class="btn btn-primary" style="width: 100px ; " type="button" {{on "click" (fn this.showSala movie.idsSala index movie.strNombre horario)}}>
+        {{horario}}
+    </button>
+{{/each}}
+            </td>
+            <td ><button class="button-delete btnEliminarMovieUpload" type="button" {{on "click" (fn this.movieDeleteUpload movie.id)}}>Eliminar</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+
+<div class="pagination justify-content-center mt-3">
+  <button class="btn btn-outline-primary me-2" type="button" {{action "previousPage5"}}>Anterior</button>
+  Página {{this.currentPage5}} de {{this.totalPages5}}
+  <button class="btn btn-outline-primary ms-2" type="button" {{action "nextPage5"}}>Siguiente</button>
+</div>
+

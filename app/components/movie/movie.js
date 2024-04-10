@@ -206,6 +206,23 @@ async UpdateListAllMovies() {
   }
 }
 
+async UpdateListAllMoviesUpd() {
+  try {
+    const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculasDisponibles');
+    const { data } = response;
+    this.dataStore.setActualizarPeliculasSubidas(data) ;
+  } catch (error) {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Problemas de conexión al actualizar',
+      showConfirmButton: false,
+      timer: 1500,
+  });
+    throw new Error(`Error al actualizar los datos: ${error.message}`);
+  }
+}
+
 @action
 async insertarMovie(){
 
@@ -310,6 +327,7 @@ async insertMovie(event) {
       }
     }));
     await this.UpdateListAllMovies();
+    await this.UpdateListAllMoviesUpd();
     document.getElementById('enviarMovie').disabled = false; 
     document.getElementById('cerrarMovie2').disabled = false;
     document.getElementById('cerrarMovie1').disabled = false;

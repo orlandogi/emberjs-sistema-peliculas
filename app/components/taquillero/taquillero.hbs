@@ -1,0 +1,144 @@
+<button id="btnTaquillero" type="button" class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal5" {{on "click" this.prueba}}>
+    Agregar película
+</button>
+
+<div class="modal fade" id="exampleModal5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel5" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen m-0 m-auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel5">Datos de la Película</h1>
+                <button id="cerrarTaquillero" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-8 col-sm-4 border border-warning p-2">
+                        <d class="d-flex" style="gap: 130px;">
+                    <h5>Datos de Ticket</h5>
+
+                           <h6>Folio: <span id="folioTicket"></span></h6> 
+                        </d>
+                        
+                        <form id="formularioUpload" {{on "submit" this.preventDefaultSubmissionTaquillero}}>
+
+                            <div class="align-items-center  d-flex">
+                                <label for="fechaInicio" class="form-label me-2" style="margin-top: 3px;">Fecha: <span id="fechaHoy"></span></label>
+                                 
+                            </div>
+                             <div class="align-items-center  d-flex">
+                                <label for="fechaInicio" class="form-label me-2" style="margin-top: 3px;">Película: <span id="idPeliculaTicket"></span></label>
+                                 
+                            </div>
+                             <div class="align-items-center  d-flex">
+                                <label for="fechaInicio" class="form-label me-2" style="margin-top: 3px;">Horario: <span id="idHorarioMovie"></span></label>
+                                 
+                            </div>
+
+      <div class="mb-3">
+                        <label for="nameClient" class="col-form-label">Nombre del cliente:</label>
+<div class="pe-5">
+    <input type="text" aria-describedby="usernameBlock" class="form-control" id="nameClient" placeholder="Digite el nombre del cliente" {{on "keydown" this.handleInputTaquillero}} {{on "keypress" this.handleInputTaquillero}} />
+</div>
+      </div>
+
+                    <div class="mb-3">
+                                    <div class="row d-flex text-center" style="justify-content: center;">
+                                        <h6 class="me-3">Adultos</h6>
+                                          <div class="col-auto d-flex pt-1">
+                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
+                                                {{on "click" this.selectTime1 }} disabled>- quitar</button>
+                                        </div>
+                                        <div class="col-auto ">
+                                            <label for="numberDuration2" class="col-form-label">0</label>
+                                        </div>
+                                        <div class="col-auto d-flex pt-1">
+                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
+                                                {{on "click" this.selectTime1 }} disabled>+ Agregar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <div class="row d-flex text-center" style="justify-content: center;">
+                                        <h6 class="me-3">Niños</h6>
+                                          <div class="col-auto d-flex pt-1">
+                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
+                                                {{on "click" this.selectTime1 }} disabled>- quitar</button>
+                                        </div>
+                                        <div class="col-auto ">
+                                            <label for="numberDuration2" class="col-form-label">0</label>
+                                        </div>
+                                        <div class="col-auto d-flex pt-1">
+                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
+                                                {{on "click" this.selectTime1 }} disabled>+ Agregar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto me-2">
+                                    <label  class="col-form-label">Total: <span id="totalTickets"></span></label>
+                                </div>
+
+                                  <div class="col-auto me-2">
+                                    <label class="col-form-label">Asientos: <span id="totalAsientos"></span></label>
+                                </div>
+
+                            <div class="align-items-center mb-3 d-flex">
+                           
+                            </div>
+
+                        </form>                       
+                       
+                    </div>
+
+
+                    <div class="col-4 col-sm-8 border border-warning">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button id="cerrarModalTaquillero" type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Cerrar</button>
+                <button id="ComprarBoletoTick" type="submit" class="btn btn-success" {{on "click" this.comprar}}>Publicar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <table class="my-table">
+    <thead>
+        <tr>
+        <th class="text-center" style="width: 180px;">Imagen</th>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Duración</th>
+        <th class="text-center">Precio</th>
+        <th class="text-center" style="width: 280px !important;">Horarios</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each this.paginatedMovies6 as |movie|}}
+        <tr>
+            <td style="padding: 5px; text-align: center;"><img src="data:image/png;base64,{{movie.bloImagen}}" alt="Imagen de {{movie.strNombre}}" style="width: 170px; height: 220px; " /></td>
+            <td style="width: 170px; text-align: center;">{{movie.strNombre}}</td>
+            <td style="width: 130px; text-align: justify; text-align: center;">{{movie.intDuracion}} <span style="font-size: 15px;"> min</span></td>
+            <td class="text-center" style="width: 130px; text-align: center;">${{movie.precio}}</td>
+            <td  style="display:flex; gap:10px; flex-wrap: wrap; padding: 0px 15px;padding-top:15px " >
+           {{#each movie.horarios as |horario index|}}
+    <button class="btn btn-primary" style="width: 100px ; " type="button" {{on "click" (fn this.showSala movie.idsSala index movie.strNombre horario)}}>
+        {{horario}}
+    </button>
+{{/each}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+
+<div class="pagination justify-content-center mt-3">
+  <button class="btn btn-outline-primary me-2" type="button" {{action "previousPage6"}}>Anterior</button>
+  Página {{this.currentPage6}} de {{this.totalPages6}}
+  <button class="btn btn-outline-primary ms-2" type="button" {{action "nextPage6"}}>Siguiente</button>
+</div>
