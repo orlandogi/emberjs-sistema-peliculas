@@ -11,6 +11,12 @@ export default class TicketTicketComponent extends Component {
     @service dataStore;
     @tracked currentPage9 = 1;
     itemsPerPage9 = 7;
+    @tracked numAdultos2 = 0;
+    @tracked numNiños2 = 0;
+    @tracked precioAdulto2 = 0;
+    @tracked precioNiño2 = 0;
+    @tracked asientos2 = [];
+    
 
     @action
     preventDefaultSubmissionTicket(event) {
@@ -118,10 +124,73 @@ export default class TicketTicketComponent extends Component {
       }
       }
 
-    
-  @action editarTicket(){
-        alert('')
-  }
+      @action handleInputTicket(event){
+        const myInput2 = document.getElementById('nameClientEdit');
+      
+        const chr = String.fromCharCode(event.which);
+        const validCharacters =
+          '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZáéíóü ';
+      
+        if (event.target === myInput2) {
+          if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+            return;
+          }
+      
+          if (myInput2.value.length >= 20 && !event.ctrlKey) {
+            event.preventDefault();
+          } else if (validCharacters.indexOf(chr) < 0 && !event.ctrlKey) {
+            event.preventDefault();
+          }
+        }
+    }
 
- 
+    @action sumarAdulto2(){
+      alert('d')
+    }
+
+    @action restarAdulto2(){
+      alert('')
+    }
+
+    @action restarNiño2(){
+      alert('')
+    }
+    
+    @action sumarNiño2(){
+      alert('')
+    }
+    
+  @action editarTicket(edit){
+
+    document.getElementById('btnTicket').click();
+    document.getElementById('folioTicket').textContent = edit.folio;
+    document.getElementById('fechaHoyEdit').textContent = edit.fecha;
+    document.getElementById('idPeliculaTicketEdit').value = edit.pelicula;
+    document.getElementById('idSalaMovieEdit').value = edit.sala;
+    document.getElementById('idHorarioMovieEdit').value = edit.horario;
+    document.getElementById('nameClientEdit').value = edit.cliente
+    document.getElementById('numAdultosEdit').textContent = edit.adultos;
+    document.getElementById('numNiñosEdit').textContent = edit.niños;
+    document.getElementById('totalAsientosEdit').textContent = edit.boletos;
+    document.getElementById('codigoAsientosEdit').textContent = edit.asientos;
+    document.getElementById('totalPrecioTicketsEdit').textContent = edit.total;
+
+    
+    }
+
+
+ @action cerrarEditTicket(){
+  alert('d')
+
+
+ }
+
+
+ @action prueba2(){
+  alert('sd')
+ }
+
+ @action comprar2(){
+  alert('')
+ }
 }

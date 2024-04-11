@@ -16,6 +16,7 @@ export default class TaquilleroTaquilleroComponent extends Component {
     @tracked precioAdulto = 0;
     @tracked precioNiño = 0;
     @tracked asientos = [];
+    @tracked precioPeli = '';
     
   get totalPages6() {
     const totalMovies = this.filteredMovies6.length;
@@ -124,6 +125,7 @@ export default class TaquilleroTaquilleroComponent extends Component {
            totalBoletos: parseInt(document.getElementById('totalAsientos').textContent),
            curTotal: document.getElementById('totalPrecioTickets').textContent,
            asientos: document.getElementById('codigoAsientos').textContent,
+           precio: this.precioPeli,
          }
        }));
        await this.UpdateListAllTickets();
@@ -174,7 +176,7 @@ export default class TaquilleroTaquilleroComponent extends Component {
       const total = document.getElementById('totalPrecioTickets').textContent;
       const asientos = document.getElementById('codigoAsientos').textContent;
       const boleto = document.getElementById('totalAsientos').textContent;
-
+      
       pdf.setFontSize(12);
       pdf.text(`Fecha: ${fecha}`, 10, y);
       pdf.text(`Folio: ${folio}`, pageWidth / 2, y);
@@ -361,6 +363,9 @@ const fechaFormateada = `${año}-${mes < 10 ? '0' : ''}${mes}-${dia < 10 ? '0' :
       document.getElementById('precioAdulto').textContent = '$' + this.precioAdulto + ' mx';
       document.getElementById('precioNiño').textContent = '$' + this.precioNiño + '.00 mx';
       this.actualizarAsientos();
+
+      this.precioPeli = precio;
+      
   }
 
   actualizarAsientos() {

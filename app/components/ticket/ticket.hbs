@@ -1,3 +1,106 @@
+<button id="btnTicket" type="button" class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal7" {{on "click" this.prueba2}} style="display: none;">
+    Agregar película
+</button>
+
+<div class="modal fade" id="exampleModal7" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel7" aria-hidden="true">
+    <div class="modal-dialog .modal-fullscreen-sm-down p-4 m-0 m-auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel7">Datos de la Ticket</h1>
+                <button id="cerrarTicketEdit" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close" {{on "click" this.cerrarEditTicket}}></button>
+            </div>
+            <div class="modal-body">
+                    <div class="">
+                    <h5 class="text-center">SuperCool</h5>
+
+                           <h6>Folio: <span id="folioTicket"></span></h6> 
+                        
+                        <form id="formularioTicket" {{on "submit" this.preventDefaultSubmissionTicket}}>
+
+                            <div class="align-items-center  d-flex">
+                                <label class="form-label me-2" style="margin-top: 3px;">Fecha: <span id="fechaHoyEdit"></span></label>
+                                 
+                            </div>
+                             <div class="align-items-center mb-1  d-flex">
+                                <label for="fechaInicio" class="form-label me-2" style="margin-top: 3px;">Película:</label><input type="text" aria-describedby="usernameBlock" class="form-control" id="idPeliculaTicketEdit" placeholder="Digite el nombre del cliente" {{on "keydown" this.handleInputTicket}} {{on "keypress" this.handleInputTicket}} />
+                                 
+                            </div>
+                             <div class="align-items-center  d-flex" style="gap: 10px;">
+                                <label  class="form-label " style="margin-top: 3px;">Sala:</label> <input type="text" aria-describedby="usernameBlock" class="form-control me-2" id="idSalaMovieEdit" placeholder="Digite el nombre del cliente" {{on "keydown" this.handleInputTicket}} {{on "keypress" this.handleInputTicket}} style="width: 70px !important;"/>
+                                <label  class="form-label " style="margin-top: 3px;">Horario:</label><input type="text" aria-describedby="usernameBlock" class="form-control" id="idHorarioMovieEdit" placeholder="Digite el nombre del cliente" {{on "keydown" this.handleInputTicket}} {{on "keypress" this.handleInputTicket}} style="width: 90px !important;"/>
+                            </div>
+
+      <div class="mb-3">
+                        <label for="nameClientEdit" class="col-form-label">Nombre del cliente:</label>
+<div class="pe-5">
+    <input type="text" aria-describedby="usernameBlock" class="form-control" id="nameClientEdit" placeholder="Digite el nombre del cliente" {{on "keydown" this.handleInputTicket}} {{on "keypress" this.handleInputTicket}} />
+</div>
+      </div>
+
+             <div class="mb-2">
+    <div class="row d-flex text-center align-items-center justify-content-center">
+        <div class="col-auto">
+            <button id="btnRestarAdultoEdit" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.restarAdulto2}}>-</button>
+        </div>
+        <div class="col-auto">
+            <h6 class="" style="position: relative; top: 15px;">Adultos</h6>
+            <label id="numAdultosEdit" class="col-form-label" style="position: relative; top: 5px;">{{this.numAdultos2}}</label> <br>
+            <label id="precioAdultoEdit" class="col-form-label" style="position: relative; bottom: 10px; "></label>
+        </div>
+        <div class="col-auto">
+            <button id="btnSumarAdultoEdit" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.sumarAdulto2}}>+</button>
+        </div>
+    </div>
+</div>
+
+<div class="mb-1">
+    <div class="row d-flex text-center align-items-center justify-content-center">
+        <div class="col-auto">
+            <button id="btnRestarNiñoEdit" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.restarNiño2}}>-</button>
+        </div>
+        <div class="col-auto">
+            <h6 class="" style="position: relative; top: 15px;">Niños</h6>
+            <label id="numNiñosEdit" class="col-form-label" style="position: relative; top: 5px;">{{this.numNiños2}}</label> <br>
+            <label id="precioNiñoEdit" class="col-form-label" style="position: relative; bottom: 10px; "></label>
+        </div>
+        <div class="col-auto">
+            <button id="btnSumarNiñoEdit" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.sumarNiño2}}>+</button>
+        </div>
+    </div>
+</div>
+
+
+                                
+
+                                  <div class="col-auto me-2 d-flex">
+                                    <label class="col-form-label me-3">Boletos: <span id="totalAsientosEdit"></span></label>
+                                    <label class="col-form-label">Asientos: <span id="codigoAsientosEdit"></span></label>
+                                </div>
+                                <div class="col-auto me-2">
+                                    <label  class="col-form-label">Total: <span id="totalPrecioTicketsEdit"></span></label>
+                                </div>
+
+                            <div class="align-items-center mb-3 d-flex">
+                           
+                            </div>
+
+                        </form>                       
+                       
+                    </div>
+            </div>
+            <div class="modal-footer ">
+                <button id="cerrarModalTicket" type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal" {{on "click" this.cerrarEditTicket}}>Cerrar</button>
+                <button id="ComprarBoletoTickEdit" type="submit" class="btn btn-success" {{on "click" this.comprar2}}>Generar ticket</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
   <table class="my-table">
     <thead>
