@@ -88,7 +88,6 @@
   <thead>
     <tr>
       <th class="text-center">Nombre de Usuario</th>
-      <th class="text-center">Contraseña</th>
       <th class="text-center">Tipo de Usuario</th>
       <th class="text-center">Estado</th>
       <th></th>
@@ -99,10 +98,9 @@
   <tbody>
     {{#each this.paginatedUsers as |user|}}
       <tr>
-        <td>{{user.strNombreUsuario}}</td>
-        <td>{{user.strContraseña}}</td>
-        <td>{{user.TipoUsuario}}</td>
-        <td>{{user.Estado}}</td>
+        <td class="text-center">{{user.strNombreUsuario}}</td>
+        <td class="text-center">{{user.TipoUsuario}}</td>
+        <td class="text-center">{{user.Estado}}</td>
         <td><button id="userDelete" class="button-delete" type="button" {{on "click" (fn this.deleteUser user.id )  }}>Eliminar</button></td>
         <td><button id="userEdit" class="button-update" type="button" {{on "click" (fn this.editarDatos user )}} >Editar</button></td>
       </tr>

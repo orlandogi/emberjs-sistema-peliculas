@@ -10,6 +10,8 @@ export default class DataStoreService extends Service {
   @tracked actualizarPeliculasSubidas;
   @tracked pruebaHorarios = 5;
   @tracked actualizarPeliculasPublicadas;
+  @tracked actualizarTickets;
+
 
   async init() {
     super.init(...arguments);
@@ -17,6 +19,7 @@ export default class DataStoreService extends Service {
     await this.updateListMovie();
     await this.updateUploadMovies();
     await this.updatePeliculasPublicadas();
+    await this.updateTickets();
   }
 
  @action setActualizarDatos(value) {
@@ -38,6 +41,10 @@ export default class DataStoreService extends Service {
 
  @action setActualizarPeliculasPublicadas(value){
     this.actualizarPeliculasPublicadas = value;
+  }
+
+  @action setActualizarTickets(value){
+    this.actualizarTickets = value;
   }
 
  @action async updateList223() {
@@ -108,6 +115,23 @@ export default class DataStoreService extends Service {
     }
   }
 
+  @action async updateTickets(){
+    try {
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/tickets');
+      const { data } = response;
+      this.actualizarTickets = data;
+    } catch (error) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas de conexión al actualizar',
+        showConfirmButton: false,
+        timer: 1500,
+    });
+      throw new Error(`Error al actualizar los datos: ${error.message}`);
+    }
+  }
+
  @action getActualizarDatos() {
     return this.actualizarDatos;
   }
@@ -126,5 +150,9 @@ export default class DataStoreService extends Service {
 
  @action getActualizarPeliculasPublicadas(){
     return this.actualizarPeliculasPublicadas;
+  }
+
+  @action getActualizarTickets(){
+    return this.actualizarTickets;
   }
 }

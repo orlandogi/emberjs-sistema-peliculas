@@ -68,8 +68,24 @@ export default class TaquilleroTaquilleroComponent extends Component {
     document.getElementById('totalPrecioTickets').textContent = '$0.00 mx'
   }
 
-  @action
-  async comprar() {
+  async UpdateListAllTickets() {
+    try {
+      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/tickets');
+      const { data } = response;
+      this.dataStore.setActualizarTickets(data) ;
+    } catch (error) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas de conexión al actualizar',
+        showConfirmButton: false,
+        timer: 1500,
+    });
+      throw new Error(`Error al actualizar los datos: ${error.message}`);
+    }
+  }
+
+  @action async comprar() {
 
     const nameCliente = document.getElementById('nameClient').value;
     const tickets = document.getElementById('totalAsientos').textContent;
@@ -77,7 +93,45 @@ export default class TaquilleroTaquilleroComponent extends Component {
     if(nameCliente != ''){
       if(parseInt(tickets) >0){
 
-        // Crear el PDF
+        try{
+        const formData = new FormData();
+        formData.append('dteFechaCompra', document.getElementById('fechaHoy').textContent);
+        formData.append('strFolio', document.getElementById('folioTicket').textContent);
+        formData.append('pelicula', document.getElementById('idPeliculaTicket').textContent);
+        formData.append('idSala', parseInt(document.getElementById('idSalaMovie').textContent));
+        formData.append('horario', document.getElementById('idHorarioMovie').textContent);
+        formData.append('strNombreCliente', document.getElementById('nameClient').value);
+        formData.append('boletosAdultos', parseInt(document.getElementById('numAdultos').textContent));
+        formData.append('boletosNiños', parseInt(document.getElementById('numNiños').textContent));
+        formData.append('totalBoletos', parseInt(document.getElementById('totalAsientos').textContent));
+        formData.append('curTotal', document.getElementById('totalPrecioTickets').textContent);
+        formData.append('asientos', document.getElementById('codigoAsientos').textContent);
+
+        await(document.getElementById('ComprarBoletoTick').disabled = true, document.getElementById('cerrarModalTaquillero').disabled = true,
+        document.getElementById('cerrarTaquillero').disabled = true,
+        axios({
+         method: 'post',
+         url: 'https://backend-express-production-be7d.up.railway.app/api/ticket',
+         data: {
+          dteFechaCompra: document.getElementById('fechaHoy').textContent,
+          strFolio: document.getElementById('folioTicket').textContent,
+           pelicula: document.getElementById('idPeliculaTicket').textContent,
+           idSala:parseInt(document.getElementById('idSalaMovie').textContent),
+           horario:document.getElementById('idHorarioMovie').textContent,
+           strNombreCliente:document.getElementById('nameClient').value,
+           boletosAdultos: parseInt(document.getElementById('numAdultos').textContent),
+           boletosNiños: parseInt(document.getElementById('numNiños').textContent),
+           totalBoletos: parseInt(document.getElementById('totalAsientos').textContent),
+           curTotal: document.getElementById('totalPrecioTickets').textContent,
+           asientos: document.getElementById('codigoAsientos').textContent,
+         }
+       }));
+       await this.UpdateListAllTickets();
+        document.getElementById('ComprarBoletoTick').disabled = false;
+        document.getElementById('cerrarModalTaquillero').disabled = false;
+        document.getElementById('cerrarTaquillero').disabled = false;
+
+            // Crear el PDF
       const pdf = new jsPDF('p', 'mm', 'a6');
 
       // Definir tamaño de página y posición inicial
@@ -167,7 +221,7 @@ export default class TaquilleroTaquilleroComponent extends Component {
      
     
       // Guardar el PDF
-      pdf.save('detalle_compra.pdf');
+      pdf.save('Ticket_compra.pdf');
 
       Swal.fire({
         position: 'center',
@@ -179,6 +233,15 @@ export default class TaquilleroTaquilleroComponent extends Component {
 
       document.getElementById('cerrarModalTaquillero').click();
 
+      }catch(error){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Error',
+          showConfirmButton: false,
+          timer: 1800,
+      });
+      }
       }else{
         Swal.fire({
           position: 'center',

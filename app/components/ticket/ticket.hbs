@@ -1,0 +1,42 @@
+
+  <table class="my-table">
+    <thead>
+        <tr>
+        <th class="text-center" style="width: 120px; !important" >Fecha</th>
+        <th class="text-center">Película</th>
+        <th class="text-center" style="width: 70px !important;">Sala</th>
+        <th class="text-center">Horario</th>
+        <th class="text-center">Cliente</th>
+        <th class="text-center">Boletos</th>
+        <th class="text-center">Asientos</th>
+        <th class="text-center">Precio total</th>
+        <th class="text-center"></th>
+          <th></th>
+        <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each this.paginatedMovies9 as |movie|}}
+        <tr>
+            <td style="text-align: center;">{{movie.fecha}}</td>
+            <td style="width: 170px; text-align: center;">{{movie.pelicula}}</td>
+            <td style="text-align: justify; text-align: center;">{{movie.sala}}</td>
+            <td class="text-center" style="width: 130px; text-align: center;">{{movie.horario}}</td>
+            <td class="text-center" style="width: 130px; text-align: center;">{{movie.cliente}}</td>
+                        <td class="text-center" style="width: 130px; text-align: center;">{{movie.boletos}}</td>
+            <td class="text-center" style="width: 130px; text-align: center;">{{movie.asientos}}</td>
+                        <td class="text-center" style="width: 130px; text-align: center;">{{movie.total}}</td>
+            <td ><button id="editTicket" class="button-delete btnEliminarMovieUpload" type="button" {{on "click" (fn this.movieDeleteTicket movie.id)}}>Eliminar</button></td>
+            <td><button id="movieEditTicket" class="button-update" type="button" {{on "click" (fn this.editarTicket movie )}}>Editar</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+
+<div class="pagination justify-content-center mt-3">
+  <button class="btn btn-outline-primary me-2" type="button" {{action "previousPage9"}}>Anterior</button>
+  Página {{this.currentPage9}} de {{this.totalPages9}}
+  <button class="btn btn-outline-primary ms-2" type="button" {{action "nextPage9"}}>Siguiente</button>
+</div>
+
