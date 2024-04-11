@@ -46,8 +46,8 @@
         </div>
         <div class="col-auto">
             <h6 class="" style="position: relative; top: 15px;">Adultos</h6>
-            <label id="numAdultosEdit" class="col-form-label" style="position: relative; top: 5px;">{{this.numAdultos2}}</label> <br>
-            <label id="precioAdultoEdit" class="col-form-label" style="position: relative; bottom: 10px; "></label>
+            <label id="numAdultos22" class="col-form-label" style="position: relative; top: 5px;">{{this.numAdultos2}}</label> <br>
+            <label id="precioAdulto22" class="col-form-label" style="position: relative; bottom: 10px; "></label>
         </div>
         <div class="col-auto">
             <button id="btnSumarAdultoEdit" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.sumarAdulto2}}>+</button>
@@ -93,7 +93,8 @@
             <div class="modal-footer ">
                 <button id="cerrarModalTicket" type="button" class="btn btn-secondary"
                     data-bs-dismiss="modal" {{on "click" this.cerrarEditTicket}}>Cerrar</button>
-                <button id="ComprarBoletoTickEdit" type="submit" class="btn btn-success" {{on "click" this.comprar2}}>Generar ticket</button>
+                  <button id="imprimirTicket" type="button" class="btn btn-primary" {{on "click" this.imprimirTick}}>Imprimir</button>
+                <button id="ComprarBoletoTickEdit" type="submit" class="btn btn-success" {{on "click" this.comprar2}}>Actualizar</button>
             </div>
         </div>
     </div>

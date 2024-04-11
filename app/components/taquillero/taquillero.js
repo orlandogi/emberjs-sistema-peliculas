@@ -363,7 +363,6 @@ const fechaFormateada = `${año}-${mes < 10 ? '0' : ''}${mes}-${dia < 10 ? '0' :
       document.getElementById('precioAdulto').textContent = '$' + this.precioAdulto + ' mx';
       document.getElementById('precioNiño').textContent = '$' + this.precioNiño + '.00 mx';
       this.actualizarAsientos();
-
       this.precioPeli = precio;
       
   }
