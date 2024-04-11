@@ -747,3 +747,18 @@ text-align: center;
 .table-row:hover {
   cursor: pointer;
 }
+
+.asiento {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.asiento.seleccionado {
+  background-color: #FFD700; /* Color para asientos seleccionados */
+}

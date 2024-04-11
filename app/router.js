@@ -10,4 +10,5 @@ Router.map(function () {
   this.route('movies');
   this.route('publicar');
   this.route('taquillero');
+  this.route('tickets');
 });

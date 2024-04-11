@@ -1458,7 +1458,7 @@ async UpdateListAllMoviesUpload() {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Película actualizada exitosamente',
+                title: 'Película publicada',
                 showConfirmButton: false,
                 timer: 1500
             });

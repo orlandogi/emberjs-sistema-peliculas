@@ -1,38 +1,35 @@
-<button id="btnTaquillero" type="button" class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal5" {{on "click" this.prueba}}>
+<button id="btnTaquillero" type="button" class="btn btn-primary mb-3 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal5" {{on "click" this.prueba}} style="display: none;">
     Agregar película
 </button>
 
 <div class="modal fade" id="exampleModal5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel5" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen m-0 m-auto">
+    <div class="modal-dialog .modal-fullscreen-sm-down p-4 m-0 m-auto">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel5">Datos de la Película</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel5">Datos de la Ticket</h1>
                 <button id="cerrarTaquillero" type="button" class="btn-close" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                    aria-label="Close" {{on "click" this.cerrarTaquilla}}></button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-8 col-sm-4 border border-warning p-2">
-                        <d class="d-flex" style="gap: 130px;">
-                    <h5>Datos de Ticket</h5>
+                    <div class="">
+                    <h5 class="text-center">SuperCool</h5>
 
                            <h6>Folio: <span id="folioTicket"></span></h6> 
-                        </d>
                         
-                        <form id="formularioUpload" {{on "submit" this.preventDefaultSubmissionTaquillero}}>
+                        <form id="formularioTaquillero" {{on "submit" this.preventDefaultSubmissionTaquillero}}>
 
                             <div class="align-items-center  d-flex">
-                                <label for="fechaInicio" class="form-label me-2" style="margin-top: 3px;">Fecha: <span id="fechaHoy"></span></label>
+                                <label class="form-label me-2" style="margin-top: 3px;">Fecha: <span id="fechaHoy"></span></label>
                                  
                             </div>
                              <div class="align-items-center  d-flex">
                                 <label for="fechaInicio" class="form-label me-2" style="margin-top: 3px;">Película: <span id="idPeliculaTicket"></span></label>
                                  
                             </div>
-                             <div class="align-items-center  d-flex">
-                                <label for="fechaInicio" class="form-label me-2" style="margin-top: 3px;">Horario: <span id="idHorarioMovie"></span></label>
-                                 
+                             <div class="align-items-center  d-flex" style="gap: 10px;">
+                                <label  class="form-label me-2" style="margin-top: 3px;">Sala: <span id="idSalaMovie"></span></label>
+                                <label  class="form-label me-2" style="margin-top: 3px;">Horario: <span id="idHorarioMovie"></span></label>
                             </div>
 
       <div class="mb-3">
@@ -42,46 +39,47 @@
 </div>
       </div>
 
-                    <div class="mb-3">
-                                    <div class="row d-flex text-center" style="justify-content: center;">
-                                        <h6 class="me-3">Adultos</h6>
-                                          <div class="col-auto d-flex pt-1">
-                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
-                                                {{on "click" this.selectTime1 }} disabled>- quitar</button>
-                                        </div>
-                                        <div class="col-auto ">
-                                            <label for="numberDuration2" class="col-form-label">0</label>
-                                        </div>
-                                        <div class="col-auto d-flex pt-1">
-                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
-                                                {{on "click" this.selectTime1 }} disabled>+ Agregar</button>
-                                        </div>
-                                    </div>
-                                </div>
+             <div class="mb-2">
+    <div class="row d-flex text-center align-items-center justify-content-center">
+        <div class="col-auto">
+            <button id="btnRestarAdulto" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.restarAdulto}}>-</button>
+        </div>
+        <div class="col-auto">
+            <h6 class="" style="position: relative; top: 15px;">Adultos</h6>
+            <label id="numAdultos" class="col-form-label" style="position: relative; top: 5px;">{{this.numAdultos}}</label> <br>
+            <label id="precioAdulto" class="col-form-label" style="position: relative; bottom: 10px; "></label>
+        </div>
+        <div class="col-auto">
+            <button id="btnSumarAdulto" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.sumarAdulto}}>+</button>
+        </div>
+    </div>
+</div>
 
-                                <div class="">
-                                    <div class="row d-flex text-center" style="justify-content: center;">
-                                        <h6 class="me-3">Niños</h6>
-                                          <div class="col-auto d-flex pt-1">
-                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
-                                                {{on "click" this.selectTime1 }} disabled>- quitar</button>
-                                        </div>
-                                        <div class="col-auto ">
-                                            <label for="numberDuration2" class="col-form-label">0</label>
-                                        </div>
-                                        <div class="col-auto d-flex pt-1">
-                                            <button id="btnAgregarHorarios1" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar"
-                                                {{on "click" this.selectTime1 }} disabled>+ Agregar</button>
-                                        </div>
-                                    </div>
-                                </div>
+<div class="mb-1">
+    <div class="row d-flex text-center align-items-center justify-content-center">
+        <div class="col-auto">
+            <button id="btnRestarNiño" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.restarNiño}}>-</button>
+        </div>
+        <div class="col-auto">
+            <h6 class="" style="position: relative; top: 15px;">Niños</h6>
+            <label id="numNiños" class="col-form-label" style="position: relative; top: 5px;">{{this.numNiños}}</label> <br>
+            <label id="precioNiño" class="col-form-label" style="position: relative; bottom: 10px; "></label>
+        </div>
+        <div class="col-auto">
+            <button id="btnSumarNiño" type="button" class="btn btn-primary btn-sm pe-3 ps-3 texto-agregar" {{on "click" this.sumarNiño}}>+</button>
+        </div>
+    </div>
+</div>
 
+
+                                
+
+                                  <div class="col-auto me-2 d-flex">
+                                    <label class="col-form-label me-3">Boletos: <span id="totalAsientos"></span></label>
+                                    <label class="col-form-label">Asientos: <span id="codigoAsientos"></span></label>
+                                </div>
                                 <div class="col-auto me-2">
-                                    <label  class="col-form-label">Total: <span id="totalTickets"></span></label>
-                                </div>
-
-                                  <div class="col-auto me-2">
-                                    <label class="col-form-label">Asientos: <span id="totalAsientos"></span></label>
+                                    <label  class="col-form-label">Total: <span id="totalPrecioTickets"></span></label>
                                 </div>
 
                             <div class="align-items-center mb-3 d-flex">
@@ -91,17 +89,11 @@
                         </form>                       
                        
                     </div>
-
-
-                    <div class="col-4 col-sm-8 border border-warning">
-                    
-                    </div>
-                </div>
             </div>
             <div class="modal-footer ">
                 <button id="cerrarModalTaquillero" type="button" class="btn btn-secondary"
-                    data-bs-dismiss="modal">Cerrar</button>
-                <button id="ComprarBoletoTick" type="submit" class="btn btn-success" {{on "click" this.comprar}}>Publicar</button>
+                    data-bs-dismiss="modal" {{on "click" this.cerrarTaquilla}}>Cerrar</button>
+                <button id="ComprarBoletoTick" type="submit" class="btn btn-success" {{on "click" this.comprar}}>Generar ticket</button>
             </div>
         </div>
     </div>
@@ -127,7 +119,7 @@
             <td class="text-center" style="width: 130px; text-align: center;">${{movie.precio}}</td>
             <td  style="display:flex; gap:10px; flex-wrap: wrap; padding: 0px 15px;padding-top:15px " >
            {{#each movie.horarios as |horario index|}}
-    <button class="btn btn-primary" style="width: 100px ; " type="button" {{on "click" (fn this.showSala movie.idsSala index movie.strNombre horario)}}>
+    <button class="btn btn-primary" style="width: 100px ; " type="button" {{on "click" (fn this.showSala movie.idsSala index movie.strNombre horario movie.precio)}}>
         {{horario}}
     </button>
 {{/each}}
