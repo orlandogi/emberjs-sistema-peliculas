@@ -7,7 +7,7 @@ export default class MoviesRoute extends Route {
     beforeModel() {
     
         if((this.auth.loadTokenFromStorage() === true) && (this.auth.loadTypeOfUser() === true)){
-            this.router.transitionTo('movies');
+            this.router.transitionTo('tickets');
           }
 
       if((this.auth.loadTokenFromStorage() === true) && (this.auth.loadTypeOfUser() === false)){

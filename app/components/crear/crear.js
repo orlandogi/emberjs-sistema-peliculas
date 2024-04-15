@@ -27,15 +27,18 @@ export default class CrearCrearComponent extends Component {
       } else {
         tipoEstado = 2;
       }
-      await(document.getElementById('enviar').disabled = true,document.getElementById('cerrar').disabled = true, 
-      document.getElementById('cerrar2').disabled = true,
-       axios
-        .post('https://backend-express-production-be7d.up.railway.app/api/usuario', {
+      await ((document.getElementById('enviar').disabled = true),
+      (document.getElementById('cerrar').disabled = true),
+      (document.getElementById('cerrar2').disabled = true),
+      axios.post(
+        'https://backend-express-production-be7d.up.railway.app/api/usuario',
+        {
           strNombreUsuario: document.getElementById('recipient-name').value,
           strContraseña: document.getElementById('inputPassword5').value,
           idTipoUsuario: tipoUser,
           idTipoEstado: tipoEstado,
-        }))
+        },
+      ))
         .then((response) => {
           document.getElementById('enviar').disabled = false;
           document.getElementById('cerrar').disabled = false;
@@ -97,9 +100,9 @@ export default class CrearCrearComponent extends Component {
             });
           }
         });
-        document.getElementById('enviar').disabled = false;
-        document.getElementById('cerrar').disabled = false;
-        document.getElementById('cerrar2').disabled = false;
+      document.getElementById('enviar').disabled = false;
+      document.getElementById('cerrar').disabled = false;
+      document.getElementById('cerrar2').disabled = false;
       await this.UpdateList();
       await this.UpdateList333();
     } catch (error) {
@@ -118,7 +121,9 @@ export default class CrearCrearComponent extends Component {
 
   async UpdateList() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
+      const response = await axios.get(
+        'https://backend-express-production-be7d.up.railway.app/api/usuarios',
+      );
       const { data } = response;
       this.dataStore.setActualizarDatos(data);
     } catch (error) {
@@ -136,7 +141,9 @@ export default class CrearCrearComponent extends Component {
 
   async UpdateList333() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/peliculasDisponibles');
+      const response = await axios.get(
+        'https://backend-express-production-be7d.up.railway.app/peliculasDisponibles',
+      );
       const { data } = response;
       this.dataStore.setActualizarPeliculasSubidas(data);
     } catch (error) {
@@ -208,49 +215,55 @@ export default class CrearCrearComponent extends Component {
   @action handleInput(event) {
     const myInput = document.getElementById('inputPassword5');
     const myInput2 = document.getElementById('recipient-name');
-  
+
     const chr = String.fromCharCode(event.which);
     const validCharacters =
       '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_';
     const validCharactersPassword =
       '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@';
-  
+
     if (event.target === myInput) {
-      if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+      if (
+        event.key === 'Backspace' ||
+        event.key === 'Tab' ||
+        event.key === '_'
+      ) {
         return;
       }
-  
+
       if (myInput.value.length >= 16 && !event.ctrlKey) {
         event.preventDefault();
       } else if (validCharactersPassword.indexOf(chr) < 0 && !event.ctrlKey) {
         event.preventDefault();
       }
     }
-  
+
     if (event.target === myInput2) {
-      if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+      if (
+        event.key === 'Backspace' ||
+        event.key === 'Tab' ||
+        event.key === '_'
+      ) {
         return;
       }
-  
+
       if (myInput2.value.length >= 20 && !event.ctrlKey) {
         event.preventDefault();
       } else if (validCharacters.indexOf(chr) < 0 && !event.ctrlKey) {
         event.preventDefault();
       }
     }
-
   }
-  
 
-  @action 
-  removeData(){
-    document.getElementById("inputPassword5").value = '';
+  @action
+  removeData() {
+    document.getElementById('inputPassword5').value = '';
     document.getElementById('recipient-name').value = '';
-    document.getElementById('opNormal').removeAttribute("selected");
-    document.getElementById('opAdmin').removeAttribute("selected");
-    document.getElementById('opActivo').removeAttribute("selected");
-    document.getElementById('opInactivo').removeAttribute("selected");
-    document.getElementById('opNormal').setAttribute("selected", "selected");
-    document.getElementById('opActivo').setAttribute("selected", "selected");
-
-  } }
+    document.getElementById('opNormal').removeAttribute('selected');
+    document.getElementById('opAdmin').removeAttribute('selected');
+    document.getElementById('opActivo').removeAttribute('selected');
+    document.getElementById('opInactivo').removeAttribute('selected');
+    document.getElementById('opNormal').setAttribute('selected', 'selected');
+    document.getElementById('opActivo').setAttribute('selected', 'selected');
+  }
+}

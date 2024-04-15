@@ -1,0 +1,18 @@
+<div class="card-container-carrusel ">
+ {{#each this.cardsIndex as |movie|}}
+
+<div class="card-carrusel">
+    <img src="data:image/png;base64,{{movie.bloImagen}}" alt="Imagen de {{movie.strNombre}}">
+    <div class="card-info-carrusel">
+            <h2>{{movie.strNombre}}</h2>
+    <p>{{movie.intDuracion}} minutos</p>
+    <p> {{#each movie.generos as |genero|}}
+                {{genero}}<br>
+            {{/each}}
+            </p>
+    <button class="btn-comprar-boleto">Comprar boletos</button>
+    </div>
+
+</div>
+{{/each}}
+</div>

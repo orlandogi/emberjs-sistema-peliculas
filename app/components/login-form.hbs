@@ -1,0 +1,10 @@
+<div class="container-login mt-4">
+  <h2 class="title-login">Iniciar sesión</h2>
+  <form {{on "submit" this.login}}>
+    <label for="username" class="label-login">Usuario</label>
+    <input class="input-login" type="text" id="usernameLogin" {{on "input" this.updateUsername}} {{on "keydown" this.handleInputLogin}} {{on "keypress" this.handleInputLogin}} required>
+    <label for="password" class="label-login">Contraseña</label>
+    <input class="input-login" type="password" id="passwordLogin" {{on "input" this.updatePassword}} {{on "keydown" this.handleInputLogin}} {{on "keypress" this.handleInputLogin}} required>
+    <button id="btn-submit-login" class="btn-login" type="submit">Iniciar sesión</button>
+  </form>
+</div>

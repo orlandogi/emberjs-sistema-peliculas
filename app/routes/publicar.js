@@ -1,10 +1,21 @@
 import Route from '@ember/routing/route';
-import axios from 'axios';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class PublicarRoute extends Route {
-   
+    @service auth;
+    @service router;
+    beforeModel() {
     
+        if((this.auth.loadTokenFromStorage() === true) && (this.auth.loadTypeOfUser() === true)){
+            this.router.transitionTo('publicar');
+          }
+
+      if((this.auth.loadTokenFromStorage() === true) && (this.auth.loadTypeOfUser() === false)){
+        this.router.transitionTo('taquillero');
+      }
+  
+      if (!this.auth.loadTokenFromStorage() && !this.auth.loadTypeOfUser()) {
+              this.router.transitionTo('login');
+        }
+      }
 }

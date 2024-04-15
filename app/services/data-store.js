@@ -12,7 +12,6 @@ export default class DataStoreService extends Service {
   @tracked actualizarPeliculasPublicadas;
   @tracked actualizarTickets;
 
-
   async init() {
     super.init(...arguments);
     await this.updateList223();
@@ -22,34 +21,35 @@ export default class DataStoreService extends Service {
     await this.updateTickets();
   }
 
- @action setActualizarDatos(value) {
+  @action setActualizarDatos(value) {
     this.actualizarDatos = value;
   }
 
-  @action setPruebaHorarios(value){
+  @action setPruebaHorarios(value) {
     this.pruebaHorarios += value;
   }
 
-
-  @action setActualizarDatosMovies(value){
+  @action setActualizarDatosMovies(value) {
     this.actualizarDatosMovies = value;
   }
 
- @action setActualizarPeliculasSubidas(value){
+  @action setActualizarPeliculasSubidas(value) {
     this.actualizarPeliculasSubidas = value;
   }
 
- @action setActualizarPeliculasPublicadas(value){
+  @action setActualizarPeliculasPublicadas(value) {
     this.actualizarPeliculasPublicadas = value;
   }
 
-  @action setActualizarTickets(value){
+  @action setActualizarTickets(value) {
     this.actualizarTickets = value;
   }
 
- @action async updateList223() {
+  @action async updateList223() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
+      const response = await axios.get(
+        'https://backend-express-production-be7d.up.railway.app/api/usuarios',
+      );
       const { data } = response;
       this.actualizarDatos = data;
     } catch (error) {
@@ -59,14 +59,16 @@ export default class DataStoreService extends Service {
         title: 'Problemas de conexión al actualizar',
         showConfirmButton: false,
         timer: 1500,
-    });
+      });
       throw new Error(`Error al actualizar los datos: ${error.message}`);
     }
   }
 
- @action async updateListMovie() {
+  @action async updateListMovie() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculas');
+      const response = await axios.get(
+        'https://backend-express-production-be7d.up.railway.app/api/peliculas',
+      );
       const { data } = response;
       this.actualizarDatosMovies = data;
     } catch (error) {
@@ -76,14 +78,16 @@ export default class DataStoreService extends Service {
         title: 'Problemas de conexión al actualizar',
         showConfirmButton: false,
         timer: 1500,
-    });
+      });
       throw new Error(`Error al actualizar los datos: ${error.message}`);
     }
   }
 
- @action async updateUploadMovies(){
+  @action async updateUploadMovies() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/peliculasDisponibles');
+      const response = await axios.get(
+        'https://backend-express-production-be7d.up.railway.app/api/peliculasDisponibles',
+      );
       const { data } = response;
       this.actualizarPeliculasSubidas = data;
     } catch (error) {
@@ -93,14 +97,16 @@ export default class DataStoreService extends Service {
         title: 'Problemas de conexión al actualizar',
         showConfirmButton: false,
         timer: 1500,
-    });
+      });
       throw new Error(`Error al actualizar los datos: ${error.message}`);
     }
   }
 
- @action async updatePeliculasPublicadas(){
+  @action async updatePeliculasPublicadas() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/uploadMovies');
+      const response = await axios.get(
+        'https://backend-express-production-be7d.up.railway.app/api/uploadMovies',
+      );
       const { data } = response;
       this.actualizarPeliculasPublicadas = data;
     } catch (error) {
@@ -110,14 +116,16 @@ export default class DataStoreService extends Service {
         title: 'Problemas de conexión al actualizar',
         showConfirmButton: false,
         timer: 1500,
-    });
+      });
       throw new Error(`Error al actualizar los datos: ${error.message}`);
     }
   }
 
-  @action async updateTickets(){
+  @action async updateTickets() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/tickets');
+      const response = await axios.get(
+        'https://backend-express-production-be7d.up.railway.app/api/tickets',
+      );
       const { data } = response;
       this.actualizarTickets = data;
     } catch (error) {
@@ -127,32 +135,32 @@ export default class DataStoreService extends Service {
         title: 'Problemas de conexión al actualizar',
         showConfirmButton: false,
         timer: 1500,
-    });
+      });
       throw new Error(`Error al actualizar los datos: ${error.message}`);
     }
   }
 
- @action getActualizarDatos() {
+  @action getActualizarDatos() {
     return this.actualizarDatos;
   }
 
- @action getActualizarDatosMovie(){
+  @action getActualizarDatosMovie() {
     return this.actualizarDatosMovies;
   }
 
- @action getPruebaHorarios(){
+  @action getPruebaHorarios() {
     return this.pruebaHorarios;
   }
 
- @action getActualizarPeliculasSubidas(){
+  @action getActualizarPeliculasSubidas() {
     return this.actualizarPeliculasSubidas;
   }
 
- @action getActualizarPeliculasPublicadas(){
+  @action getActualizarPeliculasPublicadas() {
     return this.actualizarPeliculasPublicadas;
   }
 
-  @action getActualizarTickets(){
+  @action getActualizarTickets() {
     return this.actualizarTickets;
   }
 }

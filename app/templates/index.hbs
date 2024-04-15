@@ -1,5 +1,51 @@
-    <div class="titulo text-center">
-        <h1>Usuarios</h1>
-    </div>
+<nav class="menu">
+  <LinkTo @route="index" class="menu-users">
+    <h1>SuperCool</h1>
+  </LinkTo>
+<LinkTo @route="login" class="btn btn-primary" style="margin-left: 890px; margin-bottom: 10px;">
+Iniciar Sesión
+  </LinkTo>
+</nav>
 
-  <Crear::Crear/>
+<div class="container mt-2 mb-3" style="min-height: 10px;">
+  <h2 class="mb-4 text-center">Próximos Estrenos</h2>
+  <div id="carouselExample" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <!-- Película 1 -->
+      <div class="carousel-item active">
+        <img src="https://static.giga.de/wp-content/uploads/2020/10/b9cJz5.jpg" class="d-block w-100 movie-image-carrusel" alt="Película 1">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>The Woman in Black</h5>
+          <p>Fecha de Estreno: 10 de Mayo 2024</p>
+        </div>
+      </div>
+      <!-- Película 2 -->
+      <div class="carousel-item">
+        <img src="https://www.justwatch.com/images/backdrop/300552994/s640/the-unkind/the-unkind" class="d-block w-100 movie-image-carrusel" alt="Película 2">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>The Unkid</h5>
+          <p>Fecha de Estreno: 15 de Mayo 2024</p>
+        </div>
+      </div>
+      <!-- Película 3 -->
+      <div class="carousel-item">
+        <img src="https://flashtaig.files.wordpress.com/2015/10/die-schwarze-frau-2-haus.png" class="d-block w-100 movie-image-carrusel" alt="Película 3">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Angel of Death</h5>
+          <p>Fecha de Estreno: 20 de Mayo 2024</p>
+        </div>
+      </div>
+      <!-- Agrega más películas aquí si es necesario -->
+    </div>
+    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only"></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only"></span>
+    </a>
+  </div>
+</div>
+
+<Cards />

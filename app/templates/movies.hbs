@@ -1,3 +1,28 @@
+    <nav class="menu">
+  <LinkTo @route="index" class="menu-users">
+    <h1>SuperCool</h1>
+  </LinkTo>
+  <div class="links">
+      <LinkTo @route="usuarios" class="menu-movies">
+      Usuarios
+    </LinkTo>
+    <LinkTo @route="movies" class="menu-movies">
+      Peliculas
+    </LinkTo>
+    <LinkTo @route="publicar" class="menu-about">
+      Publicar Peliculas
+    </LinkTo>
+       <LinkTo @route="taquillero" class="menu-about">
+      Venta de boletos
+    </LinkTo>
+     <LinkTo @route="tickets" class="menu-about">
+      Tickets
+    </LinkTo>
+    <LogoutButton  />
+  </div>
+</nav>
+
+
     <div class="titulo text-center">
         <h1>Películas</h1>
     </div>

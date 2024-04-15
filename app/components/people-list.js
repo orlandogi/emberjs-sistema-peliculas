@@ -98,41 +98,43 @@ export default class PeopleListComponent extends Component {
 
   @action async deleteUser(user) {
     try {
-      await (document.getElementById('userDelete').disabled = true, 
-      document.getElementById('userEdit').disabled = true, axios
-        .delete(`https://backend-express-production-be7d.up.railway.app/api/usuario/${user}`))
-        await this.UpdateList2();
-          document.getElementById('userDelete').disabled = false;
-          document.getElementById('userEdit').disabled = false;
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Eliminado',
-              showConfirmButton: false,
-              timer: 850,
-            });
+      await ((document.getElementById('userDelete').disabled = true),
+      (document.getElementById('userEdit').disabled = true),
+      axios.delete(
+        `https://backend-express-production-be7d.up.railway.app/api/usuario/${user}`,
+      ));
+      await this.UpdateList2();
+      document.getElementById('userDelete').disabled = false;
+      document.getElementById('userEdit').disabled = false;
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Eliminado',
+        showConfirmButton: false,
+        timer: 850,
+      });
     } catch (error) {
-          document.getElementById('userDelete').disabled = false;
-          document.getElementById('userEdit').disabled = false;
-          if (error.data.status === 404) {
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: 'Usuario no encontrado',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-          if (error.status === 'ERROR') {
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: 'Problemas de conexión',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }      
-          await Swal.fire({
+      document.getElementById('userDelete').disabled = false;
+      document.getElementById('userEdit').disabled = false;
+      if (error.data.status === 404) {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Usuario no encontrado',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+      if (error.status === 'ERROR') {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Problemas de conexión',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+      await Swal.fire({
         position: 'center',
         icon: 'error',
         title: 'Problemas de conexión',
@@ -177,7 +179,7 @@ export default class PeopleListComponent extends Component {
       });
     }
   }
-  
+
   @action async actualizarDatos() {
     const validar = true;
     const username = document.getElementById('recipient-name2').value;
@@ -200,25 +202,28 @@ export default class PeopleListComponent extends Component {
             } else {
               tipoEstado = 2;
             }
-            await (document.getElementById('enviar2').disabled = true, 
-            document.getElementById('cerrarmd').disabled = true,
-            document.getElementById('cerrar3').disabled = true, axios
-              .put(`https://backend-express-production-be7d.up.railway.app/api/usuario/${this.usuId}`, {
+            await ((document.getElementById('enviar2').disabled = true),
+            (document.getElementById('cerrarmd').disabled = true),
+            (document.getElementById('cerrar3').disabled = true),
+            axios.put(
+              `https://backend-express-production-be7d.up.railway.app/api/usuario/${this.usuId}`,
+              {
                 strNombreUsuario:
                   document.getElementById('recipient-name2').value,
                 strContraseña: document.getElementById('inputPassword52').value,
                 idTipoUsuario: tipoUser,
                 idTipoEstado: tipoEstado,
-              }))
+              },
+            ))
               .then(function (response) {
                 const { data } = response;
                 if (
                   data.message ===
                   'El nombre de usuario o la contraseña ya están registrados'
                 ) {
-                  document.getElementById('enviar2').disabled = false; 
-            document.getElementById('cerrarmd').disabled = false;
-            document.getElementById('cerrar3').disabled = false;
+                  document.getElementById('enviar2').disabled = false;
+                  document.getElementById('cerrarmd').disabled = false;
+                  document.getElementById('cerrar3').disabled = false;
                   Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -229,9 +234,9 @@ export default class PeopleListComponent extends Component {
                   validar = false;
                 }
                 if (response.status === 404) {
-                  document.getElementById('enviar2').disabled = false; 
-            document.getElementById('cerrarmd').disabled = false;
-            document.getElementById('cerrar3').disabled = false;
+                  document.getElementById('enviar2').disabled = false;
+                  document.getElementById('cerrarmd').disabled = false;
+                  document.getElementById('cerrar3').disabled = false;
                   Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -246,9 +251,9 @@ export default class PeopleListComponent extends Component {
                   response.status === 504 ||
                   response.status === 'ERROR'
                 ) {
-                  document.getElementById('enviar2').disabled = false; 
-            document.getElementById('cerrarmd').disabled = false;
-            document.getElementById('cerrar3').disabled = false;
+                  document.getElementById('enviar2').disabled = false;
+                  document.getElementById('cerrarmd').disabled = false;
+                  document.getElementById('cerrar3').disabled = false;
                   Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -260,7 +265,7 @@ export default class PeopleListComponent extends Component {
                 }
               })
               .catch(function (error) {
-                document.getElementById('enviar2').disabled = false; 
+                document.getElementById('enviar2').disabled = false;
                 document.getElementById('cerrarmd').disabled = false;
                 document.getElementById('cerrar3').disabled = false;
                 Swal.fire({
@@ -275,9 +280,9 @@ export default class PeopleListComponent extends Component {
               });
             if (validar) {
               await this.UpdateList2();
-              document.getElementById('enviar2').disabled = false; 
-            document.getElementById('cerrarmd').disabled = false;
-            document.getElementById('cerrar3').disabled = false;
+              document.getElementById('enviar2').disabled = false;
+              document.getElementById('cerrarmd').disabled = false;
+              document.getElementById('cerrar3').disabled = false;
               document.getElementById('cerrar3').click();
               Swal.fire({
                 position: 'center',
@@ -327,7 +332,9 @@ export default class PeopleListComponent extends Component {
 
   async UpdateList2() {
     try {
-      const response = await axios.get('https://backend-express-production-be7d.up.railway.app/api/usuarios');
+      const response = await axios.get(
+        'https://backend-express-production-be7d.up.railway.app/api/usuarios',
+      );
       const { data } = response;
       this.dataStore.setActualizarDatos(data);
     } catch (error) {
@@ -347,30 +354,38 @@ export default class PeopleListComponent extends Component {
   handleInput2(event) {
     const myInput = document.getElementById('inputPassword52');
     const myInput2 = document.getElementById('recipient-name2');
-  
+
     const chr = String.fromCharCode(event.which);
     const validCharacters =
       '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ_';
     const validCharactersPassword =
       '1234567890qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑMNBVCXZ!#$%=+*_-@';
-  
+
     if (event.target === myInput) {
-      if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+      if (
+        event.key === 'Backspace' ||
+        event.key === 'Tab' ||
+        event.key === '_'
+      ) {
         return;
       }
-  
+
       if (myInput.value.length >= 16 && !event.ctrlKey) {
         event.preventDefault();
       } else if (validCharactersPassword.indexOf(chr) < 0 && !event.ctrlKey) {
         event.preventDefault();
       }
     }
-  
+
     if (event.target === myInput2) {
-      if (event.key === 'Backspace' || event.key === 'Tab' || event.key === '_') {
+      if (
+        event.key === 'Backspace' ||
+        event.key === 'Tab' ||
+        event.key === '_'
+      ) {
         return;
       }
-  
+
       if (myInput2.value.length >= 20 && !event.ctrlKey) {
         event.preventDefault();
       } else if (validCharacters.indexOf(chr) < 0 && !event.ctrlKey) {
@@ -379,13 +394,13 @@ export default class PeopleListComponent extends Component {
     }
   }
 
-  @action 
-  removeData2(){
-    document.getElementById("inputPassword52").value = '';
+  @action
+  removeData2() {
+    document.getElementById('inputPassword52').value = '';
     document.getElementById('recipient-name2').value = '';
-    document.getElementById('opNormal2').removeAttribute("selected");
-    document.getElementById('opAdmin2').removeAttribute("selected");
-    document.getElementById('opActivo2').removeAttribute("selected");
-    document.getElementById('opInactivo2').removeAttribute("selected");
+    document.getElementById('opNormal2').removeAttribute('selected');
+    document.getElementById('opAdmin2').removeAttribute('selected');
+    document.getElementById('opActivo2').removeAttribute('selected');
+    document.getElementById('opInactivo2').removeAttribute('selected');
   }
 }
